@@ -1,5 +1,7 @@
 # Luke's Trade Database
 
+Published at https://lukeglenncharlotte.github.io/Trade-database-mtg/
+
 Static showcase (index.html, app.js, styles.css, cards.json). No build step.
 Preview: `python3 -m http.server 8000` in this folder → http://localhost:8000. Host on any static host (GitHub Pages, Netlify, Cloudflare Pages).
 

@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Luke's Trade Database</title><link rel="stylesheet" href="styles.css"></head><body>
+<header><div class="brand"><h1>Trade Database</h1><p class="sub">Luke's Magic: The Gathering cards · open to trades &amp; offers</p></div>
+<div class="stats"><div><span id="count">0</span><small>cards</small></div><div><span id="total">$0</span><small>total value</small></div></div></header>
+<section class="controls">
+<input id="q" type="search" placeholder="Search cards — name, set, foil type, treatment…  (press / to focus)" autocomplete="off">
+<select id="fFoil"><option value="">All finishes</option></select>
+<select id="fSet"><option value="">All sets</option></select>
+<select id="fColl"><option value="">All collections</option></select>
+<select id="sort"><option value="price-desc">Price ↓</option><option value="price-asc">Price ↑</option><option value="name">Name A–Z</option><option value="set">Set</option></select>
+</section>
+<main id="grid"></main><p id="empty" hidden>No cards match.</p>
+<footer>Prices: TCGplayer market price (live) where available, otherwise Scryfall's TCGplayer feed, updated <span id="upd"></span>. Card images © Wizards of the Coast.</footer>
+<div id="modal" hidden><div class="mbox"><button id="close" aria-label="Close">×</button><div class="mimg"></div><div class="minfo"></div></div></div>
+<script src="app.js"></script></body></html>

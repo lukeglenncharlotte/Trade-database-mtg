@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Add/refresh cards in cards.json. See README.md."""
+"""Add/refresh cards in cards.json, and collector box prices in collector_boxes.json. See README.md."""
 import argparse, csv, json, os, re, sys, time, urllib.request, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DB = os.path.join(HERE, "cards.json")
+BOXES = os.path.join(HERE, "collector_boxes.json")
 UA = {"User-Agent": "LukeCardShowcase/1.0", "Accept": "application/json"}
 FOIL_NAMES = {
  "surgefoil":"Surge foil","galaxyfoil":"Galaxy foil","textured":"Textured foil",
@@ -119,6 +120,39 @@ def enrich(set_code, num, finish, qty=1, condition="NM/LP", collection="Unsorted
       "artist": c.get("artist"), "collection": collection,
     }
 
+def refresh_boxes():
+    """Rewrite lowestListed and market from tcgcsv.com. Leaves owned, paid, and msrp alone."""
+    if not os.path.exists(BOXES):
+        print("no collector_boxes.json", file=sys.stderr); return
+    with open(BOXES) as f:
+        doc = json.load(f)
+    groups = {}
+    changed = 0
+    for b in doc.get("boxes") or []:
+        gid, pid = b.get("tcgplayerGroupId"), b.get("tcgplayerProductId")
+        if not gid or not pid:
+            print("! box missing tcgplayer ids", b.get("id"), file=sys.stderr); continue
+        if gid not in groups:
+            data = get(f"https://tcgcsv.com/tcgplayer/1/{gid}/prices")
+            groups[gid] = data.get("results") if isinstance(data, dict) else []
+            if not groups[gid]:
+                print("! no tcgcsv prices for group", gid, file=sys.stderr)
+        hits = [p for p in groups[gid] if p.get("productId") == pid]
+        normal = [p for p in hits if p.get("subTypeName") in (None, "Normal")]
+        hit = (normal or hits or [None])[0]
+        if not hit:
+            print("! no price row", b.get("id"), pid, file=sys.stderr); continue
+        if hit.get("lowPrice") is not None:
+            b["lowestListed"] = hit["lowPrice"]
+        if hit.get("marketPrice") is not None:
+            b["market"] = hit["marketPrice"]
+        changed += 1
+    doc["updated"] = datetime.date.today().isoformat()
+    with open(BOXES, "w") as f:
+        json.dump(doc, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+    print(f"collector_boxes.json: refreshed {changed} box prices from tcgcsv.com")
+
 def load():
     if os.path.exists(DB):
         with open(DB) as f: return json.load(f)
@@ -154,8 +188,11 @@ def main():
     ap.add_argument("--condition", default="NM/LP")
     ap.add_argument("--hp", action="append", default=[], help="card name to mark HP")
     ap.add_argument("--top", type=int, help="keep only the N most valuable cards overall")
-    ap.add_argument("--refresh", action="store_true", help="re-price all existing cards")
+    ap.add_argument("--refresh", action="store_true", help="re-price all existing cards and collector boxes")
+    ap.add_argument("--refresh-boxes", action="store_true", help="re-price collector boxes from tcgcsv.com (does not change owned/paid/msrp)")
     a = ap.parse_args()
+    if a.refresh_boxes and not (a.refresh or a.archidekt or a.list or a.card or a.top):
+        refresh_boxes(); return
     db = load(); rows = []; coll = a.collection or "Unsorted"
     if a.archidekt:
         rows, coll = from_archidekt(a.archidekt, a.collection)
@@ -178,5 +215,10 @@ def main():
     if a.refresh:
         db["cards"] = [enrich(c["setCode"], c["collectorNumber"], c["finish"], c["quantity"], c["condition"], c["collection"]) for c in db["cards"]]
     save(db, a.top)
+    if a.refresh or a.refresh_boxes:
+        try:
+            refresh_boxes()
+        except Exception as ex:
+            print("! box price refresh failed", ex, file=sys.stderr)
 
 if __name__ == "__main__": main()

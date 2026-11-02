@@ -26,4 +26,10 @@ document.addEventListener("keydown",e=>{if(e.key=="Escape")$("#modal").hidden=tr
 function salesHtml(c){if(!c.recentSales)return"<p class=mut>No sales data available.</p>";if(!c.recentSales.length)return"<p class=mut>No recent sales found.</p>";
  return `<table><tr><th>Date</th><th>Condition</th><th>Variant</th><th>Price</th></tr>${c.recentSales.map(s=>`<tr><td>${esc(s.date)}</td><td>${esc(s.condition)}</td><td>${esc(s.variant)}</td><td>${usd(s.price)}</td></tr>`).join("")}</table>
  <p class=mut>Last 5 TCGplayer sales${c.salesMatchedVariant===false?" (all variants — none matched this finish)":""}, fetched ${esc((c.salesFetched||"").replace("T"," "))}. Snapshot, not live.</p>`;}
-document.addEventListener("keydown",e=>{if(e.key=="/"&&document.activeElement!==$("#q")){e.preventDefault();$("#q").focus();}});
+document.addEventListener("keydown",e=>{
+ if(e.key!=="/"||e.ctrlKey||e.metaKey||e.altKey)return;
+ const t=e.target;if(t&&(t.tagName==="INPUT"||t.tagName==="TEXTAREA"||t.isContentEditable))return;
+ const onQuest=document.getElementById("quest")&&!document.getElementById("quest").hidden;
+ const field=onQuest?document.getElementById("questQ"):$("#q");
+ if(!field)return;e.preventDefault();field.focus();
+});

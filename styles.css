@@ -28,6 +28,81 @@ background:linear-gradient(115deg,transparent 30%,#ff9be8 40%,#9bf3ff 47%,#fff7a
 .minfo a{color:var(--gold)}#close{position:absolute;top:8px;right:12px;background:none;border:0;color:var(--txt);font-size:28px;cursor:pointer}
 @media(max-width:640px){.mbox{flex-direction:column}.mimg{flex:none}#grid{grid-template-columns:repeat(2,1fr);gap:12px}}
 
+.stats[hidden],#trade[hidden],#quest[hidden]{display:none !important}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;padding:8px 5vw 0}
+.tab{background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font:inherit;cursor:pointer}
+.tab.on{color:#111;background:linear-gradient(90deg,#f3dc95,#d8b45a);border-color:transparent;font-weight:700}
+.tab:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.qwrap{padding:8px 5vw 8px}
+.qhero h2{margin:0;font-family:Georgia,serif;font-size:2rem;background:linear-gradient(90deg,#f3dc95,#d8b45a,#f7ecc5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kicker{margin:14px 0 4px;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;color:var(--gold);font-weight:700}
+.lede{margin:8px 0 0;color:var(--mut);max-width:68ch}
+.progress{margin-top:16px}
+.prow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.prow strong{font-family:Georgia,serif;font-size:1.8rem}
+.prow span{color:var(--gold);font-weight:700}
+.bar{height:14px;border-radius:99px;background:#11131c;border:1px solid var(--line);overflow:hidden}
+.bar>span{display:block;height:100%;background:linear-gradient(90deg,#8a6a2f,#f3dc95 45%,#fff7a8 55%,#d8b45a);box-shadow:0 0 18px rgba(216,180,90,.45)}
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px}
+.dash div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.dash b{display:block;font-size:1.25rem;color:var(--gold)}
+.dash small,.medal small{color:var(--mut)}
+.gainline{margin:12px 0 0;color:var(--mut)}
+.gainline strong.up,.gain.up{color:#8ee0b0}
+.gainline strong.down,.gain.down{color:#f0a0a8}
+.medals{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.medal{flex:1 1 120px;background:#12131b;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.medal b{display:block}
+.medal.on{background:linear-gradient(180deg,rgba(243,220,149,.2),rgba(216,180,90,.05));border-color:rgba(216,180,90,.7);box-shadow:0 0 16px rgba(216,180,90,.15)}
+.medal.on b{color:var(--gold)}
+.medal.off{opacity:.55}
+.callout{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:14px;padding:14px 16px;border-radius:16px;border:1px solid rgba(216,180,90,.55);background:linear-gradient(180deg,rgba(216,180,90,.14),transparent 72%),var(--panel)}
+.callout .qname{margin:0;font-weight:700}
+.callout .kicker{margin-top:0}
+.qcontrols{padding-left:0;padding-right:0;position:sticky}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{background:transparent;color:var(--mut);border:0;padding:8px 12px;font:inherit;cursor:pointer}
+.seg button.on{background:var(--gold);color:#111;font-weight:700}
+.shelf{margin:22px 0 10px;font-family:Georgia,serif;font-size:1.35rem}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.year{grid-column:1/-1;margin:8px 0 0;padding-bottom:6px;border-bottom:1px solid var(--line);font-family:Georgia,serif;font-size:1.15rem;color:var(--gold)}
+.year small{color:var(--mut);font-family:system-ui,sans-serif;font-size:.8rem;font-weight:500;margin-left:8px}
+.qbox{position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px}
+.qbody{position:relative;z-index:1}
+.unlocked{border-color:transparent;background:linear-gradient(#1c1830,#171925) padding-box,linear-gradient(115deg,#f3dc95,#fff7a8,#9bf3ff,#ff9be8,#f3dc95) border-box;box-shadow:0 12px 32px rgba(216,180,90,.18)}
+.qshine{position:absolute;inset:-50%;pointer-events:none;background:linear-gradient(115deg,transparent 36%,rgba(255,155,232,.55) 44%,rgba(155,243,255,.5) 50%,rgba(255,247,168,.55) 56%,transparent 64%);background-size:220% 220%;animation:sh 6.5s linear infinite;mix-blend-mode:screen;opacity:.55}
+.locked{background:#12131a}
+.locked .qname{color:#c8c6d4}
+.set-icon{width:48px;height:48px;flex:0 0 auto;filter:invert(1)}
+.unlocked .set-icon{filter:invert(1) sepia(.55) saturate(3.5) hue-rotate(8deg) brightness(1.05)}
+.locked .set-icon{filter:grayscale(1) invert(1) brightness(.5)}
+.qtop{display:flex;gap:12px;align-items:flex-start;padding-right:78px;position:relative}
+.qtop>div{flex:1;min-width:0}
+.qname{margin:0;font-size:1.02rem;line-height:1.25;overflow-wrap:anywhere}
+.callout .btn{margin-left:auto}
+.qmeta,.qnote,.paid{margin:3px 0 0;color:var(--mut);font-size:.84rem}
+.qnote{margin-top:8px}
+.stamp{position:absolute;top:0;right:0;border:1.5px solid var(--line);color:var(--mut);font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:3px 6px;border-radius:4px;transform:rotate(8deg)}
+.unlocked .stamp{border-color:var(--gold);color:var(--gold)}
+.tag{display:inline-block;margin-top:8px;font-size:.72rem;font-weight:700;color:#111;background:var(--gold);border-radius:99px;padding:2px 8px}
+.qprices{display:grid;grid-template-columns:1fr 1.2fr;gap:10px;margin-top:12px;background:#101219;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.qprices span,.qprices small,.qprices em{display:block;color:var(--mut);font-style:normal;font-size:.75rem}
+.qprices strong{font-size:1.15rem}
+.qprices .na{color:var(--mut);font-weight:650}
+.gain,.paid{margin:8px 0 0;font-weight:650}
+.qbox .btn{margin-top:10px}
+footer code{color:var(--txt);font-size:.85em}
+@media (prefers-reduced-motion:reduce){.qshine{animation:none;opacity:.2}}
+@media(max-width:640px){
+.qhero h2{font-size:1.65rem}
+.prow strong{font-size:1.45rem}
+.callout{align-items:flex-start}
+.qgrid{grid-template-columns:1fr}
+.qtop{padding-right:0}
+.stamp{position:static;transform:none;align-self:flex-start;margin-left:auto}
+.qprices{grid-template-columns:1fr 1fr}
+}
+
 .price{text-align:right;font-size:1.05rem}.src{display:block;font-size:.65rem;color:var(--mut);font-weight:400}
 .controls input{font-size:1.05rem;padding:12px 14px}.controls input:focus{outline:2px solid var(--gold)}
 .mimg{display:flex;flex-direction:column;gap:10px}.mut{color:var(--mut);font-size:.8rem}

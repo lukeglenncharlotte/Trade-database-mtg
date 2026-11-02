@@ -24,6 +24,30 @@ python3 update_cards.py --refresh
 ```
 `--top N` keeps only the N most valuable cards overall (omit to keep all). HP cards are priced at 65% of NM and flagged as estimated; cards lacking a price for their finish fall back to the other finish and are flagged "est.".
 
+`--refresh` also updates Collector Box Quest prices (see below). Boxes alone:
+
+```
+python3 update_cards.py --refresh-boxes
+```
+
+## Collector Box Quest
+
+The second tab is a sealed Collector Booster display collection. Data is `collector_boxes.json` (no build step). The page reads that file as-is.
+
+To mark a box owned later, edit that one object and set `"owned"` to `true`. Optional `"paid"` is what Luke paid, in USD. Leave `"msrp"` null when you don't have a real Wizards or retailer MSRP — the page shows n/a, and a guessed number is worse than a blank. Example, the Reality Fracture display:
+
+```json
+{
+  "id": "fra",
+  "owned": true,
+  "paid": 323.88
+}
+```
+
+Commit the file and push to `main`. GitHub Pages redeploys from that push.
+
+`python3 update_cards.py --refresh-boxes` rewrites `lowestListed` and `market` from [tcgcsv.com](https://tcgcsv.com/) (TCGplayer low price and market price for the stored product id). It does not change `owned`, `paid`, `msrp`, names, or links. `--refresh` does the card reprice and this box reprice together. Wizards was not publishing MSRP from February 2019 until Foundations (October 2024), so displays before Foundations — and the Japanese Final Fantasy printing, which has no USD MSRP on file — stay `null`. Where a box MSRP is filled in, it is Wizards' Collector Booster pack MSRP times the 12 packs in the display, or a retailer sheet that printed the display MSRP itself.
+
 ## TCGplayer data
 For each card the script uses Scryfall's `tcgplayer_id` (or `tcgplayer_etched_id`) to call
 `mpapi.tcgplayer.com/v2/product/{id}/pricepoints` (market price for Foil/Normal) and

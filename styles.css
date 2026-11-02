@@ -148,6 +148,10 @@ footer code{color:var(--txt);font-size:.85em}
 @keyframes reveal{0%{filter:grayscale(1) brightness(.55)}100%{filter:none}}
 .lock.breaking{animation:lockbreak .85s ease forwards}
 @keyframes lockbreak{35%{transform:rotate(-12deg) scale(1.08)}100%{transform:translateY(18px) rotate(22deg) scale(.45);opacity:0}}
+body.ritual-open .qfigure,
+body.ritual-open .qfigure .sheen,
+body.ritual-open .qfigure .foil,
+body.ritual-open .foil .art::after{animation:none !important}
 @media (min-width:700px){#ritual,#proof{align-items:center}}
 @media (prefers-reduced-motion:reduce){
 .qfigure,.qfigure .sheen,.qfigure .foil{animation:none}

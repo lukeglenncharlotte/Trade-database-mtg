@@ -458,6 +458,8 @@
   function closeRitual() {
     if (ritual && ritual.photoUrl) URL.revokeObjectURL(ritual.photoUrl);
     ritual = null;
+    phraseTicket++;
+    document.body.classList.remove("ritual-open");
     $("#ritual").hidden = true;
     $("#ritual").innerHTML = "";
   }
@@ -485,7 +487,8 @@
         <label>Repeat<input id="phrase2" type="password" autocomplete="new-password"></label>
         ${r.hashPreview ? `<p class="qnote hashline">Salt <code>${esc(r.hashPreview.salt)}</code><br>Hash <code>${esc(r.hashPreview.hash)}</code></p>` : ""}`,
       phrase: `<p class="qnote">${box ? esc(box.name) : "This box"} stays locked until the passphrase matches the hash in the repo.</p>
-        <label>Passphrase<input id="ritualPhrase" type="password" autocomplete="current-password"></label>`,
+        <label>Passphrase<input id="ritualPhrase" type="password" autocomplete="off" spellcheck="false" autocapitalize="off" value="${esc(r.phraseDraft || "")}" ${r.checking ? "disabled" : ""}></label>
+        ${r.checking ? `<p class="qnote" role="status">Checking the passphrase…</p>` : ""}`,
       photo: `<p class="qnote">Photograph the sealed display. On a phone this opens the camera.</p>
         <label class="capture">Take or upload a photo
           <input id="ritualPhoto" type="file" accept="image/*" capture="environment">
@@ -508,7 +511,7 @@
       pick: `<button type="button" class="btn" id="ritualNext">Continue</button>`,
       token: `<button type="button" class="btn" id="ritualSaveToken">Save on this device</button>`,
       setphrase: `${r.hashPreview && token() ? `<button type="button" class="btn" id="ritualSaveHash">Save hash to the repo</button>` : `<button type="button" class="btn" id="ritualMakeHash">Create hash</button>`}`,
-      phrase: `<button type="button" class="btn" id="ritualNext">Continue</button>`,
+      phrase: `<button type="button" class="btn" id="ritualNext" ${r.checking ? "disabled" : ""}>${r.checking ? "Checking…" : "Continue"}</button>`,
       photo: `<button type="button" class="btn" id="ritualNext">Continue</button>`,
       place: `<button type="button" class="btn" id="ritualNext">Continue</button>`,
       price: `<button type="button" class="btn" id="ritualCommit">Break the seal</button>`,
@@ -523,8 +526,40 @@
       <div class="ritual-actions">${actions}<button type="button" class="btn ghost" id="ritualCancel">Close</button></div>
     </div>`;
     $("#ritual").hidden = false;
-    const focus = $("#ritual").querySelector("input, select, button");
-    if (focus) focus.focus();
+    document.body.classList.add("ritual-open");
+    const field = $("#ritual").querySelector("input:not([disabled]), textarea, select");
+    if (field && !ritual.checking) field.focus();
+  }
+  let phraseTicket = 0;
+  async function submitPassphrase() {
+    if (!ritual || ritual.step !== "phrase" || ritual.checking) return;
+    const phrase = ($("#ritualPhrase") && $("#ritualPhrase").value) || "";
+    ritual.phraseDraft = phrase;
+    if (!phrase) { ritual.error = "Enter the passphrase."; paintRitual(); return; }
+    const ticket = ++phraseTicket;
+    ritual.checking = true;
+    ritual.error = "";
+    paintRitual();
+    try {
+      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+      const got = await derivePassphrase(phrase, unlockCfg.salt, unlockCfg.iterations || 100000);
+      if (ticket !== phraseTicket || !ritual || ritual.step !== "phrase") return;
+      ritual.checking = false;
+      if (got !== unlockCfg.hash) {
+        ritual.error = "That passphrase does not match.";
+        paintRitual();
+        return;
+      }
+      ritual.phraseDraft = "";
+      ritual.passed = true;
+      ritual.step = token() ? "photo" : "token";
+      paintRitual();
+    } catch (err) {
+      if (ticket !== phraseTicket || !ritual) return;
+      ritual.checking = false;
+      ritual.error = "Could not check the passphrase.";
+      paintRitual();
+    }
   }
   function openRitual(box) {
     ritual = { box: box || null, step: "phrase", error: "", photoUrl: "", photoBytes: null, hashPreview: null, status: "" };
@@ -597,13 +632,7 @@
       ritual.step = "phrase"; ritual.error = ""; paintRitual(); return;
     }
     if (id === "ritualNext" && ritual.step === "phrase") {
-      const phrase = $("#ritualPhrase").value;
-      ritual.error = "";
-      const got = await derivePassphrase(phrase, unlockCfg.salt, unlockCfg.iterations || 100000);
-      if (got !== unlockCfg.hash) { ritual.error = "That passphrase does not match."; paintRitual(); return; }
-      ritual.passed = true;
-      ritual.step = token() ? "photo" : "token";
-      paintRitual();
+      await submitPassphrase();
       return;
     }
     if (id === "ritualLocate") {
@@ -690,7 +719,16 @@
       }
     }
   }
-  $("#ritual").addEventListener("click", onRitualClick);
+  $("#ritual").addEventListener("click", (e) => {
+    if (e.target.closest("input, textarea, select")) return;
+    onRitualClick(e);
+  });
+  $("#ritual").addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" || e.isComposing || !ritual || ritual.checking) return;
+    if (e.target.id !== "ritualPhrase") return;
+    e.preventDefault();
+    submitPassphrase();
+  });
   $("#ritual").addEventListener("change", async (e) => {
     if (e.target.id === "ritualMsrp") {
       ritual.msrpPurchase = e.target.checked;

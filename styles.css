@@ -175,6 +175,8 @@ body.ritual-open .foil .art::after{animation:none !important}
 .controls input{font-size:1.05rem;padding:12px 14px}.controls input:focus{outline:2px solid var(--gold)}
 .mimg{display:flex;flex-direction:column;gap:10px}.mut{color:var(--mut);font-size:.8rem}
 .btn{display:inline-block;margin:6px 0;padding:9px 14px;border-radius:10px;background:var(--gold);color:#111!important;font-weight:650;text-decoration:none}
+button.textlink{background:none;border:0;padding:8px 2px;margin:6px 0;color:var(--mut);font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+button.textlink:hover,button.textlink:focus-visible{color:var(--gold)}
 .sales{margin-top:12px;background:#11131c;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
 .sales summary{cursor:pointer;font-weight:650;color:var(--gold)}.sales table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.88rem}
 .sales th,.sales td{text-align:left;padding:5px 4px;border-bottom:1px solid var(--line)}.sales th{color:var(--mut);font-weight:500}

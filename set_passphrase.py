@@ -23,18 +23,23 @@ def main():
     salt = os.urandom(16)
     with open(DB) as f:
         doc = json.load(f)
+    prev = doc.get("unlock") if isinstance(doc.get("unlock"), dict) else {}
     doc["unlock"] = {
         "kdf": "PBKDF2-SHA256",
         "iterations": ITERS,
         "salt": salt.hex(),
         "hash": derive(phrase, salt),
     }
+    if isinstance(prev.get("vault"), dict):
+        doc["unlock"]["vault"] = prev["vault"]
     with open(DB, "w") as f:
         json.dump(doc, f, indent=2, ensure_ascii=False)
         f.write("\n")
     print("Wrote the salted hash into collector_boxes.json.")
     print("The passphrase itself was not saved. Commit and push collector_boxes.json to main.")
-    print("The hash only gates the ritual screen. The GitHub token is what allows a save.")
+    print("The hash only gates the ritual screen. The sealed token in unlock.vault is what allows a save.")
+    if isinstance(prev.get("vault"), dict):
+        print("The sealed token was left in place. It still opens only with the previous passphrase, so run device setup again after this hash is on main.")
 
 if __name__ == "__main__":
     main()

@@ -50,18 +50,18 @@ Commit the file and push to `main`. GitHub Pages redeploys from that push.
 
 On the quest tab, **Unlock a box** (or **Unlock this box** on a locked tile) runs a short ceremony: passphrase, a photo of the sealed display, the amount paid, then a commit straight to this repo. Owned tiles with a proof photo have **View proof**.
 
-The site is static, so the browser calls the GitHub REST API. Two separate gates:
+The site is static, so the browser calls the GitHub REST API. The only thing you type on a normal unlock is the passphrase.
 
-1. **Passphrase.** A light lock on the ritual screen. The repo stores only a random salt and a PBKDF2-SHA256 hash (`unlock` in `collector_boxes.json`). There is no default passphrase. Until you set one, the ritual asks you to create it.
-2. **GitHub token.** This is the real security. It lives in `localStorage` on that browser (`Keeper key`) and is never written to the repo. Anyone with the token can commit; the passphrase does not stop them.
+1. **Passphrase.** The ritual stays closed until it matches the salted PBKDF2-SHA256 hash in `unlock` (`collector_boxes.json`, 100,000 iterations). There is no default passphrase. The passphrase itself is never stored.
+2. **Sealed token.** A fine-grained GitHub token is encrypted in the browser and stored as `unlock.vault` (`ciphertext`, `iv`, and its own `salt`). The key is AES-GCM, derived with PBKDF2-SHA256 at 310,000 iterations. That salt is not the passphrase-verification salt. The plaintext token is never written to the repo. After a successful unlock the decrypted token is cached in `sessionStorage` for that tab only.
 
-**Create the token**
+**One-time device setup**
 
-1. GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token.
-2. Resource owner: your user account. Repository access: **Only select repositories** → `Trade-database-mtg`.
-3. Permissions: **Contents: Read and write**. Nothing else is required.
-4. Generate the token and copy it once (`github_pat_…`).
-5. On the quest tab, open **Keeper key**, paste it, and choose **Save on this device**. Use **Forget token** on a shared browser. Prefer a short expiration, and revoke the token if the device is lost.
+Create a fine-grained personal access token: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens. Resource owner: your user. Repository access: **Only select repositories** → `Trade-database-mtg`. Permission: **Contents: Read and write**. Copy the `github_pat_…` value once.
+
+Setup appears only after the passphrase matches, and only when `unlock.vault` is not there yet. The same screen is also behind the small **device setup** link on the quest tab (passphrase first, then the paste box). The browser commits the ciphertext with that token. Every device after that just enters the passphrase, decrypts the token in memory, and the submission saves.
+
+If GitHub rejects the sealed token as invalid or expired, the ritual says so and offers **Run device setup**. Paste a new token; the passphrase stays the same.
 
 **Set or change the passphrase**
 
@@ -71,11 +71,11 @@ From a checkout of this repo:
 python3 set_passphrase.py
 ```
 
-It asks twice, writes `unlock.salt` and `unlock.hash`, and does not save the words. Commit and push `collector_boxes.json`.
+It asks twice, writes `unlock.salt` and `unlock.hash`, and does not save the words. An existing `unlock.vault` is left as-is, still sealed with the previous passphrase, so run **device setup** again after the new hash is on `main`. Commit and push `collector_boxes.json`.
 
-Or, on the quest tab, start **Unlock a box** before a hash exists (or after you clear `unlock.hash`). Enter the passphrase twice, choose **Create hash**, then **Save hash to the repo** once a keeper key is stored. Changing it is the same script: run it again and push. To change it in the browser, clear `unlock.hash` in the file (or set `unlock` back to nulls), push, and use the on-page form.
+Or, on the quest tab, start **Unlock a box** before a hash exists (or after you clear `unlock.hash`). Enter the passphrase twice, choose **Create hash**, then continue into device setup. That saves the hash and the sealed token together.
 
-The ritual asks for a photo, the vendor or seller, where you bought it (type a city or **online**, or **Use my location** to fill the city), the purchase date and time (editable, defaults to now), optional notes, and the amount paid. On the price step, **I purchased this for MSRP** fills the paid amount with that box's MSRP, disables the price field, and stores `msrpPurchase: true`. The option is unavailable when the box has no MSRP. The profile then shows the price as MSRP, 0% over MSRP, and the gain against that amount. It uploads a client-resized JPEG (longest side about 1200px) to `images/verified/<box-id>.jpg` and sets `owned`, `paid`, `vendor`, `location`, `notes`, `purchasedAt`, `submittedAt` (the moment you submit, not editable), `unlockedAt`, and `verificationPhoto`. Days owned are counted from `purchasedAt`. Click a tile for its purchase profile, or a teaser with MSRP and the current price if it is still locked. Tiles and profiles use the TCGplayer product photo in `imageUrl`. A 409 from GitHub refetches the file sha, reapplies the same box, and retries. A rejected token is shown on the ritual card. `python3 update_cards.py --refresh-boxes` updates prices and fills a missing product photo. It does not change ownership, purchase details, or the hash.
+The ritual asks for a photo, the vendor or seller, where you bought it (type a city or **online**, or **Use my location** to fill the city), the purchase date and time (editable, defaults to now), optional notes, and the amount paid. On the price step, **I purchased this for MSRP** fills the paid amount with that box's MSRP, disables the price field, and stores `msrpPurchase: true`. The option is unavailable when the box has no MSRP. The profile then shows the price as MSRP, 0% over MSRP, and the gain against that amount. It uploads a client-resized JPEG (longest side about 1200px) to `images/verified/<box-id>.jpg` and sets `owned`, `paid`, `vendor`, `location`, `notes`, `purchasedAt`, `submittedAt` (the moment you submit, not editable), `unlockedAt`, and `verificationPhoto`. Days owned are counted from `purchasedAt`. Click a tile for its purchase profile, or a teaser with MSRP and the current price if it is still locked. Tiles and profiles use the TCGplayer product photo in `imageUrl`. A 409 from GitHub refetches the file sha, reapplies the same box, and retries. An invalid or expired token offers device setup again. `python3 update_cards.py --refresh-boxes` updates prices and fills a missing product photo. It does not change ownership, purchase details, the hash, or the sealed vault.
 
 `python3 update_cards.py --refresh-boxes` rewrites `lowestListed` and `market` from [tcgcsv.com](https://tcgcsv.com/) (TCGplayer low price and market price for the stored product id). If `imageUrl` is missing, it fills the TCGplayer product photo (`https://tcgplayer-cdn.tcgplayer.com/product/<id>_in_1000x1000.jpg`, or the tcgcsv `imageUrl` when there is no product id). It does not change `owned`, `paid`, `msrp`, names, links, or an image URL that is already set. `--refresh` does the card reprice and this box reprice together. Wizards was not publishing MSRP from February 2019 until Foundations (October 2024), so displays before Foundations — and the Japanese Final Fantasy printing, which has no USD MSRP on file — stay `null`. Where a box MSRP is filled in, it is Wizards' Collector Booster pack MSRP times the 12 packs in the display, or a retailer sheet that printed the display MSRP itself.
 

@@ -17,8 +17,13 @@
   let q = "";
   let unlockCfg = { kdf: "PBKDF2-SHA256", iterations: 100000, salt: null, hash: null };
   const sessionProof = new Map();
-  const TOKEN_KEY = "cbq-github-token";
+  const SESSION_TOKEN = "cbq-vault-token";
+  const SESSION_TAG = "cbq-vault-tag";
+  const VAULT_ITERATIONS = 310000;
   const GH = "https://api.github.com/repos/lukeglenncharlotte/Trade-database-mtg/contents/";
+  let memoryToken = "";
+  let tokenOverride = "";
+  try { localStorage.removeItem("cbq-github-token"); } catch (e) { /* drop the old device copy */ }
 
   const trade = $("#trade");
   const quest = $("#quest");
@@ -262,8 +267,89 @@
   async function freshSalt() {
     return bytesToHex(crypto.getRandomValues(new Uint8Array(16)));
   }
-
-  function token() { return localStorage.getItem(TOKEN_KEY) || ""; }
+  function yieldPaint() {
+    return new Promise((resolve) => {
+      requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(resolve, 0)));
+    });
+  }
+  function vaultRecord(v) {
+    return !!(v && v.salt && v.iv && v.ciphertext);
+  }
+  function vaultTag(v) {
+    return String((v && v.ciphertext) || "").slice(0, 32);
+  }
+  function clearSessionToken() {
+    memoryToken = "";
+    try {
+      sessionStorage.removeItem(SESSION_TOKEN);
+      sessionStorage.removeItem(SESSION_TAG);
+    } catch (e) { /* session storage can be blocked */ }
+  }
+  function rememberToken(pat) {
+    memoryToken = pat || "";
+    try {
+      if (!pat) {
+        sessionStorage.removeItem(SESSION_TOKEN);
+        sessionStorage.removeItem(SESSION_TAG);
+        return;
+      }
+      sessionStorage.setItem(SESSION_TOKEN, pat);
+      if (vaultRecord(unlockCfg.vault)) sessionStorage.setItem(SESSION_TAG, vaultTag(unlockCfg.vault));
+    } catch (e) { /* keep the in-memory copy for this page */ }
+  }
+  function token() {
+    if (tokenOverride) return tokenOverride;
+    if (memoryToken) return memoryToken;
+    try {
+      const pat = sessionStorage.getItem(SESSION_TOKEN) || "";
+      const tag = sessionStorage.getItem(SESSION_TAG) || "";
+      if (!pat) return "";
+      if (vaultRecord(unlockCfg.vault) && tag && tag !== vaultTag(unlockCfg.vault)) {
+        clearSessionToken();
+        return "";
+      }
+      memoryToken = pat;
+      return pat;
+    } catch (e) {
+      return "";
+    }
+  }
+  async function deriveAesKey(phrase, saltBytes, iterations) {
+    const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(phrase), "PBKDF2", false, ["deriveKey"]);
+    return crypto.subtle.deriveKey({
+      name: "PBKDF2",
+      salt: saltBytes,
+      iterations: iterations || VAULT_ITERATIONS,
+      hash: "SHA-256",
+    }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+  }
+  async function sealToken(phrase, pat) {
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const key = await deriveAesKey(phrase, salt, VAULT_ITERATIONS);
+    const cipher = new Uint8Array(await crypto.subtle.encrypt(
+      { name: "AES-GCM", iv },
+      key,
+      new TextEncoder().encode(pat)
+    ));
+    return {
+      kdf: "PBKDF2-SHA256",
+      cipher: "AES-GCM",
+      iterations: VAULT_ITERATIONS,
+      salt: bytesToB64(salt),
+      iv: bytesToB64(iv),
+      ciphertext: bytesToB64(cipher),
+    };
+  }
+  async function openToken(phrase, vault) {
+    const key = await deriveAesKey(phrase, b64ToBytes(vault.salt), vault.iterations || VAULT_ITERATIONS);
+    const plain = await crypto.subtle.decrypt(
+      { name: "AES-GCM", iv: b64ToBytes(vault.iv) },
+      key,
+      b64ToBytes(vault.ciphertext)
+    );
+    return new TextDecoder().decode(plain);
+  }
   function ghError(status, message) {
     const err = new Error(message || ("GitHub error " + status));
     err.status = status;
@@ -271,7 +357,7 @@
   }
   async function gh(path, opts) {
     const key = token();
-    if (!key) throw ghError(0, "No GitHub token is saved on this device.");
+    if (!key) throw ghError(0, "The archive key is not open on this device yet.");
     const res = await fetch(GH + path.split("/").map(encodeURIComponent).join("/"), {
       method: (opts && opts.method) || "GET",
       headers: {
@@ -285,7 +371,7 @@
     const text = await res.text();
     let data = null;
     try { data = text ? JSON.parse(text) : null; } catch (e) { data = { message: text }; }
-    if (res.status === 401) throw ghError(401, "GitHub rejected that token. It needs contents read and write on this repository only.");
+    if (res.status === 401) throw ghError(401, "GitHub didn't accept that token. It may be invalid or expired.");
     if (res.status === 403) throw ghError(403, "GitHub refused the token (" + ((data && data.message) || "forbidden") + "). Contents read and write on Trade-database-mtg is required.");
     if (res.status === 404 && opts && opts.allow404) return null;
     if (!res.ok) throw ghError(res.status, (data && data.message) || ("GitHub error " + res.status));
@@ -388,28 +474,45 @@
     }
     throw last;
   }
-  async function commitPassphrase(salt, hash) {
+  async function commitVault(phrase, pat, hashPreview) {
+    const vault = await sealToken(phrase, pat);
+    const priorOverride = tokenOverride;
+    tokenOverride = pat;
     let last = null;
-    for (let attempt = 0; attempt < 3; attempt++) {
-      const { sha, doc } = await readRepoJson("collector_boxes.json");
-      doc.unlock = { kdf: "PBKDF2-SHA256", iterations: 100000, salt, hash };
-      const text = JSON.stringify(doc, null, 2) + "\n";
-      try {
-        await gh("collector_boxes.json", {
-          method: "PUT",
-          body: JSON.stringify({
-            message: "Set Collector Box Quest passphrase hash",
-            content: bytesToB64(new TextEncoder().encode(text)),
-            sha,
-          }),
-        });
-        return doc.unlock;
-      } catch (e) {
-        last = e;
-        if (e.status !== 409 || attempt === 2) throw e;
+    try {
+      for (let attempt = 0; attempt < 3; attempt++) {
+        const { sha, doc } = await readRepoJson("collector_boxes.json");
+        const prev = doc.unlock && typeof doc.unlock === "object" ? doc.unlock : {};
+        doc.unlock = {
+          kdf: prev.kdf || "PBKDF2-SHA256",
+          iterations: hashPreview ? 100000 : (prev.iterations || 100000),
+          salt: hashPreview ? hashPreview.salt : prev.salt,
+          hash: hashPreview ? hashPreview.hash : prev.hash,
+        };
+        doc.unlock.vault = vault;
+        const text = JSON.stringify(doc, null, 2) + "\n";
+        if (pat && text.includes(pat)) throw new Error("Refusing to store the token in the clear.");
+        try {
+          await gh("collector_boxes.json", {
+            method: "PUT",
+            body: JSON.stringify({
+              message: hashPreview ? "Set Collector Box Quest passphrase hash and seal the device key" : "Seal Collector Box Quest device key",
+              content: bytesToB64(new TextEncoder().encode(text)),
+              sha,
+            }),
+          });
+          unlockCfg = Object.assign(unlockCfg, doc.unlock);
+          rememberToken(pat);
+          return doc.unlock;
+        } catch (e) {
+          last = e;
+          if (e.status !== 409 || attempt === 2) throw e;
+        }
       }
+      throw last;
+    } finally {
+      tokenOverride = priorOverride;
     }
-    throw last;
   }
 
   function burst(origin) {
@@ -468,9 +571,11 @@
     const box = r.box;
     const title = {
       pick: "Choose a sealed box",
-      token: "Keeper key",
       setphrase: "Set the passphrase",
       phrase: "The words",
+      setup: "Device setup",
+      rejected: "The saved key needs replacing",
+      ready: "Device ready",
       photo: "The proof",
       place: "The purchase",
       price: "The price",
@@ -479,16 +584,19 @@
     const body = {
       pick: `<p class="qnote">Which display did you bring home?</p>
         <label>Locked box<select id="ritualPick">${boxes.filter((b) => !b.owned).map((b) => `<option value="${esc(b.id)}">${esc(b.name)}${b.variant ? " · " + esc(b.variant) : ""}</option>`).join("")}</select></label>`,
-      token: `<p class="qnote">A fine-grained GitHub token with contents read and write on this repo is saved only in this browser. It is the real key. The passphrase is a light gate in front of the ritual.</p>
-        <label>Token<input id="ritualToken" type="password" autocomplete="off" placeholder="github_pat_…"></label>
-        ${token() ? `<p class="qnote">A token is already saved on this device.</p><button type="button" class="btn ghost" id="ritualForget">Forget token</button>` : ""}`,
       setphrase: `<p class="qnote">No passphrase is set yet, so the ritual stays closed. Choose one here, or run <code>python3 set_passphrase.py</code> and push the hash. The passphrase itself is never stored.</p>
         <label>New passphrase<input id="phrase1" type="password" autocomplete="new-password"></label>
         <label>Repeat<input id="phrase2" type="password" autocomplete="new-password"></label>
-        ${r.hashPreview ? `<p class="qnote hashline">Salt <code>${esc(r.hashPreview.salt)}</code><br>Hash <code>${esc(r.hashPreview.hash)}</code></p>` : ""}`,
-      phrase: `<p class="qnote">${box ? esc(box.name) : "This box"} stays locked until the passphrase matches the hash in the repo.</p>
+        ${r.hashPreview ? `<p class="qnote hashline">Salt <code>${esc(r.hashPreview.salt)}</code><br>Hash <code>${esc(r.hashPreview.hash)}</code></p><p class="qnote">Next, paste a token once. The hash and the sealed token are saved together.</p>` : ""}`,
+      phrase: `<p class="qnote">${r.purpose === "setup" ? "Confirm the passphrase. Device setup stays closed until it matches." : (box ? esc(box.name) + " stays locked until the passphrase matches the hash in the repo." : "The ritual stays closed until the passphrase matches the hash in the repo.")}</p>
         <label>Passphrase<input id="ritualPhrase" type="password" autocomplete="off" spellcheck="false" autocapitalize="off" value="${esc(r.phraseDraft || "")}" ${r.checking ? "disabled" : ""}></label>
         ${r.checking ? `<p class="qnote" role="status">Checking the passphrase…</p>` : ""}`,
+      setup: `<p class="qnote">Paste a fine-grained GitHub token once. It needs contents read and write on this repository only. This browser encrypts it with your passphrase and saves only the ciphertext. The token itself is never written into the repo, and the passphrase is the only thing you enter after this.</p>
+        <label>Fine-grained token<input id="ritualToken" type="password" autocomplete="off" spellcheck="false" autocapitalize="off" placeholder="github_pat_…"></label>`,
+      rejected: `<p class="qnote">${r.sealBroken
+        ? "The passphrase matched, but the sealed key could not be opened. You can run device setup again and paste the token once more. The passphrase stays the same."
+        : "GitHub didn't accept the saved key. It may be invalid or expired. You can run device setup again and paste a new token. The passphrase stays the same."}</p>`,
+      ready: `<p class="qnote">The token is sealed. On this device and any other, the passphrase is the only thing you enter.</p>`,
       photo: `<p class="qnote">Photograph the sealed display. On a phone this opens the camera.</p>
         <label class="capture">Take or upload a photo
           <input id="ritualPhoto" type="file" accept="image/*" capture="environment">
@@ -509,8 +617,9 @@
     }[r.step] || "";
     const actions = {
       pick: `<button type="button" class="btn" id="ritualNext">Continue</button>`,
-      token: `<button type="button" class="btn" id="ritualSaveToken">Save on this device</button>`,
-      setphrase: `${r.hashPreview && token() ? `<button type="button" class="btn" id="ritualSaveHash">Save hash to the repo</button>` : `<button type="button" class="btn" id="ritualMakeHash">Create hash</button>`}`,
+      setphrase: `${r.hashPreview ? `<button type="button" class="btn" id="ritualToSetup">Continue</button>` : `<button type="button" class="btn" id="ritualMakeHash">Create hash</button>`}`,
+      setup: `<button type="button" class="btn" id="ritualSeal" ${r.checking ? "disabled" : ""}>Encrypt and save</button>`,
+      rejected: `<button type="button" class="btn" id="ritualRedoSetup">Run device setup</button>`,
       phrase: `<button type="button" class="btn" id="ritualNext" ${r.checking ? "disabled" : ""}>${r.checking ? "Checking…" : "Continue"}</button>`,
       photo: `<button type="button" class="btn" id="ritualNext">Continue</button>`,
       place: `<button type="button" class="btn" id="ritualNext">Continue</button>`,
@@ -519,7 +628,7 @@
     }[r.step] || "";
     $("#ritual").innerHTML = `<div class="ritual-card" role="dialog" aria-modal="true" aria-labelledby="ritualTitle">
       <button type="button" class="ritual-x" id="ritualClose" aria-label="Close">×</button>
-      <p class="kicker">Unlock ritual</p>
+      <p class="kicker">${r.step === "setup" || r.step === "ready" || r.step === "rejected" || r.purpose === "setup" ? "Device setup" : "Unlock ritual"}</p>
       <h2 id="ritualTitle">${esc(title)}</h2>
       ${r.error ? `<p class="ritual-err">${esc(r.error)}</p>` : ""}
       ${body}
@@ -541,7 +650,7 @@
     ritual.error = "";
     paintRitual();
     try {
-      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+      await yieldPaint();
       const got = await derivePassphrase(phrase, unlockCfg.salt, unlockCfg.iterations || 100000);
       if (ticket !== phraseTicket || !ritual || ritual.step !== "phrase") return;
       ritual.checking = false;
@@ -552,8 +661,8 @@
       }
       ritual.phraseDraft = "";
       ritual.passed = true;
-      ritual.step = token() ? "photo" : "token";
-      paintRitual();
+      ritual.phrase = phrase;
+      await openArchive();
     } catch (err) {
       if (ticket !== phraseTicket || !ritual) return;
       ritual.checking = false;
@@ -561,10 +670,55 @@
       paintRitual();
     }
   }
-  function openRitual(box) {
-    ritual = { box: box || null, step: "phrase", error: "", photoUrl: "", photoBytes: null, hashPreview: null, status: "" };
+  async function openArchive() {
+    if (!ritual) return;
+    const phrase = ritual.phrase || "";
+    if (ritual.purpose === "setup" || !vaultRecord(unlockCfg.vault)) {
+      ritual.step = "setup";
+      ritual.error = "";
+      paintRitual();
+      return;
+    }
+    if (token()) {
+      ritual.step = ritual.box ? "photo" : "pick";
+      ritual.error = "";
+      paintRitual();
+      return;
+    }
+    const ticket = phraseTicket;
+    ritual.step = "saving";
+    ritual.status = "Opening the archive…";
+    ritual.error = "";
+    paintRitual();
+    try {
+      await yieldPaint();
+      const pat = await openToken(phrase, unlockCfg.vault);
+      if (ticket !== phraseTicket || !ritual) return;
+      rememberToken(pat);
+      ritual.step = ritual.box ? "photo" : "pick";
+      ritual.error = "";
+    } catch (err) {
+      if (ticket !== phraseTicket || !ritual) return;
+      clearSessionToken();
+      ritual.sealBroken = true;
+      ritual.step = "rejected";
+      ritual.error = "";
+    }
+    paintRitual();
+  }
+  function openRitual(box, purpose) {
+    ritual = { box: box || null, step: "phrase", purpose: purpose || "", error: "", photoUrl: "", photoBytes: null, hashPreview: null, status: "", phrase: "" };
     if (!unlockCfg.hash || !unlockCfg.salt) ritual.step = "setphrase";
-    else if (!box) ritual.step = "pick";
+    else if (!box && purpose !== "setup") ritual.step = "pick";
+    paintRitual();
+  }
+  function showRejected() {
+    clearSessionToken();
+    if (!ritual) return;
+    ritual.resumeStep = ritual.resumeStep || (ritual.box ? "price" : "");
+    ritual.sealBroken = false;
+    ritual.step = "rejected";
+    ritual.error = "";
     paintRitual();
   }
   async function compressPhoto(file) {
@@ -591,37 +745,78 @@
     stashRitualFields();
     const id = e.target.id;
     if ((id === "ritualClose" || id === "ritualCancel") && ritual.step !== "saving") { closeRitual(); return; }
-    if (id === "ritualForget") { localStorage.removeItem(TOKEN_KEY); ritual.error = ""; paintRitual(); return; }
-    if (id === "ritualSaveToken") {
-      const value = ($("#ritualToken") && $("#ritualToken").value || "").trim();
-      if (!value) { ritual.error = "Paste the token first."; paintRitual(); return; }
-      localStorage.setItem(TOKEN_KEY, value);
-      ritual.error = "";
-      if (ritual.passed && ritual.box) ritual.step = "photo";
-      else if (!unlockCfg.hash || !unlockCfg.salt) ritual.step = "setphrase";
-      else ritual.step = ritual.box ? "phrase" : "pick";
-      paintRitual();
-      return;
-    }
     if (id === "ritualMakeHash") {
       const a = $("#phrase1").value, b = $("#phrase2").value;
       if (!a || a !== b) { ritual.error = a ? "The two entries did not match." : "Enter a passphrase."; paintRitual(); return; }
-      const salt = await freshSalt();
-      ritual.hashPreview = { salt, hash: await derivePassphrase(a, salt, 100000) };
-      ritual.error = token() ? "" : "Hash ready. Save a keeper key to write it to the repo, or run python3 set_passphrase.py and push.";
+      ritual.step = "saving";
+      ritual.status = "Preparing the passphrase…";
+      ritual.error = "";
       paintRitual();
-      return;
-    }
-    if (id === "ritualSaveHash") {
-      ritual.error = ""; ritual.step = "saving"; ritual.status = "Writing the passphrase hash…"; paintRitual();
       try {
-        unlockCfg = Object.assign(unlockCfg, await commitPassphrase(ritual.hashPreview.salt, ritual.hashPreview.hash));
-        ritual.step = ritual.box ? "phrase" : "pick";
-        ritual.hashPreview = null;
+        await yieldPaint();
+        const salt = await freshSalt();
+        ritual.phrase = a;
+        ritual.hashPreview = { salt, hash: await derivePassphrase(a, salt, 100000) };
+        ritual.step = "setphrase";
         ritual.error = "";
       } catch (err) {
         ritual.step = "setphrase";
-        ritual.error = err.message || "Could not save the hash.";
+        ritual.error = "Could not prepare the passphrase.";
+      }
+      paintRitual();
+      return;
+    }
+    if (id === "ritualToSetup") {
+      if (!ritual.phrase || !ritual.hashPreview) { ritual.error = "Create the passphrase first."; paintRitual(); return; }
+      ritual.step = "setup";
+      ritual.error = "";
+      paintRitual();
+      return;
+    }
+    if (id === "ritualRedoSetup") {
+      if (!ritual.phrase) {
+        ritual.purpose = "setup";
+        ritual.step = (!unlockCfg.hash || !unlockCfg.salt) ? "setphrase" : "phrase";
+        ritual.error = "";
+        paintRitual();
+        return;
+      }
+      ritual.step = "setup";
+      ritual.error = "";
+      paintRitual();
+      return;
+    }
+    if (id === "ritualSeal") {
+      if (ritual.step !== "setup") return;
+      const value = ($("#ritualToken") && $("#ritualToken").value || "").trim();
+      if (!value) { ritual.error = "Paste the token first."; paintRitual(); return; }
+      if (!ritual.phrase) {
+        ritual.step = "phrase";
+        ritual.error = "Enter the passphrase again before sealing a token.";
+        paintRitual();
+        return;
+      }
+      const preview = ritual.hashPreview;
+      ritual.step = "saving";
+      ritual.status = "Encrypting the token and sealing it into the repository…";
+      ritual.error = "";
+      paintRitual();
+      try {
+        await yieldPaint();
+        await commitVault(ritual.phrase, value, preview);
+        ritual.hashPreview = null;
+        const resume = ritual.resumeStep;
+        ritual.resumeStep = "";
+        if (resume) ritual.step = resume;
+        else if (ritual.purpose === "setup" && !ritual.box) ritual.step = "ready";
+        else if (ritual.box) ritual.step = "photo";
+        else ritual.step = "pick";
+        ritual.error = "";
+      } catch (err) {
+        ritual.step = "setup";
+        ritual.error = err.status === 401
+          ? "GitHub rejected that token. Use a fine-grained token with contents read and write on this repository, then paste it again."
+          : (err.message || "Could not seal the token.");
       }
       paintRitual();
       return;
@@ -711,6 +906,11 @@
         closeRitual();
         celebrate(box, badges);
       } catch (err) {
+        if (err.status === 401 || err.status === 0) {
+          ritual.resumeStep = "price";
+          showRejected();
+          return;
+        }
         ritual.step = "price";
         ritual.error = err.status === 409
           ? "The collection file changed while saving. The latest copy was fetched and the save was retried. " + (err.message || "Try the ritual again.")
@@ -725,9 +925,15 @@
   });
   $("#ritual").addEventListener("keydown", (e) => {
     if (e.key !== "Enter" || e.isComposing || !ritual || ritual.checking) return;
-    if (e.target.id !== "ritualPhrase") return;
-    e.preventDefault();
-    submitPassphrase();
+    if (e.target.id === "ritualPhrase") {
+      e.preventDefault();
+      submitPassphrase();
+      return;
+    }
+    if (e.target.id === "ritualToken" && ritual.step === "setup") {
+      e.preventDefault();
+      onRitualClick({ target: { id: "ritualSeal" } });
+    }
   });
   $("#ritual").addEventListener("change", async (e) => {
     if (e.target.id === "ritualMsrp") {
@@ -749,10 +955,7 @@
     paintRitual();
   });
   $("#unlockAny").addEventListener("click", () => openRitual(null));
-  $("#keeperKey").addEventListener("click", () => {
-    ritual = { box: null, step: "token", error: "", photoUrl: "", photoBytes: null, hashPreview: null, status: "" };
-    paintRitual();
-  });
+  $("#deviceSetup").addEventListener("click", () => openRitual(null, "setup"));
   $("#proof").addEventListener("click", (e) => { if (e.target.id === "proof" || e.target.id === "proofClose") $("#proof").hidden = true; });
   function openProfile(box) {
     if (!box) return;

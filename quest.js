@@ -78,12 +78,15 @@
   const LOCK = `<span class="lock" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 10V7a4 4 0 0 1 8 0v3h1.2A1.8 1.8 0 0 1 19 11.8v7.4A1.8 1.8 0 0 1 17.2 21H6.8A1.8 1.8 0 0 1 5 19.2v-7.4A1.8 1.8 0 0 1 6.8 10H8zm2 0h4V7a2 2 0 0 0-4 0v3z"/></svg></span>`;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  function artSrc(b) { return b.cartoonUrl || b.imageUrl || ""; }
   function art(b, eager) {
-    if (!b.imageUrl) return "";
+    const src = artSrc(b);
+    if (!src) return "";
     const delay = reduceMotion ? "" : ` style="animation-delay:${(-(b.tcgplayerProductId % 7) * 0.45).toFixed(2)}s"`;
+    const fallback = b.cartoonUrl && b.imageUrl ? ` data-fallback="${esc(b.imageUrl)}"` : "";
     return `<div class="qstage">
       <div class="qfigure"${delay}>
-        <img class="boxart" alt="${esc(b.name)} sealed Collector Booster display" width="1000" height="1000" ${eager ? "" : 'loading="lazy"'} decoding="async" src="${esc(b.imageUrl)}">
+        <img class="boxart" alt="${esc(b.name)} sealed Collector Booster display" width="800" height="800" ${eager ? "" : 'loading="lazy"'} decoding="async" src="${esc(src)}"${fallback}>
         <span class="sheen" aria-hidden="true"></span>
         ${b.owned ? '<span class="foil" aria-hidden="true"></span>' : LOCK}
       </div>
@@ -110,7 +113,6 @@
 
   function card(b, cheapestId) {
     const bits = [b.setCode, pretty(b.releaseDate), b.variant].filter(Boolean).join(" · ");
-    const proof = b.owned && (b.verificationPhoto || sessionProof.has(b.id));
     return `<article class="qbox ${b.owned ? "unlocked" : "locked"}${b.id === cheapestId ? " next" : ""}" data-id="${esc(b.id)}">
       <div class="qbody">
         ${art(b)}
@@ -124,8 +126,6 @@
         ${prices(b)}
         <div class="qactions">
           <a class="btn" href="${esc(b.tcgplayerUrl)}" target="_blank" rel="noopener">View on TCGplayer ↗</a>
-          ${b.owned ? "" : `<button type="button" class="btn ghost" data-unlock="${esc(b.id)}">Unlock this box</button>`}
-          ${proof ? `<button type="button" class="btn ghost" data-proof="${esc(b.id)}">View proof</button>` : ""}
         </div>
       </div>
     </article>`;
@@ -204,7 +204,7 @@
 
     const cheapest = miss.filter((b) => b.lowestListed != null).sort((a, b) => a.lowestListed - b.lowestListed || a.releaseDate.localeCompare(b.releaseDate))[0];
     $("#questNext").innerHTML = cheapest ? `<aside class="callout">
-      ${cheapest.imageUrl ? `<img class="callout-art" alt="" width="84" height="84" src="${esc(cheapest.imageUrl)}">` : `<img class="set-icon" alt="" width="48" height="48" src="${esc(cheapest.icon)}">`}
+      ${artSrc(cheapest) ? `<img class="callout-art" alt="" width="84" height="84" src="${esc(artSrc(cheapest))}">` : `<img class="set-icon" alt="" width="48" height="48" src="${esc(cheapest.icon)}">`}
       <div><p class="kicker">Next cheapest to grab</p><p class="qname">${esc(cheapest.name)}</p>
       <p class="qmeta">${usd(cheapest.lowestListed)} lowest listing · ${usd(cheapest.market)} market${cheapest.msrp != null ? " · MSRP " + usd(cheapest.msrp) : ""}</p></div>
       <a class="btn" href="${esc(cheapest.tcgplayerUrl)}" target="_blank" rel="noopener">View on TCGplayer ↗</a>
@@ -316,19 +316,60 @@
     const d = new Date();
     return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
   }
-  async function commitUnlock(box, paid, photoBytes) {
+  function localNowValue() {
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, "0");
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes());
+  }
+  function localToISO(value) {
+    const d = new Date(value);
+    if (!value || Number.isNaN(d.getTime())) return null;
+    return d.toISOString();
+  }
+  function stampText(iso) {
+    if (!iso) return "n/a";
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso;
+    return d.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+  }
+  function signedPct(n) {
+    if (n == null || !Number.isFinite(n)) return "n/a";
+    if (Math.abs(n) < 0.05) return "0%";
+    return (n > 0 ? "+" : "−") + Math.abs(n).toLocaleString(undefined, { maximumFractionDigits: 1 }) + "%";
+  }
+  function daysOwned(b) {
+    if (!b.purchasedAt) return null;
+    const t = new Date(b.purchasedAt);
+    if (Number.isNaN(t.getTime())) return null;
+    return Math.max(0, Math.floor((Date.now() - t.getTime()) / 86400000));
+  }
+  function shelfOrder() {
+    return boxes.filter((b) => b.owned).slice().sort((a, b) => {
+      const ka = a.submittedAt || a.unlockedAt || "9999";
+      const kb = b.submittedAt || b.unlockedAt || "9999";
+      if (ka !== kb) return ka.localeCompare(kb);
+      return (a.releaseDate || "").localeCompare(b.releaseDate || "") || a.name.localeCompare(b.name);
+    });
+  }
+  async function commitUnlock(box, purchase, photoBytes) {
     const photoPath = "images/verified/" + box.id + ".jpg";
     await putContent(photoPath, bytesToB64(photoBytes), "Add verification photo for " + box.name);
+    const submittedAt = new Date().toISOString();
     let last = null;
     for (let attempt = 0; attempt < 3; attempt++) {
       const { sha, doc } = await readRepoJson("collector_boxes.json");
       const target = (doc.boxes || []).find((b) => b.id === box.id);
       if (!target) throw new Error("That box is no longer in collector_boxes.json.");
       target.owned = true;
-      target.paid = paid;
-      target.unlockedAt = todayISO();
+      target.paid = purchase.paid;
+      target.vendor = purchase.vendor;
+      target.location = purchase.location || null;
+      target.notes = purchase.notes || null;
+      target.purchasedAt = purchase.purchasedAt;
+      target.submittedAt = submittedAt;
+      target.unlockedAt = submittedAt.slice(0, 10);
       target.verificationPhoto = photoPath;
-      doc.updated = todayISO();
+      doc.updated = submittedAt.slice(0, 10);
       const text = JSON.stringify(doc, null, 2) + "\n";
       try {
         await gh("collector_boxes.json", {
@@ -339,7 +380,7 @@
             sha,
           }),
         });
-        return { doc, photoPath, unlockedAt: target.unlockedAt };
+        return { doc, photoPath, submittedAt, unlockedAt: target.unlockedAt };
       } catch (e) {
         last = e;
         if (e.status !== 409 || attempt === 2) throw e;
@@ -429,6 +470,7 @@
       setphrase: "Set the passphrase",
       phrase: "The words",
       photo: "The proof",
+      place: "The purchase",
       price: "The price",
       saving: "Writing the archive",
     }[r.step] || "Unlock ritual";
@@ -449,8 +491,14 @@
           <input id="ritualPhoto" type="file" accept="image/*" capture="environment">
         </label>
         ${r.photoUrl ? `<img class="proof-preview" alt="Chosen verification photo" src="${esc(r.photoUrl)}">` : ""}`,
+      place: `<p class="qnote">Who sold it, where, and when you bought it. The log time is recorded automatically when you break the seal.</p>
+        <label>Vendor or seller<input id="ritualVendor" autocomplete="organization" value="${esc(r.vendor || "")}" placeholder="Micro Center, a person, a shop…"></label>
+        <label>Location<input id="ritualLocation" autocomplete="off" value="${esc(r.location || "")}" placeholder="City, or online"></label>
+        <button type="button" class="btn ghost" id="ritualLocate">${r.locating ? "Finding city…" : "Use my location"}</button>
+        <label>Purchased<input id="ritualWhen" type="datetime-local" value="${esc(r.purchasedLocal == null ? localNowValue() : r.purchasedLocal)}"></label>
+        <label>Notes, optional<textarea id="ritualNotes" rows="3" placeholder="Anything you want to remember">${esc(r.notes || "")}</textarea></label>`,
       price: `<p class="qnote">What did you pay for ${box ? esc(box.name) : "this box"}?</p>
-        <label>Amount paid, USD<input id="ritualPaid" inputmode="decimal" autocomplete="off" placeholder="0.00"></label>`,
+        <label>Amount paid, USD<input id="ritualPaid" inputmode="decimal" autocomplete="off" placeholder="0.00" value="${esc(r.paidText || "")}"></label>`,
       saving: `<p class="qnote">${esc(r.status || "Sealing the proof into the repository…")}</p>`,
     }[r.step] || "";
     const actions = {
@@ -459,6 +507,7 @@
       setphrase: `${r.hashPreview && token() ? `<button type="button" class="btn" id="ritualSaveHash">Save hash to the repo</button>` : `<button type="button" class="btn" id="ritualMakeHash">Create hash</button>`}`,
       phrase: `<button type="button" class="btn" id="ritualNext">Continue</button>`,
       photo: `<button type="button" class="btn" id="ritualNext">Continue</button>`,
+      place: `<button type="button" class="btn" id="ritualNext">Continue</button>`,
       price: `<button type="button" class="btn" id="ritualCommit">Break the seal</button>`,
       saving: "",
     }[r.step] || "";
@@ -491,7 +540,16 @@
     if (!blob) throw new Error("Could not compress that photo.");
     return new Uint8Array(await blob.arrayBuffer());
   }
+  function stashRitualFields() {
+    if (!ritual) return;
+    const v = $("#ritualVendor"); if (v) ritual.vendor = v.value;
+    const l = $("#ritualLocation"); if (l) ritual.location = l.value;
+    const n = $("#ritualNotes"); if (n) ritual.notes = n.value;
+    const d = $("#ritualWhen"); if (d) ritual.purchasedLocal = d.value;
+    const p = $("#ritualPaid"); if (p) ritual.paidText = p.value;
+  }
   async function onRitualClick(e) {
+    stashRitualFields();
     const id = e.target.id;
     if ((id === "ritualClose" || id === "ritualCancel") && ritual.step !== "saving") { closeRitual(); return; }
     if (id === "ritualForget") { localStorage.removeItem(TOKEN_KEY); ritual.error = ""; paintRitual(); return; }
@@ -544,23 +602,67 @@
       paintRitual();
       return;
     }
+    if (id === "ritualLocate") {
+      stashRitualFields();
+      if (!navigator.geolocation) { ritual.error = "This browser cannot share a location. Type the city or online."; paintRitual(); return; }
+      ritual.locating = true; ritual.error = ""; paintRitual();
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        try {
+          const url = "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + pos.coords.latitude + "&longitude=" + pos.coords.longitude + "&localityLanguage=en";
+          const j = await (await fetch(url)).json();
+          const city = j.city || j.locality || "";
+          ritual.location = [city, j.principalSubdivision].filter(Boolean).join(", ") || j.countryName || "";
+          ritual.error = ritual.location ? "" : "No city came back. Type it instead.";
+        } catch (err) {
+          ritual.error = "Could not look up a city from that location.";
+        }
+        ritual.locating = false;
+        paintRitual();
+      }, () => {
+        ritual.locating = false;
+        ritual.error = "Location permission was denied. Type the city or online.";
+        paintRitual();
+      }, { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 });
+      return;
+    }
     if (id === "ritualNext" && ritual.step === "photo") {
       if (!ritual.photoBytes) { ritual.error = "Add a photo of the sealed box."; paintRitual(); return; }
+      if (!ritual.purchasedLocal) ritual.purchasedLocal = localNowValue();
+      ritual.step = "place"; ritual.error = ""; paintRitual(); return;
+    }
+    if (id === "ritualNext" && ritual.step === "place") {
+      stashRitualFields();
+      if (!(ritual.vendor || "").trim()) { ritual.error = "Enter the vendor or seller."; paintRitual(); return; }
+      if (!localToISO(ritual.purchasedLocal)) { ritual.error = "Enter the date and time you bought it."; paintRitual(); return; }
       ritual.step = "price"; ritual.error = ""; paintRitual(); return;
     }
     if (id === "ritualCommit") {
       const raw = $("#ritualPaid").value.trim().replace(/[$,]/g, "");
+      ritual.paidText = $("#ritualPaid").value;
       const paid = Math.round(Number(raw) * 100) / 100;
       if (!raw || !Number.isFinite(paid) || paid < 0) { ritual.error = "Enter the amount you paid."; paintRitual(); return; }
+      const purchasedAt = localToISO(ritual.purchasedLocal);
+      if (!purchasedAt) { ritual.step = "place"; ritual.error = "Enter the date and time you bought it."; paintRitual(); return; }
       const before = boxes.filter((b) => b.owned).length;
       ritual.step = "saving"; ritual.status = "Uploading the photo and marking the box owned…"; ritual.error = ""; paintRitual();
       try {
-        const saved = await commitUnlock(ritual.box, paid, ritual.photoBytes);
+        const saved = await commitUnlock(ritual.box, {
+          paid,
+          vendor: ritual.vendor.trim(),
+          location: (ritual.location || "").trim(),
+          notes: (ritual.notes || "").trim(),
+          purchasedAt,
+        }, ritual.photoBytes);
         const id = ritual.box.id;
         const local = boxes.find((b) => b.id === id);
         if (local) {
           local.owned = true;
           local.paid = paid;
+          local.vendor = ritual.vendor.trim();
+          local.location = (ritual.location || "").trim() || null;
+          local.notes = (ritual.notes || "").trim() || null;
+          local.purchasedAt = purchasedAt;
+          local.submittedAt = saved.submittedAt;
           local.unlockedAt = saved.unlockedAt;
           local.verificationPhoto = saved.photoPath;
         }
@@ -601,24 +703,71 @@
     paintRitual();
   });
   $("#proof").addEventListener("click", (e) => { if (e.target.id === "proof" || e.target.id === "proofClose") $("#proof").hidden = true; });
-  document.getElementById("quest").addEventListener("click", (e) => {
-    const unlock = e.target.closest("[data-unlock]");
-    if (unlock) { openRitual(boxes.find((b) => b.id === unlock.dataset.unlock) || null); return; }
-    const proof = e.target.closest("[data-proof]");
-    if (!proof) return;
-    const box = boxes.find((b) => b.id === proof.dataset.proof);
+  function openProfile(box) {
     if (!box) return;
-    const src = sessionProof.get(box.id) || box.verificationPhoto;
-    $("#proof").innerHTML = `<div class="proof-card"><button type="button" id="proofClose" class="ritual-x" aria-label="Close">×</button><p class="kicker">Proof</p><h2>${esc(box.name)}</h2><img alt="Verification photo of ${esc(box.name)}" src="${esc(src)}"><p class="qnote">${box.unlockedAt ? "Unlocked " + esc(box.unlockedAt) : ""}${box.paid != null ? " · paid " + usd(box.paid) : ""}</p></div>`;
+    const art = artSrc(box);
+    const order = shelfOrder();
+    const num = order.findIndex((b) => b.id === box.id) + 1;
+    const mile = milestones(boxes.length).find((g) => g.n === num);
+    const paidVs = box.paid != null && box.msrp ? ((box.paid - box.msrp) / box.msrp) * 100 : null;
+    const gain = box.paid != null && box.market != null ? box.market - box.paid : null;
+    const gainPct = gain != null && box.paid ? (gain / box.paid) * 100 : null;
+    const days = daysOwned(box);
+    const proofSrc = sessionProof.get(box.id) || box.verificationPhoto;
+    const rows = box.owned ? [
+      ["Purchased", stampText(box.purchasedAt)],
+      ["Logged", stampText(box.submittedAt)],
+      ["Vendor", box.vendor || "n/a"],
+      ["Location", box.location || "n/a"],
+      ["Paid", usd(box.paid)],
+      ["MSRP", usd(box.msrp)],
+      ["Vs MSRP", paidVs == null ? "n/a" : (Math.abs(paidVs) < 0.05 ? "At MSRP" : signedPct(paidVs))],
+      ["Lowest listing", usd(box.lowestListed)],
+      ["Market", usd(box.market)],
+      ["Vs paid", gain == null ? "n/a" : money(gain) + (gainPct == null ? "" : " (" + signedPct(gainPct) + ")")],
+      ["Days owned", days == null ? "n/a" : String(days)],
+      ["Milestone", num ? ("Box #" + num + (mile ? " · " + mile.name : "")) : "n/a"],
+      ["Notes", box.notes || "n/a"],
+    ] : [
+      ["MSRP", usd(box.msrp)],
+      ["Lowest listing", usd(box.lowestListed)],
+      ["Market", usd(box.market)],
+    ];
+    $("#proof").innerHTML = `<div class="proof-card profile" role="dialog" aria-modal="true">
+      <button type="button" id="proofClose" class="ritual-x" aria-label="Close">×</button>
+      <p class="kicker">${box.owned ? "Purchase profile" : "Still sealed"}</p>
+      <h2>${esc(box.name)}</h2>
+      ${art ? `<img class="profile-art" alt="" src="${esc(art)}">` : ""}
+      ${box.owned ? (proofSrc ? `<img class="profile-proof" alt="Verification photo of ${esc(box.name)}" src="${esc(proofSrc)}">` : `<p class="placeholder">No proof photo</p>`) : `<p class="qnote">This display is still locked.</p>`}
+      <dl>${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+      ${box.owned ? "" : `<button type="button" class="btn" data-unlock="${esc(box.id)}">Unlock this box</button>`}
+    </div>`;
     $("#proof").hidden = false;
+  }
+  document.getElementById("quest").addEventListener("click", (e) => {
+    if (e.target.closest("#ritual")) return;
+    const unlock = e.target.closest("[data-unlock]");
+    if (unlock) { $("#proof").hidden = true; openRitual(boxes.find((b) => b.id === unlock.dataset.unlock) || null); return; }
+    if (e.target.closest("#proof")) return;
+    if (e.target.closest("a")) return;
+    const card = e.target.closest(".qbox");
+    if (!card) return;
+    openProfile(boxes.find((b) => b.id === card.dataset.id));
   });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && ritual && ritual.step !== "saving") closeRitual();
+    if (e.key !== "Escape") return;
+    if (ritual && ritual.step !== "saving") closeRitual();
+    else if ($("#proof") && !$("#proof").hidden) $("#proof").hidden = true;
   });
 
   document.getElementById("quest").addEventListener("error", (e) => {
     const img = e.target;
     if (!img.classList || !img.classList.contains("boxart")) return;
+    if (img.dataset.fallback && img.getAttribute("src") !== img.dataset.fallback) {
+      img.src = img.dataset.fallback;
+      img.removeAttribute("data-fallback");
+      return;
+    }
     const fig = img.closest(".qfigure");
     if (fig) fig.classList.add("no-art");
   }, true);

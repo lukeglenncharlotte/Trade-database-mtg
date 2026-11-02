@@ -122,6 +122,15 @@ footer code{color:var(--txt);font-size:.85em}
 .ritual-x{position:absolute;top:6px;right:10px;background:none;border:0;color:var(--txt);font-size:28px;cursor:pointer}
 .capture{display:inline-flex;flex-direction:column;gap:8px;margin:8px 0;padding:12px;border-radius:12px;border:1px dashed rgba(216,180,90,.75);color:var(--gold);cursor:pointer}
 .proof-preview,.proof-card img{display:block;width:100%;max-height:320px;object-fit:contain;border-radius:12px;background:#0e0f16;margin-top:8px}
+.proof-card.profile{width:min(680px,100%)}
+.profile-art{background:#f4f1ea}
+.profile-proof{background:#111}
+.profile dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:12px 0}
+.profile dt{color:var(--mut)}
+.profile dd{margin:0}
+.placeholder{margin:10px 0;padding:28px 12px;text-align:center;color:var(--mut);border:1px dashed var(--line);border-radius:12px}
+.ritual-card textarea{display:block;width:100%;margin-top:6px;background:#101219;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:12px;font:16px inherit;resize:vertical}
+.qbox{cursor:pointer}
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:40}
 .bit{position:fixed;width:8px;height:12px;margin:-6px 0 0 -4px;border-radius:2px;animation:bit 1.25s ease-out forwards}
 @keyframes bit{to{transform:translate(var(--dx),var(--dy)) rotate(220deg);opacity:0}}

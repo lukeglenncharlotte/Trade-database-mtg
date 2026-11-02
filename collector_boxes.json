@@ -1175,7 +1175,7 @@
   "unlock": {
     "kdf": "PBKDF2-SHA256",
     "iterations": 100000,
-    "salt": null,
-    "hash": null
+    "salt": "bb8ae92eec77f6c62611fc096d9f3c76",
+    "hash": "24bb428e7ea0562f1d33a33a859af56c5541af7e2220030c426c55bfe2d58f5a"
   }
 }

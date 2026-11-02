@@ -1103,8 +1103,8 @@
     },
     {
       "id": "fra",
-      "owned": false,
-      "paid": null,
+      "owned": true,
+      "paid": 323.88,
       "name": "Reality Fracture",
       "setCode": "FRA",
       "releaseDate": "2026-10-02",
@@ -1121,14 +1121,14 @@
       "tcgplayerGroupId": 24684,
       "icon": "https://svgs.scryfall.io/sets/fra.svg",
       "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/692983_in_1000x1000.jpg",
-      "vendor": null,
-      "location": null,
-      "notes": null,
-      "purchasedAt": null,
-      "submittedAt": null,
-      "unlockedAt": null,
-      "verificationPhoto": null,
-      "msrpPurchase": null
+      "unlockedAt": "2026-11-02",
+      "verificationPhoto": "images/verified/fra.jpg",
+      "vendor": "Microcenter Charlotte",
+      "location": "Charlotte NC",
+      "notes": "Camped out with Hunter",
+      "submittedAt": "2026-11-02T16:36:49.513Z",
+      "purchasedAt": "2026-10-02T14:32:00.000Z",
+      "msrpPurchase": true
     },
     {
       "id": "trk",

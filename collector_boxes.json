@@ -1,6 +1,6 @@
 {
   "updated": "2026-11-02",
-  "note": "Mark a box owned with the unlock ritual (or by editing owned). imageUrl is the TCGplayer product photo used on the tiles and profiles. The ritual stores paid, vendor, location, notes, purchasedAt (when it was bought), submittedAt (when it was logged), and verificationPhoto. python3 update_cards.py --refresh-boxes updates prices and fills a missing imageUrl. It does not change owned, paid, purchase details, or the passphrase hash. Never store a passphrase or a plaintext GitHub token here. unlock.vault may hold only an AES-GCM ciphertext, iv, and salt.",
+  "note": "Mark a box owned by editing owned, or with the unlock ritual, which saves on that device and does not write this file. imageUrl is the TCGplayer product photo used on the tiles and profiles. A permanent unlock stores paid, vendor, location, notes, purchasedAt (when it was bought), submittedAt (when it was logged), and verificationPhoto. python3 update_cards.py --refresh-boxes updates prices and fills a missing imageUrl. It does not change owned, paid, or purchase details. Never store a passphrase or a GitHub token here.",
   "boxes": [
     {
       "id": "eld",
@@ -1172,11 +1172,5 @@
       "icon": "https://svgs.scryfall.io/sets/mdd.svg",
       "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/723266_in_1000x1000.jpg"
     }
-  ],
-  "unlock": {
-    "kdf": "PBKDF2-SHA256",
-    "iterations": 100000,
-    "salt": "bb8ae92eec77f6c62611fc096d9f3c76",
-    "hash": "24bb428e7ea0562f1d33a33a859af56c5541af7e2220030c426c55bfe2d58f5a"
-  }
+  ]
 }

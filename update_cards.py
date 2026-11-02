@@ -131,7 +131,7 @@ def sealed_image_url(pid, csv_url=None):
 def refresh_boxes():
     """Rewrite lowestListed and market from tcgcsv.com, and fill a missing imageUrl.
 
-    Leaves owned, paid, purchasedAt, submittedAt, vendor, location, notes, verificationPhoto, msrp, the unlock passphrase hash, unlock.vault, and an imageUrl that is already set.
+    Leaves owned, paid, purchasedAt, submittedAt, vendor, location, notes, verificationPhoto, msrp, and an imageUrl that is already set.
     """
     if not os.path.exists(BOXES):
         print("no collector_boxes.json", file=sys.stderr); return

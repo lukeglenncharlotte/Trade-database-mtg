@@ -77,10 +77,10 @@ background:linear-gradient(115deg,transparent 30%,#ff9be8 40%,#9bf3ff 47%,#fff7a
 .qstage:hover .qfigure{animation-play-state:paused}
 @keyframes boxfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 .boxart{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:14px;background:#f4f1ea}
-.sheen,.foil{position:absolute;inset:0;border-radius:inherit;pointer-events:none}
-.sheen{background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.62) 48%,transparent 62%);background-size:240% 100%;animation:sheen 5.4s ease-in-out infinite;mix-blend-mode:soft-light}
+.qfigure .sheen,.qfigure .foil{position:absolute;inset:0;border-radius:inherit;pointer-events:none}
+.qfigure .sheen{background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.62) 48%,transparent 62%);background-size:240% 100%;animation:sheen 5.4s ease-in-out infinite;mix-blend-mode:soft-light}
 @keyframes sheen{0%{background-position:130% 0}100%{background-position:-130% 0}}
-.foil{background:linear-gradient(115deg,transparent 28%,rgba(255,155,232,.55) 40%,rgba(155,243,255,.5) 50%,rgba(255,247,168,.62) 60%,transparent 74%);background-size:240% 240%;animation:sh 6.5s linear infinite;mix-blend-mode:color-dodge;opacity:.42}
+.qfigure .foil{background:linear-gradient(115deg,transparent 28%,rgba(255,155,232,.55) 40%,rgba(155,243,255,.5) 50%,rgba(255,247,168,.62) 60%,transparent 74%);background-size:240% 240%;animation:sh 6.5s linear infinite;mix-blend-mode:color-dodge;opacity:.42}
 .locked .boxart{filter:grayscale(1) brightness(.58) contrast(.92)}
 .locked .qfigure{box-shadow:0 8px 18px rgba(0,0,0,.28)}
 .locked .sheen{opacity:.45}
@@ -150,10 +150,10 @@ footer code{color:var(--txt);font-size:.85em}
 @keyframes lockbreak{35%{transform:rotate(-12deg) scale(1.08)}100%{transform:translateY(18px) rotate(22deg) scale(.45);opacity:0}}
 @media (min-width:700px){#ritual,#proof{align-items:center}}
 @media (prefers-reduced-motion:reduce){
-.qfigure,.sheen,.foil{animation:none}
+.qfigure,.qfigure .sheen,.qfigure .foil{animation:none}
 .qfigure{transition:none}
-.sheen{opacity:0}
-.foil{opacity:.22}
+.qfigure .sheen{opacity:0}
+.qfigure .foil{opacity:.22}
 .bit,.just-unlocked .boxart,.just-unlocked .qfigure,.lock.breaking,.badge-pop{animation:none}
 .bar>span{transition:none}
 }

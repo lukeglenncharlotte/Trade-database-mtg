@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-26T06:04",
+ "updated": "2026-11-02T06:10",
  "cards": [
   {
    "id": "wot-71-foil-big_marn_deck",
@@ -15,53 +15,53 @@
    "quantity": 1,
    "priceUsd": 422.58,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 509566,
    "recentSales": [
     {
-     "date": "2026-10-26",
+     "date": "2026-10-31",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 149.99,
-     "shipping": 0.79,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-23",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 149.67,
+     "price": 155.0,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-22",
-     "condition": "Lightly Played",
+     "date": "2026-10-31",
+     "condition": "Near Mint",
      "variant": "Normal",
-     "price": 154.05,
+     "price": 148.0,
+     "shipping": 1.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 150.85,
+     "shipping": 0.99,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-29",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 150.0,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-22",
-     "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 154.04,
-     "shipping": 9.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-21",
+     "date": "2026-10-27",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 152.99,
+     "price": 174.79,
      "shipping": 0.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": false,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/e/6/e6a06aad-6073-465b-89d0-8c4ae4307aff.jpg?1783914913",
    "imageLarge": "https://cards.scryfall.io/png/front/e/6/e6a06aad-6073-465b-89d0-8c4ae4307aff.png?1783914913",
    "faceImages": null,
@@ -84,7 +84,7 @@
    "quantity": 1,
    "priceUsd": 359.71,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 544896,
    "recentSales": [
@@ -130,7 +130,7 @@
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/9/8/9857225a-3525-4e42-852c-6d2f7400e931.jpg?1783911706",
    "imageLarge": "https://cards.scryfall.io/png/front/9/8/9857225a-3525-4e42-852c-6d2f7400e931.png?1783911706",
    "faceImages": null,
@@ -153,7 +153,7 @@
    "quantity": 1,
    "priceUsd": 359.31,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 544249,
    "recentSales": [
@@ -199,82 +199,13 @@
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/3/3/33ebd4c1-e7ea-4708-8b7c-c47ca6b63c22.jpg?1783911705",
    "imageLarge": "https://cards.scryfall.io/png/front/3/3/33ebd4c1-e7ea-4708-8b7c-c47ca6b63c22.png?1783911705",
    "faceImages": null,
    "scryfallUri": "https://scryfall.com/card/otp/67/mana-drain",
    "tcgplayerUri": "https://www.tcgplayer.com/product/544249",
    "artist": "Florey",
-   "collection": "Big Marn deck"
-  },
-  {
-   "id": "tdm-411-foil-big_marn_deck",
-   "name": "Elspeth, Storm Slayer",
-   "set": "Tarkir: Dragonstorm",
-   "setCode": "TDM",
-   "collectorNumber": "411",
-   "rarity": "mythic",
-   "treatment": "Showcase",
-   "finish": "foil",
-   "foilType": "Halo foil",
-   "condition": "NM/LP",
-   "quantity": 1,
-   "priceUsd": 322.27,
-   "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
-   "priceSource": "TCGplayer market (live)",
-   "tcgplayerId": 623963,
-   "recentSales": [
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 323.95,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-23",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 300.45,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-19",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 349.99,
-     "shipping": 2.49,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-17",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 93.71,
-     "shipping": 1.22,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-15",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 153.0,
-     "shipping": 0.0,
-     "qty": 1
-    }
-   ],
-   "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
-   "imageUrl": "https://cards.scryfall.io/large/front/8/9/89b98fd0-e2e5-4533-af2b-5230af2c88bd.jpg?1783907201",
-   "imageLarge": "https://cards.scryfall.io/png/front/8/9/89b98fd0-e2e5-4533-af2b-5230af2c88bd.png?1783907201",
-   "faceImages": null,
-   "scryfallUri": "https://scryfall.com/card/tdm/411/elspeth-storm-slayer",
-   "tcgplayerUri": "https://www.tcgplayer.com/product/623963",
-   "artist": "Ekaterina Burmak",
    "collection": "Big Marn deck"
   },
   {
@@ -289,12 +220,20 @@
    "foilType": "Galaxy foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 315.24,
+   "priceUsd": 337.01,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 641851,
    "recentSales": [
+    {
+     "date": "2026-10-26",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 406.24,
+     "shipping": 0.0,
+     "qty": 1
+    },
     {
      "date": "2026-10-24",
      "condition": "Lightly Played",
@@ -326,24 +265,85 @@
      "price": 400.0,
      "shipping": 0.0,
      "qty": 1
-    },
-    {
-     "date": "2026-09-06",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 471.22,
-     "shipping": 0.0,
-     "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/9/4/946f355a-f621-4571-8082-cebba73ebd1c.jpg?1783905830",
    "imageLarge": "https://cards.scryfall.io/png/front/9/4/946f355a-f621-4571-8082-cebba73ebd1c.png?1783905830",
    "faceImages": null,
    "scryfallUri": "https://scryfall.com/card/eos/106/gemstone-caverns",
    "tcgplayerUri": "https://www.tcgplayer.com/product/641851",
    "artist": "Mark Poole",
+   "collection": "Big Marn deck"
+  },
+  {
+   "id": "tdm-411-foil-big_marn_deck",
+   "name": "Elspeth, Storm Slayer",
+   "set": "Tarkir: Dragonstorm",
+   "setCode": "TDM",
+   "collectorNumber": "411",
+   "rarity": "mythic",
+   "treatment": "Showcase",
+   "finish": "foil",
+   "foilType": "Halo foil",
+   "condition": "NM/LP",
+   "quantity": 1,
+   "priceUsd": 323.51,
+   "priceEstimated": false,
+   "priceUpdated": "2026-11-02",
+   "priceSource": "TCGplayer market (live)",
+   "tcgplayerId": 623963,
+   "recentSales": [
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 320.95,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-25",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 323.95,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-23",
+     "condition": "Lightly Played",
+     "variant": "Foil",
+     "price": 300.45,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-19",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 349.99,
+     "shipping": 2.49,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-17",
+     "condition": "Lightly Played",
+     "variant": "Foil",
+     "price": 93.71,
+     "shipping": 1.22,
+     "qty": 1
+    }
+   ],
+   "salesMatchedVariant": true,
+   "salesFetched": "2026-11-02T06:09",
+   "imageUrl": "https://cards.scryfall.io/large/front/8/9/89b98fd0-e2e5-4533-af2b-5230af2c88bd.jpg?1783907201",
+   "imageLarge": "https://cards.scryfall.io/png/front/8/9/89b98fd0-e2e5-4533-af2b-5230af2c88bd.png?1783907201",
+   "faceImages": null,
+   "scryfallUri": "https://scryfall.com/card/tdm/411/elspeth-storm-slayer",
+   "tcgplayerUri": "https://www.tcgplayer.com/product/623963",
+   "artist": "Ekaterina Burmak",
    "collection": "Big Marn deck"
   },
   {
@@ -360,53 +360,53 @@
    "quantity": 1,
    "priceUsd": 294.42,
    "priceEstimated": true,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 1556,
    "recentSales": [
     {
-     "date": "2026-10-25",
+     "date": "2026-11-02",
+     "condition": "Heavily Played",
+     "variant": "Normal",
+     "price": 292.0,
+     "shipping": 1.31,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Lightly Played",
+     "variant": "Normal",
+     "price": 405.69,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-29",
+     "condition": "Lightly Played",
+     "variant": "Normal",
+     "price": 375.0,
+     "shipping": 1.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-28",
      "condition": "Moderately Played",
      "variant": "Normal",
-     "price": 342.04,
-     "shipping": 0.0,
+     "price": 307.0,
+     "shipping": 4.99,
      "qty": 1
     },
     {
-     "date": "2026-10-24",
-     "condition": "Moderately Played",
-     "variant": "Normal",
-     "price": 311.99,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
+     "date": "2026-10-28",
      "condition": "Lightly Played",
      "variant": "Normal",
-     "price": 394.18,
-     "shipping": 9.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 369.04,
-     "shipping": 1.27,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 370.31,
-     "shipping": 0.0,
+     "price": 368.82,
+     "shipping": 1.49,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/4/7/472034a2-0ba9-4876-ab7a-aa7013d603bb.jpg?1783948277",
    "imageLarge": "https://cards.scryfall.io/png/front/4/7/472034a2-0ba9-4876-ab7a-aa7013d603bb.png?1783948277",
    "faceImages": null,
@@ -429,10 +429,18 @@
    "quantity": 1,
    "priceUsd": 225.41,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 512576,
    "recentSales": [
+    {
+     "date": "2026-10-28",
+     "condition": "Lightly Played",
+     "variant": "Foil",
+     "price": 399.99,
+     "shipping": 0.0,
+     "qty": 1
+    },
     {
      "date": "2026-10-23",
      "condition": "Lightly Played",
@@ -464,18 +472,10 @@
      "price": 248.53,
      "shipping": 0.0,
      "qty": 1
-    },
-    {
-     "date": "2026-08-21",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 225.94,
-     "shipping": 0.0,
-     "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/3/1/3161968d-df23-42c0-8e16-b5746cf8f1d1.jpg?1783916408",
    "imageLarge": "https://cards.scryfall.io/png/front/3/1/3161968d-df23-42c0-8e16-b5746cf8f1d1.png?1783916408",
    "faceImages": null,
@@ -498,7 +498,7 @@
    "quantity": 1,
    "priceUsd": 217.06,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 498829,
    "recentSales": [
@@ -544,7 +544,7 @@
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/b/1/b1a74aab-dcf2-426d-9cc5-9ef771d8227a.jpg?1783915819",
    "imageLarge": "https://cards.scryfall.io/png/front/b/1/b1a74aab-dcf2-426d-9cc5-9ef771d8227a.png?1783915819",
    "faceImages": null,
@@ -565,31 +565,55 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 193.71,
+   "priceUsd": 193.2,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 643635,
    "recentSales": [
     {
-     "date": "2026-10-26",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 185.08,
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 134.22,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-24",
+     "date": "2026-11-01",
      "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 191.0,
-     "shipping": 0.99,
+     "variant": "Normal",
+     "price": 130.35,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 123.01,
+     "shipping": 1.31,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 139.97,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-31",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 139.99,
+     "shipping": 0.0,
      "qty": 1
     }
    ],
-   "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesMatchedVariant": false,
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/3/a/3afebe8a-9f21-4260-8e93-1ab1dff13c09.jpg?1783905865",
    "imageLarge": "https://cards.scryfall.io/png/front/3/a/3afebe8a-9f21-4260-8e93-1ab1dff13c09.png?1783905865",
    "faceImages": null,
@@ -612,7 +636,7 @@
    "quantity": 1,
    "priceUsd": 170.76,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 552900,
    "recentSales": [
@@ -623,18 +647,10 @@
      "price": 183.0,
      "shipping": 0.0,
      "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 179.0,
-     "shipping": 0.0,
-     "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/c/8/c86b8a75-9e31-4a44-95b8-c83b9a49646f.jpg?1784634451",
    "imageLarge": "https://cards.scryfall.io/png/front/c/8/c86b8a75-9e31-4a44-95b8-c83b9a49646f.png?1784634451",
    "faceImages": null,
@@ -655,12 +671,28 @@
    "foilType": "Galaxy foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 158.46,
+   "priceUsd": 157.17,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 287158,
    "recentSales": [
+    {
+     "date": "2026-11-02",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 150.01,
+     "shipping": 0.99,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-02",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 151.0,
+     "shipping": 0.0,
+     "qty": 1
+    },
     {
      "date": "2026-10-12",
      "condition": "Lightly Played",
@@ -684,26 +716,10 @@
      "price": 153.08,
      "shipping": 0.0,
      "qty": 1
-    },
-    {
-     "date": "2026-09-19",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 154.98,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-09-18",
-     "condition": "Moderately Played",
-     "variant": "Foil",
-     "price": 140.14,
-     "shipping": 0.0,
-     "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/0/f/0f1296cc-59aa-412d-9115-99fdc9ada754.jpg?1783920339",
    "imageLarge": "https://cards.scryfall.io/png/front/0/f/0f1296cc-59aa-412d-9115-99fdc9ada754.png?1783920339",
    "faceImages": null,
@@ -724,130 +740,61 @@
    "foilType": "Silver foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 132.66,
+   "priceUsd": 137.23,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 517458,
    "recentSales": [
     {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 77.84,
+     "date": "2026-10-30",
+     "condition": "Moderately Played",
+     "variant": "Foil",
+     "price": 111.59,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
+     "date": "2026-10-30",
      "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 76.25,
+     "variant": "Foil",
+     "price": 134.99,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 127.67,
+     "shipping": 4.99,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 125.0,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 124.0,
      "shipping": 1.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-23",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 80.4,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-21",
-     "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 67.77,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-17",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 79.67,
-     "shipping": 0.0,
      "qty": 1
     }
    ],
-   "salesMatchedVariant": false,
-   "salesFetched": "2026-10-26T06:03",
+   "salesMatchedVariant": true,
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/0/9/09535dd7-5d14-426e-8bbb-efdfe9b7543d.jpg?1783914186",
    "imageLarge": "https://cards.scryfall.io/png/front/0/9/09535dd7-5d14-426e-8bbb-efdfe9b7543d.png?1783914186",
    "faceImages": null,
    "scryfallUri": "https://scryfall.com/card/ltc/523/pact-of-negation",
    "tcgplayerUri": "https://www.tcgplayer.com/product/517458",
    "artist": "Greg Hildebrandt & Tim Hildebrandt",
-   "collection": "Big Marn deck"
-  },
-  {
-   "id": "one-346-foil-big_marn_deck",
-   "name": "Mondrak, Glory Dominus",
-   "set": "Phyrexia: All Will Be One",
-   "setCode": "ONE",
-   "collectorNumber": "346",
-   "rarity": "mythic",
-   "treatment": "Borderless",
-   "finish": "foil",
-   "foilType": "Oil slick raised foil",
-   "condition": "NM/LP",
-   "quantity": 1,
-   "priceUsd": 114.46,
-   "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
-   "priceSource": "TCGplayer market (live)",
-   "tcgplayerId": 478283,
-   "recentSales": [
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 102.99,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 100.0,
-     "shipping": 1.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-23",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 109.3,
-     "shipping": 0.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-21",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 104.04,
-     "shipping": 0.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-18",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 102.97,
-     "shipping": 0.0,
-     "qty": 1
-    }
-   ],
-   "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
-   "imageUrl": "https://cards.scryfall.io/large/front/1/e/1ef1b6a8-0151-4e41-a909-3d519dc19f14.jpg?1783917942",
-   "imageLarge": "https://cards.scryfall.io/png/front/1/e/1ef1b6a8-0151-4e41-a909-3d519dc19f14.png?1783917942",
-   "faceImages": null,
-   "scryfallUri": "https://scryfall.com/card/one/346/mondrak-glory-dominus",
-   "tcgplayerUri": "https://www.tcgplayer.com/product/478283",
-   "artist": "rishxxv",
    "collection": "Big Marn deck"
   },
   {
@@ -862,29 +809,106 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 114.13,
+   "priceUsd": 113.86,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 662085,
    "recentSales": [
     {
-     "date": "2026-10-24",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Foil",
-     "price": 103.51,
-     "shipping": 1.49,
+     "price": 110.99,
+     "shipping": 1.75,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-31",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 106.99,
+     "shipping": 5.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/e/9/e9a213c8-f9b5-4fcb-969c-b6c574810f21.jpg?1783905108",
    "imageLarge": "https://cards.scryfall.io/png/front/e/9/e9a213c8-f9b5-4fcb-969c-b6c574810f21.png?1783905108",
    "faceImages": null,
    "scryfallUri": "https://scryfall.com/card/slc/21/urzas-saga",
    "tcgplayerUri": "https://www.tcgplayer.com/product/662085",
    "artist": "Sadboi",
+   "collection": "Big Marn deck"
+  },
+  {
+   "id": "one-346-foil-big_marn_deck",
+   "name": "Mondrak, Glory Dominus",
+   "set": "Phyrexia: All Will Be One",
+   "setCode": "ONE",
+   "collectorNumber": "346",
+   "rarity": "mythic",
+   "treatment": "Borderless",
+   "finish": "foil",
+   "foilType": "Oil slick raised foil",
+   "condition": "NM/LP",
+   "quantity": 1,
+   "priceUsd": 111.78,
+   "priceEstimated": false,
+   "priceUpdated": "2026-11-02",
+   "priceSource": "TCGplayer market (live)",
+   "tcgplayerId": 478283,
+   "recentSales": [
+    {
+     "date": "2026-10-31",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 105.03,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-28",
+     "condition": "Lightly Played",
+     "variant": "Foil",
+     "price": 112.99,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-27",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 100.0,
+     "shipping": 0.99,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-26",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 102.0,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-25",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 102.99,
+     "shipping": 0.0,
+     "qty": 1
+    }
+   ],
+   "salesMatchedVariant": true,
+   "salesFetched": "2026-11-02T06:09",
+   "imageUrl": "https://cards.scryfall.io/large/front/1/e/1ef1b6a8-0151-4e41-a909-3d519dc19f14.jpg?1783917942",
+   "imageLarge": "https://cards.scryfall.io/png/front/1/e/1ef1b6a8-0151-4e41-a909-3d519dc19f14.png?1783917942",
+   "faceImages": null,
+   "scryfallUri": "https://scryfall.com/card/one/346/mondrak-glory-dominus",
+   "tcgplayerUri": "https://www.tcgplayer.com/product/478283",
+   "artist": "rishxxv",
    "collection": "Big Marn deck"
   },
   {
@@ -899,47 +923,47 @@
    "foilType": null,
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 107.84,
+   "priceUsd": 105.34,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 487805,
    "recentSales": [
     {
-     "date": "2026-10-26",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 103.99,
+     "price": 112.66,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-26",
+     "date": "2026-11-01",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 100.99,
-     "shipping": 0.79,
+     "price": 102.56,
+     "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-26",
+     "date": "2026-11-01",
      "condition": "Lightly Played",
      "variant": "Normal",
-     "price": 100.99,
+     "price": 111.41,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
+     "date": "2026-11-01",
+     "condition": "Lightly Played",
      "variant": "Normal",
-     "price": 124.99,
-     "shipping": 0.0,
+     "price": 101.99,
+     "shipping": 4.99,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/d/5/d5806e68-1054-458e-866d-1f2470f682b2.jpg?1790212038",
    "imageLarge": "https://cards.scryfall.io/png/front/d/5/d5806e68-1054-458e-866d-1f2470f682b2.png?1790212038",
    "faceImages": null,
@@ -960,31 +984,55 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 102.35,
+   "priceUsd": 101.98,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 505763,
    "recentSales": [
     {
-     "date": "2026-10-24",
+     "date": "2026-11-01",
      "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 102.91,
+     "variant": "Normal",
+     "price": 72.61,
+     "shipping": 1.49,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Lightly Played",
+     "variant": "Normal",
+     "price": 80.99,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-24",
+     "date": "2026-11-01",
      "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 102.91,
+     "variant": "Normal",
+     "price": 75.17,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Lightly Played",
+     "variant": "Normal",
+     "price": 72.8,
+     "shipping": 1.5,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 75.0,
      "shipping": 0.0,
      "qty": 1
     }
    ],
-   "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesMatchedVariant": false,
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/c/1/c103c4d8-5a3c-443b-9caf-f41f8b61e73f.jpg?1783915494",
    "imageLarge": "https://cards.scryfall.io/png/front/c/1/c103c4d8-5a3c-443b-9caf-f41f8b61e73f.png?1783915494",
    "faceImages": null,
@@ -1005,55 +1053,23 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 96.79,
+   "priceUsd": 95.6,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 623998,
    "recentSales": [
     {
-     "date": "2026-10-26",
+     "date": "2026-10-31",
      "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 49.61,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 48.43,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 49.3,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 46.97,
-     "shipping": 1.31,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-23",
-     "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 46.92,
+     "variant": "Foil",
+     "price": 90.32,
      "shipping": 0.0,
      "qty": 1
     }
    ],
-   "salesMatchedVariant": false,
-   "salesFetched": "2026-10-26T06:03",
+   "salesMatchedVariant": true,
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/8/9/894105c4-d3ce-4d38-855b-24aa47b112c1.jpg?1783907426",
    "imageLarge": "https://cards.scryfall.io/png/front/8/9/894105c4-d3ce-4d38-855b-24aa47b112c1.png?1783907426",
    "faceImages": null,
@@ -1074,12 +1090,28 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 94.88,
+   "priceUsd": 95.3,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 241450,
    "recentSales": [
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 96.46,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-27",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 100.0,
+     "shipping": 0.0,
+     "qty": 1
+    },
     {
      "date": "2026-10-06",
      "condition": "Near Mint",
@@ -1103,26 +1135,10 @@
      "price": 90.0,
      "shipping": 0.0,
      "qty": 1
-    },
-    {
-     "date": "2026-09-24",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 90.0,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-09-16",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 90.0,
-     "shipping": 0.0,
-     "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/e/6/e61ae0e2-8170-453e-93dd-f8ee82290677.jpg?1783926966",
    "imageLarge": "https://cards.scryfall.io/png/front/e/6/e61ae0e2-8170-453e-93dd-f8ee82290677.png?1783926966",
    "faceImages": null,
@@ -1143,23 +1159,31 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 86.46,
+   "priceUsd": 86.58,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 504303,
    "recentSales": [
     {
-     "date": "2026-10-24",
-     "condition": "Damaged",
+     "date": "2026-11-01",
+     "condition": "Lightly Played",
      "variant": "Foil",
-     "price": 64.88,
+     "price": 76.8,
      "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-29",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 79.99,
+     "shipping": 2.49,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/d/a/da65d83c-67bd-4d54-9c9a-50d57ca115bb.jpg?1783915494",
    "imageLarge": "https://cards.scryfall.io/png/front/d/a/da65d83c-67bd-4d54-9c9a-50d57ca115bb.png?1783915494",
    "faceImages": null,
@@ -1182,10 +1206,26 @@
    "quantity": 1,
    "priceUsd": 83.03,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 285804,
    "recentSales": [
+    {
+     "date": "2026-10-31",
+     "condition": "Lightly Played",
+     "variant": "Foil",
+     "price": 48.0,
+     "shipping": 1.99,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-29",
+     "condition": "Lightly Played",
+     "variant": "Foil",
+     "price": 49.99,
+     "shipping": 0.0,
+     "qty": 1
+    },
     {
      "date": "2026-10-22",
      "condition": "Near Mint",
@@ -1209,26 +1249,10 @@
      "price": 72.59,
      "shipping": 2.99,
      "qty": 1
-    },
-    {
-     "date": "2026-10-15",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 62.0,
-     "shipping": 1.49,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-10",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 59.24,
-     "shipping": 0.0,
-     "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/e/7/e7517e8e-b424-4731-ba9d-6132bdefa6bf.jpg?1783920949",
    "imageLarge": "https://cards.scryfall.io/png/front/e/7/e7517e8e-b424-4731-ba9d-6132bdefa6bf.png?1783920949",
    "faceImages": null,
@@ -1251,7 +1275,7 @@
    "quantity": 1,
    "priceUsd": 81.97,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 57648,
    "recentSales": [
@@ -1297,7 +1321,7 @@
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/7/3/7393a74a-5bf4-468f-a40e-3ad1b99bb701.jpg?1783940866",
    "imageLarge": "https://cards.scryfall.io/png/front/7/3/7393a74a-5bf4-468f-a40e-3ad1b99bb701.png?1783940866",
    "faceImages": null,
@@ -1318,55 +1342,55 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 77.5,
+   "priceUsd": 78.03,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 130149,
    "recentSales": [
     {
-     "date": "2026-10-26",
-     "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 49.4,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-26",
+     "date": "2026-11-02",
      "condition": "Moderately Played",
      "variant": "Normal",
-     "price": 47.46,
+     "price": 47.49,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-26",
-     "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 45.99,
-     "shipping": 0.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 44.99,
-     "shipping": 1.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 63.98,
+     "price": 55.0,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-02",
+     "condition": "Moderately Played",
+     "variant": "Normal",
+     "price": 46.95,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-02",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 59.13,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 53.64,
      "shipping": 0.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": false,
-   "salesFetched": "2026-10-26T06:03",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/9/a/9a52c265-6920-4929-ba0a-70da08df01f1.jpg?1783936544",
    "imageLarge": "https://cards.scryfall.io/png/front/9/a/9a52c265-6920-4929-ba0a-70da08df01f1.png?1783936544",
    "faceImages": null,
@@ -1387,47 +1411,47 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 67.19,
+   "priceUsd": 66.75,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 279273,
    "recentSales": [
     {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 65.24,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-23",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 69.99,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-23",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 65.45,
-     "shipping": 1.22,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-22",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Foil",
      "price": 70.04,
      "shipping": 0.0,
      "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 66.7,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-31",
+     "condition": "Lightly Played",
+     "variant": "Foil",
+     "price": 67.65,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Lightly Played",
+     "variant": "Foil",
+     "price": 69.99,
+     "shipping": 0.0,
+     "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/f/a/fa4b80b1-fc8d-4da6-964a-3b85451c3049.jpg?1783922908",
    "imageLarge": "https://cards.scryfall.io/png/front/f/a/fa4b80b1-fc8d-4da6-964a-3b85451c3049.png?1783922908",
    "faceImages": null,
@@ -1448,31 +1472,23 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 59.67,
+   "priceUsd": 59.81,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 662054,
    "recentSales": [
     {
-     "date": "2026-10-26",
+     "date": "2026-11-01",
      "condition": "Near Mint",
      "variant": "Foil",
-     "price": 60.99,
+     "price": 60.44,
      "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 58.25,
-     "shipping": 1.74,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/6/8/68875b43-6839-467c-909e-52fd2212b7de.jpg?1783905112",
    "imageLarge": "https://cards.scryfall.io/png/front/6/8/68875b43-6839-467c-909e-52fd2212b7de.png?1783905112",
    "faceImages": null,
@@ -1493,31 +1509,39 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 56.09,
+   "priceUsd": 57.26,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 498425,
    "recentSales": [
     {
-     "date": "2026-10-24",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Foil",
-     "price": 59.31,
+     "price": 68.2,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-24",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Foil",
-     "price": 55.75,
-     "shipping": 1.68,
+     "price": 59.99,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-02",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 58.28,
+     "shipping": 1.5,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/d/e/de2de055-5246-408b-80fe-cd01688c145e.jpg?1783916154",
    "imageLarge": "https://cards.scryfall.io/png/front/d/e/de2de055-5246-408b-80fe-cd01688c145e.png?1783916154",
    "faceImages": null,
@@ -1538,55 +1562,55 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 52.54,
+   "priceUsd": 52.02,
    "priceEstimated": true,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "Scryfall (TCGplayer feed)",
    "tcgplayerId": 617863,
    "recentSales": [
     {
-     "date": "2026-10-25",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 44.52,
-     "shipping": 1.31,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 44.97,
+     "price": 16.95,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
+     "date": "2026-11-01",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 44.54,
+     "price": 16.95,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-24",
+     "date": "2026-10-30",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 54.18,
+     "price": 55.0,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-24",
-     "condition": "Lightly Played",
+     "date": "2026-10-29",
+     "condition": "Near Mint",
      "variant": "Normal",
-     "price": 16.94,
+     "price": 16.95,
      "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-27",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 44.55,
+     "shipping": 2.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": false,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/b/2/b2d1219f-fadb-4427-8627-e5aef3589600.jpg?1783907933",
    "imageLarge": "https://cards.scryfall.io/png/front/b/2/b2d1219f-fadb-4427-8627-e5aef3589600.png?1783907933",
    "faceImages": null,
@@ -1607,29 +1631,90 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 51.67,
+   "priceUsd": 51.08,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 221816,
    "recentSales": [
     {
-     "date": "2026-10-23",
+     "date": "2026-11-01",
      "condition": "Lightly Played",
      "variant": "Foil",
-     "price": 48.26,
-     "shipping": 1.6,
+     "price": 50.72,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Lightly Played",
+     "variant": "Foil",
+     "price": 50.72,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Lightly Played",
+     "variant": "Foil",
+     "price": 50.32,
+     "shipping": 0.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/b/e/be6604df-0888-420d-957e-93cf3d770a9e.jpg?1783929431",
    "imageLarge": "https://cards.scryfall.io/png/front/b/e/be6604df-0888-420d-957e-93cf3d770a9e.png?1783929431",
    "faceImages": null,
    "scryfallUri": "https://scryfall.com/card/zne/17/morphic-pool",
    "tcgplayerUri": "https://www.tcgplayer.com/product/221816",
    "artist": "Steven Belledin",
+   "collection": "Big Marn deck"
+  },
+  {
+   "id": "cmm-695-foil-big_marn_deck",
+   "name": "Deadly Rollick",
+   "set": "Commander Masters",
+   "setCode": "CMM",
+   "collectorNumber": "695",
+   "rarity": "rare",
+   "treatment": "Borderless, Full art",
+   "finish": "foil",
+   "foilType": "Traditional foil",
+   "condition": "NM/LP",
+   "quantity": 1,
+   "priceUsd": 49.56,
+   "priceEstimated": false,
+   "priceUpdated": "2026-11-02",
+   "priceSource": "TCGplayer market (live)",
+   "tcgplayerId": 503467,
+   "recentSales": [
+    {
+     "date": "2026-11-02",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 51.99,
+     "shipping": 4.99,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 44.4,
+     "shipping": 0.99,
+     "qty": 1
+    }
+   ],
+   "salesMatchedVariant": true,
+   "salesFetched": "2026-11-02T06:09",
+   "imageUrl": "https://cards.scryfall.io/large/front/a/3/a30c266d-579e-4757-a4d6-6722fa343a6c.jpg?1783915494",
+   "imageLarge": "https://cards.scryfall.io/png/front/a/3/a30c266d-579e-4757-a4d6-6722fa343a6c.png?1783915494",
+   "faceImages": null,
+   "scryfallUri": "https://scryfall.com/card/cmm/695/deadly-rollick",
+   "tcgplayerUri": "https://www.tcgplayer.com/product/503467",
+   "artist": "Ron Spencer",
    "collection": "Big Marn deck"
   },
   {
@@ -1644,14 +1729,38 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 50.05,
+   "priceUsd": 49.42,
    "priceEstimated": true,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "Scryfall (TCGplayer feed)",
    "tcgplayerId": 539217,
    "recentSales": [
     {
-     "date": "2026-10-26",
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 51.99,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 45.0,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 44.0,
+     "shipping": 1.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-29",
      "condition": "Near Mint",
      "variant": "Normal",
      "price": 47.99,
@@ -1659,40 +1768,16 @@
      "qty": 1
     },
     {
-     "date": "2026-10-24",
+     "date": "2026-10-26",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 52.57,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-16",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 48.99,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-15",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 47.5,
-     "shipping": 1.49,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-13",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 52.45,
+     "price": 47.99,
      "shipping": 0.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": false,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/b/7/b7210c3a-bbd3-4f3a-933b-a5618a4f7a52.jpg?1783912449",
    "imageLarge": "https://cards.scryfall.io/png/front/b/7/b7210c3a-bbd3-4f3a-933b-a5618a4f7a52.png?1783912449",
    "faceImages": null,
@@ -1713,12 +1798,44 @@
    "foilType": "Rainbow foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 48.86,
+   "priceUsd": 48.52,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 631610,
    "recentSales": [
+    {
+     "date": "2026-11-02",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 49.25,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-31",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 49.33,
+     "shipping": 1.31,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-28",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 47.99,
+     "shipping": 0.99,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-27",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 47.99,
+     "shipping": 0.99,
+     "qty": 1
+    },
     {
      "date": "2026-10-26",
      "condition": "Near Mint",
@@ -1726,109 +1843,16 @@
      "price": 48.82,
      "shipping": 0.0,
      "qty": 1
-    },
-    {
-     "date": "2026-10-26",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 46.99,
-     "shipping": 0.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 53.87,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 47.22,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 46.49,
-     "shipping": 0.0,
-     "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/7/7/776b5cdd-a1e3-4b41-aeb4-d68f1dbaf56d.jpg?1783906684",
    "imageLarge": "https://cards.scryfall.io/png/front/7/7/776b5cdd-a1e3-4b41-aeb4-d68f1dbaf56d.png?1783906684",
    "faceImages": null,
    "scryfallUri": "https://scryfall.com/card/sld/1898/bitterblossom",
    "tcgplayerUri": "https://www.tcgplayer.com/product/631610",
    "artist": "Princess Hidir",
-   "collection": "Big Marn deck"
-  },
-  {
-   "id": "cmm-695-foil-big_marn_deck",
-   "name": "Deadly Rollick",
-   "set": "Commander Masters",
-   "setCode": "CMM",
-   "collectorNumber": "695",
-   "rarity": "rare",
-   "treatment": "Borderless, Full art",
-   "finish": "foil",
-   "foilType": "Traditional foil",
-   "condition": "NM/LP",
-   "quantity": 1,
-   "priceUsd": 47.64,
-   "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
-   "priceSource": "TCGplayer market (live)",
-   "tcgplayerId": 503467,
-   "recentSales": [
-    {
-     "date": "2026-10-26",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 49.3,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 42.0,
-     "shipping": 3.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 47.3,
-     "shipping": 1.49,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 45.99,
-     "shipping": 0.0,
-     "qty": 1
-    }
-   ],
-   "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
-   "imageUrl": "https://cards.scryfall.io/large/front/a/3/a30c266d-579e-4757-a4d6-6722fa343a6c.jpg?1783915494",
-   "imageLarge": "https://cards.scryfall.io/png/front/a/3/a30c266d-579e-4757-a4d6-6722fa343a6c.png?1783915494",
-   "faceImages": null,
-   "scryfallUri": "https://scryfall.com/card/cmm/695/deadly-rollick",
-   "tcgplayerUri": "https://www.tcgplayer.com/product/503467",
-   "artist": "Ron Spencer",
    "collection": "Big Marn deck"
   },
   {
@@ -1843,30 +1867,38 @@
    "foilType": "Etched foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 46.46,
+   "priceUsd": 46.64,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 256409,
    "recentSales": [
     {
-     "date": "2026-10-26",
+     "date": "2026-10-30",
      "condition": "Near Mint",
      "variant": "Foil",
-     "price": 44.13,
-     "shipping": 1.31,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 51.5,
+     "price": 45.0,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-24",
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 45.38,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-29",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 49.99,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-29",
      "condition": "Lightly Played",
      "variant": "Foil",
      "price": 44.95,
@@ -1874,24 +1906,16 @@
      "qty": 1
     },
     {
-     "date": "2026-10-24",
+     "date": "2026-10-26",
      "condition": "Near Mint",
      "variant": "Foil",
-     "price": 48.15,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-23",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 45.48,
-     "shipping": 1.49,
+     "price": 46.25,
+     "shipping": 0.99,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/6/8/68357502-cf23-4bf6-ab4e-371428e540d0.jpg?1783924634",
    "imageLarge": "https://cards.scryfall.io/png/front/6/8/68357502-cf23-4bf6-ab4e-371428e540d0.png?1783924634",
    "faceImages": null,
@@ -1914,29 +1938,53 @@
    "quantity": 1,
    "priceUsd": 43.77,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 238616,
    "recentSales": [
     {
-     "date": "2026-10-26",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 42.95,
+     "date": "2026-11-02",
+     "condition": "Lightly Played",
+     "variant": "Normal",
+     "price": 31.0,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
+     "date": "2026-11-01",
      "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 43.89,
+     "variant": "Normal",
+     "price": 29.75,
      "shipping": 0.0,
+     "qty": 2
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 29.92,
+     "shipping": 0.0,
+     "qty": 3
+    },
+    {
+     "date": "2026-10-31",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 31.26,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-31",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 28.93,
+     "shipping": 0.99,
      "qty": 1
     }
    ],
-   "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesMatchedVariant": false,
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/c/7/c7057b04-e22f-4e33-9f08-b9fbd2e54bf5.jpg?1783926701",
    "imageLarge": "https://cards.scryfall.io/png/front/c/7/c7057b04-e22f-4e33-9f08-b9fbd2e54bf5.png?1783926701",
    "faceImages": null,
@@ -1957,55 +2005,55 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 42.2,
+   "priceUsd": 42.22,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 238610,
    "recentSales": [
     {
-     "date": "2026-10-26",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 31.99,
-     "shipping": 0.79,
+     "price": 40.64,
+     "shipping": 0.0,
+     "qty": 2
+    },
+    {
+     "date": "2026-11-02",
+     "condition": "Lightly Played",
+     "variant": "Normal",
+     "price": 32.0,
+     "shipping": 2.5,
      "qty": 1
     },
     {
-     "date": "2026-10-26",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 33.8,
+     "price": 32.95,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-26",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 33.8,
+     "price": 31.75,
+     "shipping": 2.05,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-02",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 41.78,
      "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-26",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 32.5,
-     "shipping": 1.49,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-26",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 31.99,
-     "shipping": 0.79,
      "qty": 1
     }
    ],
    "salesMatchedVariant": false,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/7/1/71e491c5-8c07-449b-b2f1-ffa052e6d311.jpg?1783926793",
    "imageLarge": "https://cards.scryfall.io/png/front/7/1/71e491c5-8c07-449b-b2f1-ffa052e6d311.png?1783926793",
    "faceImages": null,
@@ -2026,55 +2074,23 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 41.89,
+   "priceUsd": 41.84,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 552387,
    "recentSales": [
     {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 18.0,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 17.99,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 14.0,
-     "shipping": 0.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 15.99,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 15.0,
+     "date": "2026-11-01",
+     "condition": "Lightly Played",
+     "variant": "Foil",
+     "price": 39.98,
      "shipping": 0.0,
      "qty": 1
     }
    ],
-   "salesMatchedVariant": false,
-   "salesFetched": "2026-10-26T06:04",
+   "salesMatchedVariant": true,
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/9/5/9500a456-1d7a-4463-975c-da0ad5af6baa.jpg?1783911200",
    "imageLarge": "https://cards.scryfall.io/png/front/9/5/9500a456-1d7a-4463-975c-da0ad5af6baa.png?1783911200",
    "faceImages": null,
@@ -2095,17 +2111,17 @@
    "foilType": "Galaxy foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 40.62,
+   "priceUsd": 40.39,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 641782,
    "recentSales": [
     {
-     "date": "2026-10-24",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Foil",
-     "price": 36.92,
+     "price": 41.22,
      "shipping": 0.0,
      "qty": 1
     },
@@ -2143,7 +2159,7 @@
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/d/8/d854480d-a163-422b-a3dc-54dffd7b3eab.jpg?1783905872",
    "imageLarge": "https://cards.scryfall.io/png/front/d/8/d854480d-a163-422b-a3dc-54dffd7b3eab.png?1783905872",
    "faceImages": null,
@@ -2164,23 +2180,23 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 40.22,
+   "priceUsd": 40.21,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 651905,
    "recentSales": [
     {
-     "date": "2026-10-24",
+     "date": "2026-11-02",
      "condition": "Lightly Played",
      "variant": "Foil",
-     "price": 38.33,
+     "price": 36.92,
      "shipping": 0.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:09",
    "imageUrl": "https://cards.scryfall.io/large/front/d/7/d7b0a0d5-a9fe-49ea-9250-8825b36accc0.jpg?1783905387",
    "imageLarge": "https://cards.scryfall.io/png/front/d/7/d7b0a0d5-a9fe-49ea-9250-8825b36accc0.png?1783905387",
    "faceImages": null,
@@ -2201,90 +2217,37 @@
    "foilType": null,
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 38.2,
+   "priceUsd": 38.25,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 262437,
    "recentSales": [
     {
-     "date": "2026-10-25",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 36.5,
-     "shipping": 0.0,
+     "price": 39.99,
+     "shipping": 6.99,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 38.99,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
+     "date": "2026-10-31",
      "condition": "Lightly Played",
      "variant": "Normal",
-     "price": 35.6,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 35.44,
+     "price": 38.46,
      "shipping": 0.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/9/e/9e99599e-c594-42c6-b9e3-4dbb8e982f88.jpg?1783923760",
    "imageLarge": "https://cards.scryfall.io/png/front/9/e/9e99599e-c594-42c6-b9e3-4dbb8e982f88.png?1783923760",
    "faceImages": null,
    "scryfallUri": "https://scryfall.com/card/neo/414/otawara-soaring-city",
    "tcgplayerUri": "https://www.tcgplayer.com/product/262437",
    "artist": "Yuta Shimpo",
-   "collection": "Big Marn deck"
-  },
-  {
-   "id": "cmm-692-foil-big_marn_deck",
-   "name": "Flawless Maneuver",
-   "set": "Commander Masters",
-   "setCode": "CMM",
-   "collectorNumber": "692",
-   "rarity": "rare",
-   "treatment": "Borderless, Full art",
-   "finish": "foil",
-   "foilType": "Traditional foil",
-   "condition": "NM/LP",
-   "quantity": 1,
-   "priceUsd": 37.29,
-   "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
-   "priceSource": "TCGplayer market (live)",
-   "tcgplayerId": 504585,
-   "recentSales": [
-    {
-     "date": "2026-10-26",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 33.14,
-     "shipping": 0.0,
-     "qty": 1
-    }
-   ],
-   "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
-   "imageUrl": "https://cards.scryfall.io/large/front/3/c/3c3bf400-31c0-4ae4-8429-0f6fb92cbe9e.jpg?1783915496",
-   "imageLarge": "https://cards.scryfall.io/png/front/3/c/3c3bf400-31c0-4ae4-8429-0f6fb92cbe9e.png?1783915496",
-   "faceImages": null,
-   "scryfallUri": "https://scryfall.com/card/cmm/692/flawless-maneuver",
-   "tcgplayerUri": "https://www.tcgplayer.com/product/504585",
-   "artist": "Warren Mahy",
    "collection": "Big Marn deck"
   },
   {
@@ -2299,53 +2262,106 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 36.75,
+   "priceUsd": 37.11,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 219499,
    "recentSales": [
     {
-     "date": "2026-10-25",
+     "date": "2026-11-01",
      "condition": "Near Mint",
      "variant": "Foil",
-     "price": 44.15,
+     "price": 42.0,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 36.82,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-31",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 34.94,
+     "shipping": 0.99,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-31",
      "condition": "Lightly Played",
      "variant": "Foil",
-     "price": 32.86,
-     "shipping": 2.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 39.98,
+     "price": 34.37,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-23",
+     "date": "2026-10-30",
      "condition": "Near Mint",
      "variant": "Foil",
-     "price": 32.5,
-     "shipping": 1.99,
+     "price": 35.98,
+     "shipping": 0.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/7/3/73731e45-51bb-4188-a54d-fdaa4bdfaf1f.jpg?1783930073",
    "imageLarge": "https://cards.scryfall.io/png/front/7/3/73731e45-51bb-4188-a54d-fdaa4bdfaf1f.png?1783930073",
    "faceImages": null,
    "scryfallUri": "https://scryfall.com/card/2xm/345/toxic-deluge",
    "tcgplayerUri": "https://www.tcgplayer.com/product/219499",
    "artist": "Richard Kane Ferguson",
+   "collection": "Big Marn deck"
+  },
+  {
+   "id": "cmm-692-foil-big_marn_deck",
+   "name": "Flawless Maneuver",
+   "set": "Commander Masters",
+   "setCode": "CMM",
+   "collectorNumber": "692",
+   "rarity": "rare",
+   "treatment": "Borderless, Full art",
+   "finish": "foil",
+   "foilType": "Traditional foil",
+   "condition": "NM/LP",
+   "quantity": 1,
+   "priceUsd": 36.63,
+   "priceEstimated": false,
+   "priceUpdated": "2026-11-02",
+   "priceSource": "TCGplayer market (live)",
+   "tcgplayerId": 504585,
+   "recentSales": [
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 34.02,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-31",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 36.7,
+     "shipping": 0.0,
+     "qty": 1
+    }
+   ],
+   "salesMatchedVariant": true,
+   "salesFetched": "2026-11-02T06:10",
+   "imageUrl": "https://cards.scryfall.io/large/front/3/c/3c3bf400-31c0-4ae4-8429-0f6fb92cbe9e.jpg?1783915496",
+   "imageLarge": "https://cards.scryfall.io/png/front/3/c/3c3bf400-31c0-4ae4-8429-0f6fb92cbe9e.png?1783915496",
+   "faceImages": null,
+   "scryfallUri": "https://scryfall.com/card/cmm/692/flawless-maneuver",
+   "tcgplayerUri": "https://www.tcgplayer.com/product/504585",
+   "artist": "Warren Mahy",
    "collection": "Big Marn deck"
   },
   {
@@ -2360,39 +2376,23 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 35.19,
+   "priceUsd": 35.23,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 541292,
    "recentSales": [
     {
-     "date": "2026-10-26",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 34.94,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-26",
+     "date": "2026-11-01",
      "condition": "Lightly Played",
      "variant": "Foil",
-     "price": 35.24,
+     "price": 35.43,
      "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 33.94,
-     "shipping": 0.99,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/7/9/797b30b0-bc82-43fd-a842-d5879e2441bd.jpg?1783911152",
    "imageLarge": "https://cards.scryfall.io/png/front/7/9/797b30b0-bc82-43fd-a842-d5879e2441bd.png?1783911152",
    "faceImages": null,
@@ -2413,23 +2413,39 @@
    "foilType": null,
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 34.47,
+   "priceUsd": 34.46,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 238613,
    "recentSales": [
     {
-     "date": "2026-10-25",
+     "date": "2026-11-01",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 32.85,
+     "price": 33.01,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 34.3,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 35.95,
      "shipping": 0.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/4/e/4e8397e6-d13a-4996-8fde-b8a9895de287.jpg?1783926703",
    "imageLarge": "https://cards.scryfall.io/png/front/4/e/4e8397e6-d13a-4996-8fde-b8a9895de287.png?1783926703",
    "faceImages": null,
@@ -2450,31 +2466,55 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 33.34,
+   "priceUsd": 33.38,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 635394,
    "recentSales": [
     {
-     "date": "2026-10-25",
+     "date": "2026-11-02",
      "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 33.57,
+     "variant": "Normal",
+     "price": 9.68,
+     "shipping": 1.49,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 10.68,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 32.5,
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 11.54,
      "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 10.37,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 9.77,
+     "shipping": 0.99,
      "qty": 1
     }
    ],
-   "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesMatchedVariant": false,
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/8/c/8c832508-e6f8-4581-8424-744f4e24fad2.jpg?1783906327",
    "imageLarge": "https://cards.scryfall.io/png/front/8/c/8c832508-e6f8-4581-8424-744f4e24fad2.png?1783906327",
    "faceImages": null,
@@ -2495,39 +2535,31 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 32.82,
+   "priceUsd": 32.66,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 450583,
    "recentSales": [
     {
-     "date": "2026-10-24",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 30.24,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-21",
-     "condition": "Lightly Played",
-     "variant": "Foil",
-     "price": 34.97,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-19",
+     "date": "2026-10-30",
      "condition": "Near Mint",
      "variant": "Foil",
-     "price": 31.82,
+     "price": 27.61,
+     "shipping": 1.31,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 30.22,
      "shipping": 0.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/0/b/0b387332-5725-40c2-abf5-2562038e85a3.jpg?1783919220",
    "imageLarge": "https://cards.scryfall.io/png/front/0/b/0b387332-5725-40c2-abf5-2562038e85a3.png?1783919220",
    "faceImages": null,
@@ -2548,130 +2580,61 @@
    "foilType": null,
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 31.97,
+   "priceUsd": 32.44,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 526242,
    "recentSales": [
     {
-     "date": "2026-10-25",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 35.7,
-     "shipping": 0.0,
+     "price": 32.49,
+     "shipping": 1.49,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 29.0,
-     "shipping": 2.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 33.09,
-     "shipping": 0.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 38.99,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
+     "date": "2026-11-01",
      "condition": "Lightly Played",
      "variant": "Normal",
-     "price": 29.74,
-     "shipping": 1.99,
+     "price": 31.31,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 32.8,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-29",
+     "condition": "Lightly Played",
+     "variant": "Normal",
+     "price": 34.0,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-27",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 31.97,
+     "shipping": 1.29,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/a/a/aa65e964-8ca5-4e56-b770-b50cddbc7365.jpg?1783913923",
    "imageLarge": "https://cards.scryfall.io/png/front/a/a/aa65e964-8ca5-4e56-b770-b50cddbc7365.png?1783913923",
    "faceImages": null,
    "scryfallUri": "https://scryfall.com/card/lcc/38/charismatic-conqueror",
    "tcgplayerUri": "https://www.tcgplayer.com/product/526242",
    "artist": "Bram Sels",
-   "collection": "Big Marn deck"
-  },
-  {
-   "id": "sld-908-foil-big_marn_deck",
-   "name": "Arcane Signet",
-   "set": "Secret Lair Drop",
-   "setCode": "SLD",
-   "collectorNumber": "908",
-   "rarity": "rare",
-   "treatment": "Borderless, Full art, Secret Lair",
-   "finish": "foil",
-   "foilType": "Traditional foil",
-   "condition": "NM/LP",
-   "quantity": 1,
-   "priceUsd": 28.6,
-   "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
-   "priceSource": "TCGplayer market (live)",
-   "tcgplayerId": 587975,
-   "recentSales": [
-    {
-     "date": "2026-10-24",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 27.94,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-23",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 27.95,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-22",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 27.83,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-20",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 27.83,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-20",
-     "condition": "Near Mint",
-     "variant": "Foil",
-     "price": 27.91,
-     "shipping": 0.0,
-     "qty": 1
-    }
-   ],
-   "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
-   "imageUrl": "https://cards.scryfall.io/large/front/8/d/8d4ed44c-7b95-4153-afde-cfa2fef4e146.jpg?1787979845",
-   "imageLarge": "https://cards.scryfall.io/png/front/8/d/8d4ed44c-7b95-4153-afde-cfa2fef4e146.png?1787979845",
-   "faceImages": null,
-   "scryfallUri": "https://scryfall.com/card/sld/908/arcane-signet",
-   "tcgplayerUri": "https://www.tcgplayer.com/product/587975",
-   "artist": "Alexander Forssberg",
    "collection": "Big Marn deck"
   },
   {
@@ -2686,61 +2649,130 @@
    "foilType": null,
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 28.41,
+   "priceUsd": 30.59,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 536016,
    "recentSales": [
     {
-     "date": "2026-10-26",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 34.99,
+     "price": 29.61,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
+     "date": "2026-11-01",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 32.05,
+     "price": 45.24,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
+     "date": "2026-11-01",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 30.0,
-     "shipping": 0.99,
+     "price": 33.3,
+     "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
+     "date": "2026-10-31",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 33.3,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-31",
      "condition": "Lightly Played",
      "variant": "Normal",
-     "price": 29.95,
-     "shipping": 0.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 29.0,
-     "shipping": 1.9,
+     "price": 28.84,
+     "shipping": 0.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/0/d/0dd4d070-38cf-4517-8152-84c9fcf2c984.jpg?1783912940",
    "imageLarge": "https://cards.scryfall.io/png/front/0/d/0dd4d070-38cf-4517-8152-84c9fcf2c984.png?1783912940",
    "faceImages": null,
    "scryfallUri": "https://scryfall.com/card/mkc/326/trouble-in-pairs",
    "tcgplayerUri": "https://www.tcgplayer.com/product/536016",
    "artist": "Fay Dalton",
+   "collection": "Big Marn deck"
+  },
+  {
+   "id": "sld-908-foil-big_marn_deck",
+   "name": "Arcane Signet",
+   "set": "Secret Lair Drop",
+   "setCode": "SLD",
+   "collectorNumber": "908",
+   "rarity": "rare",
+   "treatment": "Borderless, Full art, Secret Lair",
+   "finish": "foil",
+   "foilType": "Traditional foil",
+   "condition": "NM/LP",
+   "quantity": 1,
+   "priceUsd": 28.12,
+   "priceEstimated": false,
+   "priceUpdated": "2026-11-02",
+   "priceSource": "TCGplayer market (live)",
+   "tcgplayerId": 587975,
+   "recentSales": [
+    {
+     "date": "2026-11-02",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 27.95,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-01",
+     "condition": "Moderately Played",
+     "variant": "Foil",
+     "price": 19.9,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 27.95,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-29",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 23.99,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-29",
+     "condition": "Near Mint",
+     "variant": "Foil",
+     "price": 27.95,
+     "shipping": 0.0,
+     "qty": 1
+    }
+   ],
+   "salesMatchedVariant": true,
+   "salesFetched": "2026-11-02T06:10",
+   "imageUrl": "https://cards.scryfall.io/large/front/8/d/8d4ed44c-7b95-4153-afde-cfa2fef4e146.jpg?1787979845",
+   "imageLarge": "https://cards.scryfall.io/png/front/8/d/8d4ed44c-7b95-4153-afde-cfa2fef4e146.png?1787979845",
+   "faceImages": null,
+   "scryfallUri": "https://scryfall.com/card/sld/908/arcane-signet",
+   "tcgplayerUri": "https://www.tcgplayer.com/product/587975",
+   "artist": "Alexander Forssberg",
    "collection": "Big Marn deck"
   },
   {
@@ -2755,55 +2787,31 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 27.51,
+   "priceUsd": 27.56,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 541299,
    "recentSales": [
     {
-     "date": "2026-10-26",
+     "date": "2026-11-02",
      "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 23.18,
+     "variant": "Foil",
+     "price": 27.95,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-26",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 23.17,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 17.5,
-     "shipping": 1.49,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
+     "date": "2026-11-01",
      "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 17.55,
-     "shipping": 0.0,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 23.19,
+     "variant": "Foil",
+     "price": 25.66,
      "shipping": 0.0,
      "qty": 1
     }
    ],
-   "salesMatchedVariant": false,
-   "salesFetched": "2026-10-26T06:04",
+   "salesMatchedVariant": true,
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/4/3/431eca69-ba8c-47c8-a325-22a844f83e80.jpg?1783911153",
    "imageLarge": "https://cards.scryfall.io/png/front/4/3/431eca69-ba8c-47c8-a325-22a844f83e80.png?1783911153",
    "faceImages": null,
@@ -2824,55 +2832,55 @@
    "foilType": null,
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 24.63,
+   "priceUsd": 23.75,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 590679,
    "recentSales": [
     {
-     "date": "2026-10-26",
+     "date": "2026-11-01",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 26.98,
+     "price": 20.98,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
+     "date": "2026-10-31",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 24.45,
+     "price": 24.4,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
-     "condition": "Moderately Played",
+     "date": "2026-10-31",
+     "condition": "Near Mint",
      "variant": "Normal",
-     "price": 21.44,
-     "shipping": 1.49,
+     "price": 21.0,
+     "shipping": 1.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
+     "date": "2026-10-31",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 24.22,
-     "shipping": 1.49,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 23.92,
+     "price": 24.4,
      "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-31",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 20.98,
+     "shipping": 1.31,
      "qty": 1
     }
    ],
    "salesMatchedVariant": true,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/8/b/8bf88010-799d-4217-8e79-308bec7ad2ff.jpg?1783908857",
    "imageLarge": "https://cards.scryfall.io/png/front/8/b/8bf88010-799d-4217-8e79-308bec7ad2ff.png?1783908857",
    "faceImages": null,
@@ -2893,55 +2901,55 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 21.6,
+   "priceUsd": 23.07,
    "priceEstimated": false,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "TCGplayer market (live)",
    "tcgplayerId": 552631,
    "recentSales": [
     {
-     "date": "2026-10-26",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 19.11,
-     "shipping": 1.38,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-26",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 19.3,
-     "shipping": 0.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 18.99,
-     "shipping": 1.49,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-25",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 21.74,
+     "price": 21.99,
      "shipping": 0.0,
      "qty": 1
     },
     {
-     "date": "2026-10-25",
+     "date": "2026-11-02",
      "condition": "Near Mint",
      "variant": "Normal",
-     "price": 21.74,
+     "price": 21.99,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-02",
+     "condition": "Lightly Played",
+     "variant": "Normal",
+     "price": 27.99,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-02",
+     "condition": "Lightly Played",
+     "variant": "Normal",
+     "price": 27.99,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-11-02",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 21.99,
      "shipping": 0.0,
      "qty": 1
     }
    ],
    "salesMatchedVariant": false,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/b/3/b334e4c6-d316-4141-8889-f95afcc04701.jpg?1784634565",
    "imageLarge": "https://cards.scryfall.io/png/front/b/3/b334e4c6-d316-4141-8889-f95afcc04701.png?1784634565",
    "faceImages": null,
@@ -2962,12 +2970,44 @@
    "foilType": "Traditional foil",
    "condition": "NM/LP",
    "quantity": 1,
-   "priceUsd": 20.92,
+   "priceUsd": 21.0,
    "priceEstimated": true,
-   "priceUpdated": "2026-10-26",
+   "priceUpdated": "2026-11-02",
    "priceSource": "Scryfall (TCGplayer feed)",
    "tcgplayerId": 583897,
    "recentSales": [
+    {
+     "date": "2026-11-02",
+     "condition": "Lightly Played",
+     "variant": "Normal",
+     "price": 18.0,
+     "shipping": 4.99,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-30",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 23.49,
+     "shipping": 0.0,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-29",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 22.0,
+     "shipping": 0.99,
+     "qty": 1
+    },
+    {
+     "date": "2026-10-27",
+     "condition": "Near Mint",
+     "variant": "Normal",
+     "price": 17.5,
+     "shipping": 4.99,
+     "qty": 1
+    },
     {
      "date": "2026-10-24",
      "condition": "Near Mint",
@@ -2975,42 +3015,10 @@
      "price": 22.35,
      "shipping": 0.0,
      "qty": 1
-    },
-    {
-     "date": "2026-10-24",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 20.79,
-     "shipping": 1.49,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-23",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 16.99,
-     "shipping": 4.99,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-21",
-     "condition": "Near Mint",
-     "variant": "Normal",
-     "price": 19.96,
-     "shipping": 1.49,
-     "qty": 1
-    },
-    {
-     "date": "2026-10-17",
-     "condition": "Lightly Played",
-     "variant": "Normal",
-     "price": 19.5,
-     "shipping": 1.5,
-     "qty": 1
     }
    ],
    "salesMatchedVariant": false,
-   "salesFetched": "2026-10-26T06:04",
+   "salesFetched": "2026-11-02T06:10",
    "imageUrl": "https://cards.scryfall.io/large/front/3/8/384a1033-bf43-44d7-8d82-d61fc6c2d65a.jpg?1783909218",
    "imageLarge": "https://cards.scryfall.io/png/front/3/8/384a1033-bf43-44d7-8d82-d61fc6c2d65a.png?1783909218",
    "faceImages": null,

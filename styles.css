@@ -67,13 +67,28 @@ background:linear-gradient(115deg,transparent 30%,#ff9be8 40%,#9bf3ff 47%,#fff7a
 .qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
 .year{grid-column:1/-1;margin:8px 0 0;padding-bottom:6px;border-bottom:1px solid var(--line);font-family:Georgia,serif;font-size:1.15rem;color:var(--gold)}
 .year small{color:var(--mut);font-family:system-ui,sans-serif;font-size:.8rem;font-weight:500;margin-left:8px}
-.qbox{position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px}
+.qbox{position:relative;overflow:visible;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px}
 .qbody{position:relative;z-index:1}
 .unlocked{border-color:transparent;background:linear-gradient(#1c1830,#171925) padding-box,linear-gradient(115deg,#f3dc95,#fff7a8,#9bf3ff,#ff9be8,#f3dc95) border-box;box-shadow:0 12px 32px rgba(216,180,90,.18)}
-.qshine{position:absolute;inset:-50%;pointer-events:none;background:linear-gradient(115deg,transparent 36%,rgba(255,155,232,.55) 44%,rgba(155,243,255,.5) 50%,rgba(255,247,168,.55) 56%,transparent 64%);background-size:220% 220%;animation:sh 6.5s linear infinite;mix-blend-mode:screen;opacity:.55}
 .locked{background:#12131a}
 .locked .qname{color:#c8c6d4}
-.set-icon{width:48px;height:48px;flex:0 0 auto;filter:invert(1)}
+.qstage{perspective:900px;margin:0 0 12px}
+.qfigure{position:relative;overflow:hidden;border-radius:14px;background:#f4f1ea;transform-style:preserve-3d;animation:boxfloat 5.2s ease-in-out infinite;transition:transform .18s ease-out;box-shadow:0 14px 28px rgba(0,0,0,.38)}
+.qstage:hover .qfigure{animation-play-state:paused}
+@keyframes boxfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.boxart{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:14px;background:#f4f1ea}
+.sheen,.foil{position:absolute;inset:0;border-radius:inherit;pointer-events:none}
+.sheen{background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.62) 48%,transparent 62%);background-size:240% 100%;animation:sheen 5.4s ease-in-out infinite;mix-blend-mode:soft-light}
+@keyframes sheen{0%{background-position:130% 0}100%{background-position:-130% 0}}
+.foil{background:linear-gradient(115deg,transparent 28%,rgba(255,155,232,.55) 40%,rgba(155,243,255,.5) 50%,rgba(255,247,168,.62) 60%,transparent 74%);background-size:240% 240%;animation:sh 6.5s linear infinite;mix-blend-mode:color-dodge;opacity:.42}
+.locked .boxart{filter:grayscale(1) brightness(.58) contrast(.92)}
+.locked .qfigure{box-shadow:0 8px 18px rgba(0,0,0,.28)}
+.locked .sheen{opacity:.45}
+.lock{position:absolute;inset:0;display:grid;place-items:center;border-radius:inherit;background:rgba(8,9,14,.22);color:#f7f4ea;pointer-events:none}
+.lock svg{width:46px;height:46px;padding:11px;box-sizing:border-box;border-radius:50%;background:rgba(8,9,14,.78);border:1px solid rgba(255,255,255,.4);box-shadow:0 8px 22px rgba(0,0,0,.45)}
+.qfigure.no-art .boxart{opacity:.15}
+.callout-art{width:84px;height:84px;object-fit:contain;border-radius:12px;background:#f4f1ea;flex:0 0 auto;box-shadow:0 8px 18px rgba(0,0,0,.35)}
+.set-icon{width:36px;height:36px;flex:0 0 auto;filter:invert(1)}
 .unlocked .set-icon{filter:invert(1) sepia(.55) saturate(3.5) hue-rotate(8deg) brightness(1.05)}
 .locked .set-icon{filter:grayscale(1) invert(1) brightness(.5)}
 .qtop{display:flex;gap:12px;align-items:flex-start;padding-right:78px;position:relative}
@@ -92,7 +107,12 @@ background:linear-gradient(115deg,transparent 30%,#ff9be8 40%,#9bf3ff 47%,#fff7a
 .gain,.paid{margin:8px 0 0;font-weight:650}
 .qbox .btn{margin-top:10px}
 footer code{color:var(--txt);font-size:.85em}
-@media (prefers-reduced-motion:reduce){.qshine{animation:none;opacity:.2}}
+@media (prefers-reduced-motion:reduce){
+.qfigure,.sheen,.foil{animation:none}
+.qfigure{transition:none}
+.sheen{opacity:0}
+.foil{opacity:.22}
+}
 @media(max-width:640px){
 .qhero h2{font-size:1.65rem}
 .prow strong{font-size:1.45rem}

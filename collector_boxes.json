@@ -1,6 +1,6 @@
 {
   "updated": "2026-11-02",
-  "note": "Mark a box owned by setting \"owned\" to true on that object. Optional \"paid\" is what Luke paid, in USD. Leave \"msrp\" null when it is unknown — never invent one; the page shows n/a. python3 update_cards.py --refresh-boxes rewrites lowestListed and market from tcgcsv.com and does not change owned, paid, or msrp. --refresh updates cards and these box prices.",
+  "note": "Mark a box owned by setting \"owned\" to true on that object. Optional \"paid\" is what Luke paid, in USD. Leave \"msrp\" null when it is unknown — never invent one; the page shows n/a. imageUrl is the TCGplayer product photo (https://tcgplayer-cdn.tcgplayer.com/product/<id>_in_1000x1000.jpg). python3 update_cards.py --refresh-boxes rewrites lowestListed and market from tcgcsv.com, fills a missing imageUrl, and does not change owned, paid, or msrp. --refresh updates cards and these box prices.",
   "boxes": [
     {
       "id": "eld",
@@ -20,7 +20,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/194907",
       "tcgplayerProductId": 194907,
       "tcgplayerGroupId": 2494,
-      "icon": "https://svgs.scryfall.io/sets/eld.svg"
+      "icon": "https://svgs.scryfall.io/sets/eld.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/194907_in_1000x1000.jpg"
     },
     {
       "id": "thb",
@@ -40,7 +41,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/202302",
       "tcgplayerProductId": 202302,
       "tcgplayerGroupId": 2568,
-      "icon": "https://svgs.scryfall.io/sets/thb.svg"
+      "icon": "https://svgs.scryfall.io/sets/thb.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/202302_in_1000x1000.jpg"
     },
     {
       "id": "iko",
@@ -60,7 +62,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/208279",
       "tcgplayerProductId": 208279,
       "tcgplayerGroupId": 2603,
-      "icon": "https://svgs.scryfall.io/sets/iko.svg"
+      "icon": "https://svgs.scryfall.io/sets/iko.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/208279_in_1000x1000.jpg"
     },
     {
       "id": "m21",
@@ -80,7 +83,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/214818",
       "tcgplayerProductId": 214818,
       "tcgplayerGroupId": 2653,
-      "icon": "https://svgs.scryfall.io/sets/m21.svg"
+      "icon": "https://svgs.scryfall.io/sets/m21.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/214818_in_1000x1000.jpg"
     },
     {
       "id": "2xm-vip",
@@ -100,7 +104,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/215304",
       "tcgplayerProductId": 215304,
       "tcgplayerGroupId": 2655,
-      "icon": "https://svgs.scryfall.io/sets/2xm.svg"
+      "icon": "https://svgs.scryfall.io/sets/2xm.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/215304_in_1000x1000.jpg"
     },
     {
       "id": "znr",
@@ -120,7 +125,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/220423",
       "tcgplayerProductId": 220423,
       "tcgplayerGroupId": 2648,
-      "icon": "https://svgs.scryfall.io/sets/znr.svg"
+      "icon": "https://svgs.scryfall.io/sets/znr.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/220423_in_1000x1000.jpg"
     },
     {
       "id": "cmr",
@@ -140,7 +146,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/221323",
       "tcgplayerProductId": 221323,
       "tcgplayerGroupId": 2708,
-      "icon": "https://svgs.scryfall.io/sets/cmr.svg"
+      "icon": "https://svgs.scryfall.io/sets/cmr.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/221323_in_1000x1000.jpg"
     },
     {
       "id": "khm",
@@ -160,7 +167,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/228249",
       "tcgplayerProductId": 228249,
       "tcgplayerGroupId": 2750,
-      "icon": "https://svgs.scryfall.io/sets/khm.svg"
+      "icon": "https://svgs.scryfall.io/sets/khm.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/228249_in_1000x1000.jpg"
     },
     {
       "id": "stx",
@@ -180,7 +188,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/233232",
       "tcgplayerProductId": 233232,
       "tcgplayerGroupId": 2773,
-      "icon": "https://svgs.scryfall.io/sets/stx.svg"
+      "icon": "https://svgs.scryfall.io/sets/stx.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/233232_in_1000x1000.jpg"
     },
     {
       "id": "mh2",
@@ -200,7 +209,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/236348",
       "tcgplayerProductId": 236348,
       "tcgplayerGroupId": 2809,
-      "icon": "https://svgs.scryfall.io/sets/mh2.svg"
+      "icon": "https://svgs.scryfall.io/sets/mh2.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/236348_in_1000x1000.jpg"
     },
     {
       "id": "afr",
@@ -220,7 +230,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/238745",
       "tcgplayerProductId": 238745,
       "tcgplayerGroupId": 2823,
-      "icon": "https://svgs.scryfall.io/sets/afr.svg"
+      "icon": "https://svgs.scryfall.io/sets/afr.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/238745_in_1000x1000.jpg"
     },
     {
       "id": "mid",
@@ -240,7 +251,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/244384",
       "tcgplayerProductId": 244384,
       "tcgplayerGroupId": 2864,
-      "icon": "https://svgs.scryfall.io/sets/mid.svg"
+      "icon": "https://svgs.scryfall.io/sets/mid.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/244384_in_1000x1000.jpg"
     },
     {
       "id": "vow",
@@ -260,7 +272,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/246457",
       "tcgplayerProductId": 246457,
       "tcgplayerGroupId": 2862,
-      "icon": "https://svgs.scryfall.io/sets/vow.svg"
+      "icon": "https://svgs.scryfall.io/sets/vow.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/246457_in_1000x1000.jpg"
     },
     {
       "id": "neo",
@@ -280,7 +293,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/257563",
       "tcgplayerProductId": 257563,
       "tcgplayerGroupId": 2965,
-      "icon": "https://svgs.scryfall.io/sets/neo.svg"
+      "icon": "https://svgs.scryfall.io/sets/neo.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/257563_in_1000x1000.jpg"
     },
     {
       "id": "snc",
@@ -300,7 +314,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/264767",
       "tcgplayerProductId": 264767,
       "tcgplayerGroupId": 3026,
-      "icon": "https://svgs.scryfall.io/sets/snc.svg"
+      "icon": "https://svgs.scryfall.io/sets/snc.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/264767_in_1000x1000.jpg"
     },
     {
       "id": "clb",
@@ -320,7 +335,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/267023",
       "tcgplayerProductId": 267023,
       "tcgplayerGroupId": 3047,
-      "icon": "https://svgs.scryfall.io/sets/clb.svg"
+      "icon": "https://svgs.scryfall.io/sets/clb.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/267023_in_1000x1000.jpg"
     },
     {
       "id": "2x2",
@@ -340,7 +356,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/271509",
       "tcgplayerProductId": 271509,
       "tcgplayerGroupId": 3070,
-      "icon": "https://svgs.scryfall.io/sets/2x2.svg"
+      "icon": "https://svgs.scryfall.io/sets/2x2.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/271509_in_1000x1000.jpg"
     },
     {
       "id": "unf",
@@ -360,7 +377,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/275406",
       "tcgplayerProductId": 275406,
       "tcgplayerGroupId": 2958,
-      "icon": "https://svgs.scryfall.io/sets/unf.svg"
+      "icon": "https://svgs.scryfall.io/sets/unf.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/275406_in_1000x1000.jpg"
     },
     {
       "id": "dmu",
@@ -380,7 +398,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/275412",
       "tcgplayerProductId": 275412,
       "tcgplayerGroupId": 3102,
-      "icon": "https://svgs.scryfall.io/sets/dmu.svg"
+      "icon": "https://svgs.scryfall.io/sets/dmu.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/275412_in_1000x1000.jpg"
     },
     {
       "id": "bro",
@@ -400,7 +419,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/282224",
       "tcgplayerProductId": 282224,
       "tcgplayerGroupId": 3157,
-      "icon": "https://svgs.scryfall.io/sets/bro.svg"
+      "icon": "https://svgs.scryfall.io/sets/bro.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/282224_in_1000x1000.jpg"
     },
     {
       "id": "dmr",
@@ -420,7 +440,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/449559",
       "tcgplayerProductId": 449559,
       "tcgplayerGroupId": 17670,
-      "icon": "https://svgs.scryfall.io/sets/dmr.svg"
+      "icon": "https://svgs.scryfall.io/sets/dmr.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/449559_in_1000x1000.jpg"
     },
     {
       "id": "one",
@@ -440,7 +461,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/451880",
       "tcgplayerProductId": 451880,
       "tcgplayerGroupId": 17684,
-      "icon": "https://svgs.scryfall.io/sets/one.svg"
+      "icon": "https://svgs.scryfall.io/sets/one.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/451880_in_1000x1000.jpg"
     },
     {
       "id": "mom",
@@ -460,7 +482,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/475584",
       "tcgplayerProductId": 475584,
       "tcgplayerGroupId": 22875,
-      "icon": "https://svgs.scryfall.io/sets/mom.svg"
+      "icon": "https://svgs.scryfall.io/sets/mom.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/475584_in_1000x1000.jpg"
     },
     {
       "id": "mat",
@@ -480,7 +503,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/489207",
       "tcgplayerProductId": 489207,
       "tcgplayerGroupId": 22876,
-      "icon": "https://svgs.scryfall.io/sets/mat.svg"
+      "icon": "https://svgs.scryfall.io/sets/mat.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/489207_in_1000x1000.jpg"
     },
     {
       "id": "ltr",
@@ -500,7 +524,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/484912",
       "tcgplayerProductId": 484912,
       "tcgplayerGroupId": 23019,
-      "icon": "https://svgs.scryfall.io/sets/ltr.svg"
+      "icon": "https://svgs.scryfall.io/sets/ltr.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/484912_in_1000x1000.jpg"
     },
     {
       "id": "ltr-special",
@@ -520,7 +545,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/515906",
       "tcgplayerProductId": 515906,
       "tcgplayerGroupId": 23019,
-      "icon": "https://svgs.scryfall.io/sets/ltr.svg"
+      "icon": "https://svgs.scryfall.io/sets/ltr.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/515906_in_1000x1000.jpg"
     },
     {
       "id": "cmm",
@@ -540,7 +566,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/484929",
       "tcgplayerProductId": 484929,
       "tcgplayerGroupId": 23020,
-      "icon": "https://svgs.scryfall.io/sets/cmm.svg"
+      "icon": "https://svgs.scryfall.io/sets/cmm.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/484929_in_1000x1000.jpg"
     },
     {
       "id": "woe",
@@ -560,7 +587,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/496041",
       "tcgplayerProductId": 496041,
       "tcgplayerGroupId": 23163,
-      "icon": "https://svgs.scryfall.io/sets/woe.svg"
+      "icon": "https://svgs.scryfall.io/sets/woe.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/496041_in_1000x1000.jpg"
     },
     {
       "id": "who",
@@ -580,7 +608,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/496076",
       "tcgplayerProductId": 496076,
       "tcgplayerGroupId": 23165,
-      "icon": "https://svgs.scryfall.io/sets/who.svg"
+      "icon": "https://svgs.scryfall.io/sets/who.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/496076_in_1000x1000.jpg"
     },
     {
       "id": "lci",
@@ -600,7 +629,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/516614",
       "tcgplayerProductId": 516614,
       "tcgplayerGroupId": 23312,
-      "icon": "https://svgs.scryfall.io/sets/lci.svg"
+      "icon": "https://svgs.scryfall.io/sets/lci.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/516614_in_1000x1000.jpg"
     },
     {
       "id": "rvr",
@@ -620,7 +650,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/517708",
       "tcgplayerProductId": 517708,
       "tcgplayerGroupId": 23319,
-      "icon": "https://svgs.scryfall.io/sets/rvr.svg"
+      "icon": "https://svgs.scryfall.io/sets/rvr.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/517708_in_1000x1000.jpg"
     },
     {
       "id": "mkm",
@@ -640,7 +671,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/529968",
       "tcgplayerProductId": 529968,
       "tcgplayerGroupId": 23361,
-      "icon": "https://svgs.scryfall.io/sets/mkm.svg"
+      "icon": "https://svgs.scryfall.io/sets/mkm.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/529968_in_1000x1000.jpg"
     },
     {
       "id": "pip",
@@ -660,7 +692,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/523185",
       "tcgplayerProductId": 523185,
       "tcgplayerGroupId": 23337,
-      "icon": "https://svgs.scryfall.io/sets/pip.svg"
+      "icon": "https://svgs.scryfall.io/sets/pip.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/523185_in_1000x1000.jpg"
     },
     {
       "id": "otj",
@@ -680,7 +713,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/541090",
       "tcgplayerProductId": 541090,
       "tcgplayerGroupId": 23439,
-      "icon": "https://svgs.scryfall.io/sets/otj.svg"
+      "icon": "https://svgs.scryfall.io/sets/otj.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/541090_in_1000x1000.jpg"
     },
     {
       "id": "mh3",
@@ -700,7 +734,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/541179",
       "tcgplayerProductId": 541179,
       "tcgplayerGroupId": 23444,
-      "icon": "https://svgs.scryfall.io/sets/mh3.svg"
+      "icon": "https://svgs.scryfall.io/sets/mh3.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/541179_in_1000x1000.jpg"
     },
     {
       "id": "acr",
@@ -720,7 +755,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/541225",
       "tcgplayerProductId": 541225,
       "tcgplayerGroupId": 23446,
-      "icon": "https://svgs.scryfall.io/sets/acr.svg"
+      "icon": "https://svgs.scryfall.io/sets/acr.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/541225_in_1000x1000.jpg"
     },
     {
       "id": "blb",
@@ -740,7 +776,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/541238",
       "tcgplayerProductId": 541238,
       "tcgplayerGroupId": 23447,
-      "icon": "https://svgs.scryfall.io/sets/blb.svg"
+      "icon": "https://svgs.scryfall.io/sets/blb.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/541238_in_1000x1000.jpg"
     },
     {
       "id": "dsk",
@@ -760,7 +797,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/557244",
       "tcgplayerProductId": 557244,
       "tcgplayerGroupId": 23550,
-      "icon": "https://svgs.scryfall.io/sets/dsk.svg"
+      "icon": "https://svgs.scryfall.io/sets/dsk.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/557244_in_1000x1000.jpg"
     },
     {
       "id": "fdn",
@@ -780,7 +818,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/562122",
       "tcgplayerProductId": 562122,
       "tcgplayerGroupId": 23556,
-      "icon": "https://svgs.scryfall.io/sets/fdn.svg"
+      "icon": "https://svgs.scryfall.io/sets/fdn.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/562122_in_1000x1000.jpg"
     },
     {
       "id": "inr",
@@ -800,7 +839,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/594681",
       "tcgplayerProductId": 594681,
       "tcgplayerGroupId": 23848,
-      "icon": "https://svgs.scryfall.io/sets/inr.svg"
+      "icon": "https://svgs.scryfall.io/sets/inr.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/594681_in_1000x1000.jpg"
     },
     {
       "id": "dft",
@@ -820,7 +860,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/604253",
       "tcgplayerProductId": 604253,
       "tcgplayerGroupId": 23874,
-      "icon": "https://svgs.scryfall.io/sets/dft.svg"
+      "icon": "https://svgs.scryfall.io/sets/dft.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/604253_in_1000x1000.jpg"
     },
     {
       "id": "tdm",
@@ -840,7 +881,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/619649",
       "tcgplayerProductId": 619649,
       "tcgplayerGroupId": 24232,
-      "icon": "https://svgs.scryfall.io/sets/tdm.svg"
+      "icon": "https://svgs.scryfall.io/sets/tdm.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/619649_in_1000x1000.jpg"
     },
     {
       "id": "fin",
@@ -860,7 +902,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/618893",
       "tcgplayerProductId": 618893,
       "tcgplayerGroupId": 24219,
-      "icon": "https://svgs.scryfall.io/sets/fin.svg"
+      "icon": "https://svgs.scryfall.io/sets/fin.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/618893_in_1000x1000.jpg"
     },
     {
       "id": "fin-jp",
@@ -880,7 +923,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/628315",
       "tcgplayerProductId": 628315,
       "tcgplayerGroupId": 24219,
-      "icon": "https://svgs.scryfall.io/sets/fin.svg"
+      "icon": "https://svgs.scryfall.io/sets/fin.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/628315_in_1000x1000.jpg"
     },
     {
       "id": "eoe",
@@ -900,7 +944,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/619672",
       "tcgplayerProductId": 619672,
       "tcgplayerGroupId": 24233,
-      "icon": "https://svgs.scryfall.io/sets/eoe.svg"
+      "icon": "https://svgs.scryfall.io/sets/eoe.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/619672_in_1000x1000.jpg"
     },
     {
       "id": "spm",
@@ -920,7 +965,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/621110",
       "tcgplayerProductId": 621110,
       "tcgplayerGroupId": 24245,
-      "icon": "https://svgs.scryfall.io/sets/spm.svg"
+      "icon": "https://svgs.scryfall.io/sets/spm.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/621110_in_1000x1000.jpg"
     },
     {
       "id": "tla",
@@ -940,7 +986,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/648650",
       "tcgplayerProductId": 648650,
       "tcgplayerGroupId": 24421,
-      "icon": "https://svgs.scryfall.io/sets/tla.svg"
+      "icon": "https://svgs.scryfall.io/sets/tla.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/648650_in_1000x1000.jpg"
     },
     {
       "id": "ecl",
@@ -960,7 +1007,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/656322",
       "tcgplayerProductId": 656322,
       "tcgplayerGroupId": 24463,
-      "icon": "https://svgs.scryfall.io/sets/ecl.svg"
+      "icon": "https://svgs.scryfall.io/sets/ecl.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/656322_in_1000x1000.jpg"
     },
     {
       "id": "tmt",
@@ -980,7 +1028,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/657852",
       "tcgplayerProductId": 657852,
       "tcgplayerGroupId": 24495,
-      "icon": "https://svgs.scryfall.io/sets/tmt.svg"
+      "icon": "https://svgs.scryfall.io/sets/tmt.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/657852_in_1000x1000.jpg"
     },
     {
       "id": "sos",
@@ -1000,7 +1049,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/675558",
       "tcgplayerProductId": 675558,
       "tcgplayerGroupId": 24601,
-      "icon": "https://svgs.scryfall.io/sets/sos.svg"
+      "icon": "https://svgs.scryfall.io/sets/sos.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/675558_in_1000x1000.jpg"
     },
     {
       "id": "msh",
@@ -1020,7 +1070,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/675606",
       "tcgplayerProductId": 675606,
       "tcgplayerGroupId": 24553,
-      "icon": "https://svgs.scryfall.io/sets/msh.svg"
+      "icon": "https://svgs.scryfall.io/sets/msh.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/675606_in_1000x1000.jpg"
     },
     {
       "id": "hob",
@@ -1040,7 +1091,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/692963",
       "tcgplayerProductId": 692963,
       "tcgplayerGroupId": 24683,
-      "icon": "https://svgs.scryfall.io/sets/hob.svg"
+      "icon": "https://svgs.scryfall.io/sets/hob.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/692963_in_1000x1000.jpg"
     },
     {
       "id": "fra",
@@ -1060,7 +1112,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/692983",
       "tcgplayerProductId": 692983,
       "tcgplayerGroupId": 24684,
-      "icon": "https://svgs.scryfall.io/sets/fra.svg"
+      "icon": "https://svgs.scryfall.io/sets/fra.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/692983_in_1000x1000.jpg"
     },
     {
       "id": "trk",
@@ -1080,7 +1133,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/706142",
       "tcgplayerProductId": 706142,
       "tcgplayerGroupId": 24766,
-      "icon": "https://svgs.scryfall.io/sets/trk.svg"
+      "icon": "https://svgs.scryfall.io/sets/trk.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/706142_in_1000x1000.jpg"
     },
     {
       "id": "mdd",
@@ -1100,7 +1154,8 @@
       "tcgplayerUrl": "https://www.tcgplayer.com/product/723266",
       "tcgplayerProductId": 723266,
       "tcgplayerGroupId": 24909,
-      "icon": "https://svgs.scryfall.io/sets/mdd.svg"
+      "icon": "https://svgs.scryfall.io/sets/mdd.svg",
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/723266_in_1000x1000.jpg"
     }
   ]
 }

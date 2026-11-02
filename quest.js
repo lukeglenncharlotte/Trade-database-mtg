@@ -71,13 +71,46 @@
     ${paidGain == null ? "" : `<p class="gain ${paidGain >= 0 ? "up" : "down"}">${money(paidGain)} vs paid</p>`}`;
   }
 
+  const LOCK = `<span class="lock" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 10V7a4 4 0 0 1 8 0v3h1.2A1.8 1.8 0 0 1 19 11.8v7.4A1.8 1.8 0 0 1 17.2 21H6.8A1.8 1.8 0 0 1 5 19.2v-7.4A1.8 1.8 0 0 1 6.8 10H8zm2 0h4V7a2 2 0 0 0-4 0v3z"/></svg></span>`;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function art(b, eager) {
+    if (!b.imageUrl) return "";
+    const delay = reduceMotion ? "" : ` style="animation-delay:${(-(b.tcgplayerProductId % 7) * 0.45).toFixed(2)}s"`;
+    return `<div class="qstage">
+      <div class="qfigure"${delay}>
+        <img class="boxart" alt="${esc(b.name)} sealed Collector Booster display" width="1000" height="1000" ${eager ? "" : 'loading="lazy"'} decoding="async" src="${esc(b.imageUrl)}">
+        <span class="sheen" aria-hidden="true"></span>
+        ${b.owned ? '<span class="foil" aria-hidden="true"></span>' : LOCK}
+      </div>
+    </div>`;
+  }
+
+  function bindTilt(root) {
+    if (reduceMotion || !root) return;
+    root.querySelectorAll(".qstage").forEach((stage) => {
+      const fig = stage.querySelector(".qfigure");
+      if (!fig) return;
+      stage.addEventListener("pointermove", (e) => {
+        const r = stage.getBoundingClientRect();
+        if (!r.width || !r.height) return;
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        fig.style.transform = `rotateX(${(-py * 8).toFixed(2)}deg) rotateY(${(px * 11).toFixed(2)}deg) translateZ(10px)`;
+      });
+      const reset = () => { fig.style.transform = ""; };
+      stage.addEventListener("pointerleave", reset);
+      stage.addEventListener("pointercancel", reset);
+    });
+  }
+
   function card(b, cheapestId) {
     const bits = [b.setCode, pretty(b.releaseDate), b.variant].filter(Boolean).join(" · ");
     return `<article class="qbox ${b.owned ? "unlocked" : "locked"}${b.id === cheapestId ? " next" : ""}">
-      ${b.owned ? '<div class="qshine" aria-hidden="true"></div>' : ""}
       <div class="qbody">
+        ${art(b)}
         <div class="qtop">
-          <img class="set-icon" alt="" width="48" height="48" loading="lazy" src="${esc(b.icon)}">
+          <img class="set-icon" alt="" width="36" height="36" loading="lazy" src="${esc(b.icon)}">
           <div><h3 class="qname">${esc(b.name)}</h3><p class="qmeta">${esc(bits)}</p></div>
           <span class="stamp">${b.owned ? "Unlocked" : "Locked"}</span>
         </div>
@@ -117,6 +150,8 @@
     }
     $("#questOwned").innerHTML = ownedHtml;
     $("#questList").innerHTML = missHtml;
+    bindTilt($("#questOwned"));
+    bindTilt($("#questList"));
     const ownedVisible = showOwned && owned.length > 0;
     const missVisible = showMissing && missing.length > 0;
     $("#ownedHead").hidden = !ownedVisible;
@@ -160,7 +195,7 @@
 
     const cheapest = miss.filter((b) => b.lowestListed != null).sort((a, b) => a.lowestListed - b.lowestListed || a.releaseDate.localeCompare(b.releaseDate))[0];
     $("#questNext").innerHTML = cheapest ? `<aside class="callout">
-      <img class="set-icon" alt="" width="48" height="48" src="${esc(cheapest.icon)}">
+      ${cheapest.imageUrl ? `<img class="callout-art" alt="" width="84" height="84" src="${esc(cheapest.imageUrl)}">` : `<img class="set-icon" alt="" width="48" height="48" src="${esc(cheapest.icon)}">`}
       <div><p class="kicker">Next cheapest to grab</p><p class="qname">${esc(cheapest.name)}</p>
       <p class="qmeta">${usd(cheapest.lowestListed)} lowest listing · ${usd(cheapest.market)} market${cheapest.msrp != null ? " · MSRP " + usd(cheapest.msrp) : ""}</p></div>
       <a class="btn" href="${esc(cheapest.tcgplayerUrl)}" target="_blank" rel="noopener">View on TCGplayer ↗</a>
@@ -174,6 +209,13 @@
   }));
   $("#questSort").addEventListener("input", () => { sort = $("#questSort").value; render(); });
   $("#questQ").addEventListener("input", () => { q = $("#questQ").value; render(); });
+
+  document.getElementById("quest").addEventListener("error", (e) => {
+    const img = e.target;
+    if (!img.classList || !img.classList.contains("boxart")) return;
+    const fig = img.closest(".qfigure");
+    if (fig) fig.classList.add("no-art");
+  }, true);
 
   fetch("collector_boxes.json", { cache: "no-store" }).then((r) => r.json()).then((d) => {
     boxes = d.boxes || [];

@@ -120,14 +120,25 @@ def enrich(set_code, num, finish, qty=1, condition="NM/LP", collection="Unsorted
       "artist": c.get("artist"), "collection": collection,
     }
 
+def sealed_image_url(pid, csv_url=None):
+    """Large TCGplayer product photo. tcgcsv imageUrl is the fallback when there is no product id."""
+    if pid:
+        return f"https://tcgplayer-cdn.tcgplayer.com/product/{int(pid)}_in_1000x1000.jpg"
+    if csv_url and "_200w." in csv_url:
+        return csv_url.replace("_200w.", "_in_1000x1000.")
+    return csv_url or None
+
 def refresh_boxes():
-    """Rewrite lowestListed and market from tcgcsv.com. Leaves owned, paid, and msrp alone."""
+    """Rewrite lowestListed and market from tcgcsv.com, and fill a missing imageUrl.
+
+    Leaves owned, paid, msrp, and an imageUrl that is already set.
+    """
     if not os.path.exists(BOXES):
         print("no collector_boxes.json", file=sys.stderr); return
     with open(BOXES) as f:
         doc = json.load(f)
-    groups = {}
-    changed = 0
+    groups, products = {}, {}
+    changed = images = 0
     for b in doc.get("boxes") or []:
         gid, pid = b.get("tcgplayerGroupId"), b.get("tcgplayerProductId")
         if not gid or not pid:
@@ -147,11 +158,20 @@ def refresh_boxes():
         if hit.get("marketPrice") is not None:
             b["market"] = hit["marketPrice"]
         changed += 1
+        if not b.get("imageUrl"):
+            if gid not in products:
+                pdata = get(f"https://tcgcsv.com/tcgplayer/1/{gid}/products")
+                products[gid] = {p.get("productId"): p for p in (pdata.get("results") or [])} if isinstance(pdata, dict) else {}
+            csv_url = (products[gid].get(pid) or {}).get("imageUrl")
+            url = sealed_image_url(pid, csv_url)
+            if url:
+                b["imageUrl"] = url
+                images += 1
     doc["updated"] = datetime.date.today().isoformat()
     with open(BOXES, "w") as f:
         json.dump(doc, f, indent=2, ensure_ascii=False)
         f.write("\n")
-    print(f"collector_boxes.json: refreshed {changed} box prices from tcgcsv.com")
+    print(f"collector_boxes.json: refreshed {changed} box prices from tcgcsv.com, filled {images} product image(s)")
 
 def load():
     if os.path.exists(DB):

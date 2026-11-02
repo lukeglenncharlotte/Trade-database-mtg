@@ -1075,8 +1075,8 @@
     },
     {
       "id": "hob",
-      "owned": false,
-      "paid": null,
+      "owned": true,
+      "paid": 455.88,
       "name": "The Hobbit",
       "setCode": "HOB",
       "releaseDate": "2026-08-14",
@@ -1093,14 +1093,13 @@
       "tcgplayerGroupId": 24683,
       "icon": "https://svgs.scryfall.io/sets/hob.svg",
       "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/692963_in_1000x1000.jpg",
-      "unlockedAt": null,
-      "verificationPhoto": null,
-      "vendor": null,
-      "location": null,
-      "notes": null,
-      "submittedAt": null,
-      "purchasedAt": null,
-      "msrpPurchase": null
+      "unlockedAt": "2026-11-02",
+      "verificationPhoto": "images/verified/hob.jpg",
+      "vendor": "Microcenter Charlotte",
+      "location": "Charlotte NC",
+      "notes": "Camped out with Kristina and Hunter",
+      "submittedAt": "2026-11-02T04:24:45.553Z",
+      "purchasedAt": "2026-08-14T14:19:00.000Z"
     },
     {
       "id": "fra",

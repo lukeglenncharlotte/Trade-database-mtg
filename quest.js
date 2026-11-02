@@ -361,6 +361,7 @@
       if (!target) throw new Error("That box is no longer in collector_boxes.json.");
       target.owned = true;
       target.paid = purchase.paid;
+      target.msrpPurchase = !!purchase.msrpPurchase;
       target.vendor = purchase.vendor;
       target.location = purchase.location || null;
       target.notes = purchase.notes || null;
@@ -497,7 +498,10 @@
         <label>Purchased<input id="ritualWhen" type="datetime-local" value="${esc(r.purchasedLocal == null ? localNowValue() : r.purchasedLocal)}"></label>
         <label>Notes, optional<textarea id="ritualNotes" rows="3" placeholder="Anything you want to remember">${esc(r.notes || "")}</textarea></label>`,
       price: `<p class="qnote">What did you pay for ${box ? esc(box.name) : "this box"}?</p>
-        <label>Amount paid, USD<input id="ritualPaid" inputmode="decimal" autocomplete="off" placeholder="0.00" value="${esc(r.paidText || "")}"></label>`,
+        ${box && box.msrp != null
+          ? `<label class="check"><input type="checkbox" id="ritualMsrp" ${r.msrpPurchase ? "checked" : ""}> I purchased this for MSRP</label>`
+          : `<p class="qnote">No MSRP is on file for this box, so it can't be marked as an MSRP purchase.</p>`}
+        <label>Amount paid, USD<input id="ritualPaid" inputmode="decimal" autocomplete="off" placeholder="0.00" value="${esc(r.msrpPurchase && box && box.msrp != null ? Number(box.msrp).toFixed(2) : (r.paidText || ""))}" ${r.msrpPurchase && box && box.msrp != null ? "disabled" : ""}></label>`,
       saving: `<p class="qnote">${esc(r.status || "Sealing the proof into the repository…")}</p>`,
     }[r.step] || "";
     const actions = {
@@ -545,7 +549,8 @@
     const l = $("#ritualLocation"); if (l) ritual.location = l.value;
     const n = $("#ritualNotes"); if (n) ritual.notes = n.value;
     const d = $("#ritualWhen"); if (d) ritual.purchasedLocal = d.value;
-    const p = $("#ritualPaid"); if (p) ritual.paidText = p.value;
+    const p = $("#ritualPaid"); if (p && !p.disabled) ritual.paidText = p.value;
+    const m = $("#ritualMsrp"); if (m) ritual.msrpPurchase = m.checked;
   }
   async function onRitualClick(e) {
     stashRitualFields();
@@ -636,8 +641,9 @@
       ritual.step = "price"; ritual.error = ""; paintRitual(); return;
     }
     if (id === "ritualCommit") {
-      const raw = $("#ritualPaid").value.trim().replace(/[$,]/g, "");
-      ritual.paidText = $("#ritualPaid").value;
+      const msrpPurchase = !!(ritual.msrpPurchase && ritual.box && ritual.box.msrp != null);
+      const raw = msrpPurchase ? String(ritual.box.msrp) : $("#ritualPaid").value.trim().replace(/[$,]/g, "");
+      if (!msrpPurchase) ritual.paidText = $("#ritualPaid").value;
       const paid = Math.round(Number(raw) * 100) / 100;
       if (!raw || !Number.isFinite(paid) || paid < 0) { ritual.error = "Enter the amount you paid."; paintRitual(); return; }
       const purchasedAt = localToISO(ritual.purchasedLocal);
@@ -647,6 +653,7 @@
       try {
         const saved = await commitUnlock(ritual.box, {
           paid,
+          msrpPurchase,
           vendor: ritual.vendor.trim(),
           location: (ritual.location || "").trim(),
           notes: (ritual.notes || "").trim(),
@@ -657,6 +664,7 @@
         if (local) {
           local.owned = true;
           local.paid = paid;
+          local.msrpPurchase = msrpPurchase;
           local.vendor = ritual.vendor.trim();
           local.location = (ritual.location || "").trim() || null;
           local.notes = (ritual.notes || "").trim() || null;
@@ -684,6 +692,12 @@
   }
   $("#ritual").addEventListener("click", onRitualClick);
   $("#ritual").addEventListener("change", async (e) => {
+    if (e.target.id === "ritualMsrp") {
+      ritual.msrpPurchase = e.target.checked;
+      if (ritual.msrpPurchase && ritual.box && ritual.box.msrp != null) ritual.paidText = Number(ritual.box.msrp).toFixed(2);
+      paintRitual();
+      return;
+    }
     if (e.target.id !== "ritualPhoto" || !e.target.files || !e.target.files[0]) return;
     try {
       ritual.photoBytes = await compressPhoto(e.target.files[0]);
@@ -708,7 +722,7 @@
     const order = shelfOrder();
     const num = order.findIndex((b) => b.id === box.id) + 1;
     const mile = milestones(boxes.length).find((g) => g.n === num);
-    const paidVs = box.paid != null && box.msrp ? ((box.paid - box.msrp) / box.msrp) * 100 : null;
+    const paidVs = box.msrpPurchase ? 0 : (box.paid != null && box.msrp ? ((box.paid - box.msrp) / box.msrp) * 100 : null);
     const gain = box.paid != null && box.market != null ? box.market - box.paid : null;
     const gainPct = gain != null && box.paid ? (gain / box.paid) * 100 : null;
     const days = daysOwned(box);
@@ -718,9 +732,9 @@
       ["Logged", stampText(box.submittedAt)],
       ["Vendor", box.vendor || "n/a"],
       ["Location", box.location || "n/a"],
-      ["Paid", usd(box.paid)],
+      ["Paid", box.msrpPurchase ? usd(box.paid) + " · MSRP" : usd(box.paid)],
       ["MSRP", usd(box.msrp)],
-      ["Vs MSRP", paidVs == null ? "n/a" : (Math.abs(paidVs) < 0.05 ? "At MSRP" : signedPct(paidVs))],
+      ["Vs MSRP", paidVs == null ? "n/a" : (Math.abs(paidVs) < 0.05 ? "0% over MSRP" : signedPct(paidVs) + " vs MSRP")],
       ["Lowest listing", usd(box.lowestListed)],
       ["Market", usd(box.market)],
       ["Vs paid", gain == null ? "n/a" : money(gain) + (gainPct == null ? "" : " (" + signedPct(gainPct) + ")")],

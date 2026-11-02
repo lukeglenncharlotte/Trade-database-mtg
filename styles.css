@@ -115,6 +115,9 @@ footer code{color:var(--txt);font-size:.85em}
 .ritual-card h2,.proof-card h2{margin:0 0 8px;font-family:Georgia,serif}
 .ritual-card label{display:block;margin:12px 0;color:var(--mut);font-size:.85rem}
 .ritual-card input,.ritual-card select{display:block;width:100%;margin-top:6px;background:#101219;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:12px;font:16px inherit}
+.ritual-card label.check{display:flex;align-items:center;gap:10px;color:var(--txt);font-size:1rem}
+.ritual-card label.check input{width:1.15rem;height:1.15rem;margin:0;padding:0}
+.ritual-card input:disabled{opacity:.65}
 .ritual-card code{color:var(--txt)}
 .ritual-card .hashline code{word-break:break-all}
 .ritual-err{margin:8px 0;background:#2a1518;border:1px solid #7a3038;color:#f3c9cc;border-radius:10px;padding:8px 10px}

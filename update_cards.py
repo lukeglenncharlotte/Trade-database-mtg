@@ -120,57 +120,6 @@ def enrich(set_code, num, finish, qty=1, condition="NM/LP", collection="Unsorted
       "artist": c.get("artist"), "collection": collection,
     }
 
-def cartoonify_image(im):
-    """Cel-shaded comic pass: smooth, quantize, posterize, then ink the edges."""
-    from PIL import Image, ImageEnhance, ImageFilter, ImageOps
-    im = im.convert("RGB")
-    im.thumbnail((800, 800), Image.Resampling.LANCZOS)
-    w, h = im.size
-    small = im.resize((max(1, w // 5), max(1, h // 5)), Image.Resampling.BILINEAR)
-    small = small.filter(ImageFilter.SMOOTH_MORE)
-    color = small.resize((w, h), Image.Resampling.BILINEAR)
-    color = color.quantize(colors=12, method=Image.Quantize.MEDIANCUT).convert("RGB")
-    color = ImageOps.posterize(color, 3)
-    color = ImageEnhance.Color(color).enhance(1.35)
-    color = ImageEnhance.Contrast(color).enhance(1.08)
-    gray = ImageOps.grayscale(im.filter(ImageFilter.MedianFilter(3)))
-    edges = ImageOps.autocontrast(gray.filter(ImageFilter.FIND_EDGES)).filter(ImageFilter.MaxFilter(3))
-    ink = edges.point(lambda p: 0 if p > 36 else 255)
-    black = Image.new("RGB", (w, h), (22, 16, 32))
-    return Image.composite(color, black, ink)
-
-def cartoonize_missing(boxes=None, doc=None):
-    """Write images/boxes/<id>.webp for any box that does not have one yet. Returns how many were created."""
-    import io
-    from PIL import Image
-    made = 0
-    items = boxes if boxes is not None else (doc or {}).get("boxes") or []
-    out_dir = os.path.join(HERE, "images", "boxes")
-    os.makedirs(out_dir, exist_ok=True)
-    for b in items:
-        dest = os.path.join(out_dir, b["id"] + ".webp")
-        rel = f"images/boxes/{b['id']}.webp"
-        if os.path.exists(dest):
-            if b.get("cartoonUrl") != rel:
-                b["cartoonUrl"] = rel
-            continue
-        url = b.get("imageUrl") or sealed_image_url(b.get("tcgplayerProductId"))
-        if not url:
-            print("! no source image for", b.get("id"), file=sys.stderr)
-            continue
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=40) as r:
-                raw = r.read()
-            art = cartoonify_image(Image.open(io.BytesIO(raw)))
-            art.save(dest, "WEBP", quality=82, method=4)
-            b["cartoonUrl"] = rel
-            made += 1
-            print("cartoon", b["id"])
-        except Exception as ex:
-            print("! cartoon failed", b.get("id"), ex, file=sys.stderr)
-    return made
-
 def sealed_image_url(pid, csv_url=None):
     """Large TCGplayer product photo. tcgcsv imageUrl is the fallback when there is no product id."""
     if pid:
@@ -182,7 +131,7 @@ def sealed_image_url(pid, csv_url=None):
 def refresh_boxes():
     """Rewrite lowestListed and market from tcgcsv.com, and fill a missing imageUrl.
 
-    Leaves owned, paid, purchasedAt, submittedAt, vendor, location, notes, verificationPhoto, msrp, the unlock passphrase hash, and an imageUrl that is already set. Draws a missing cartoon webp for a new box.
+    Leaves owned, paid, purchasedAt, submittedAt, vendor, location, notes, verificationPhoto, msrp, the unlock passphrase hash, and an imageUrl that is already set.
     """
     if not os.path.exists(BOXES):
         print("no collector_boxes.json", file=sys.stderr); return
@@ -218,16 +167,11 @@ def refresh_boxes():
             if url:
                 b["imageUrl"] = url
                 images += 1
-    try:
-        drawn = cartoonize_missing(doc.get("boxes") or [])
-    except Exception as ex:
-        drawn = 0
-        print("! cartoon pass failed", ex, file=sys.stderr)
     doc["updated"] = datetime.date.today().isoformat()
     with open(BOXES, "w") as f:
         json.dump(doc, f, indent=2, ensure_ascii=False)
         f.write("\n")
-    print(f"collector_boxes.json: refreshed {changed} box prices from tcgcsv.com, filled {images} product image(s), drew {drawn} cartoon box(es)")
+    print(f"collector_boxes.json: refreshed {changed} box prices from tcgcsv.com, filled {images} product image(s)")
 
 def load():
     if os.path.exists(DB):

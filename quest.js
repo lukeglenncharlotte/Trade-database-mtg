@@ -78,15 +78,14 @@
   const LOCK = `<span class="lock" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 10V7a4 4 0 0 1 8 0v3h1.2A1.8 1.8 0 0 1 19 11.8v7.4A1.8 1.8 0 0 1 17.2 21H6.8A1.8 1.8 0 0 1 5 19.2v-7.4A1.8 1.8 0 0 1 6.8 10H8zm2 0h4V7a2 2 0 0 0-4 0v3z"/></svg></span>`;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function artSrc(b) { return b.cartoonUrl || b.imageUrl || ""; }
+  function artSrc(b) { return b.imageUrl || ""; }
   function art(b, eager) {
     const src = artSrc(b);
     if (!src) return "";
     const delay = reduceMotion ? "" : ` style="animation-delay:${(-(b.tcgplayerProductId % 7) * 0.45).toFixed(2)}s"`;
-    const fallback = b.cartoonUrl && b.imageUrl ? ` data-fallback="${esc(b.imageUrl)}"` : "";
     return `<div class="qstage">
       <div class="qfigure"${delay}>
-        <img class="boxart" alt="${esc(b.name)} sealed Collector Booster display" width="800" height="800" ${eager ? "" : 'loading="lazy"'} decoding="async" src="${esc(src)}"${fallback}>
+        <img class="boxart" alt="${esc(b.name)} sealed Collector Booster display" width="1000" height="1000" ${eager ? "" : 'loading="lazy"'} decoding="async" src="${esc(src)}">
         <span class="sheen" aria-hidden="true"></span>
         ${b.owned ? '<span class="foil" aria-hidden="true"></span>' : LOCK}
       </div>
@@ -763,11 +762,6 @@
   document.getElementById("quest").addEventListener("error", (e) => {
     const img = e.target;
     if (!img.classList || !img.classList.contains("boxart")) return;
-    if (img.dataset.fallback && img.getAttribute("src") !== img.dataset.fallback) {
-      img.src = img.dataset.fallback;
-      img.removeAttribute("data-fallback");
-      return;
-    }
     const fig = img.closest(".qfigure");
     if (fig) fig.classList.add("no-art");
   }, true);

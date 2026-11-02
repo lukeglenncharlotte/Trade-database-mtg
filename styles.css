@@ -42,7 +42,7 @@ background:linear-gradient(115deg,transparent 30%,#ff9be8 40%,#9bf3ff 47%,#fff7a
 .prow strong{font-family:Georgia,serif;font-size:1.8rem}
 .prow span{color:var(--gold);font-weight:700}
 .bar{height:14px;border-radius:99px;background:#11131c;border:1px solid var(--line);overflow:hidden}
-.bar>span{display:block;height:100%;background:linear-gradient(90deg,#8a6a2f,#f3dc95 45%,#fff7a8 55%,#d8b45a);box-shadow:0 0 18px rgba(216,180,90,.45)}
+.bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#8a6a2f,#f3dc95 45%,#fff7a8 55%,#d8b45a);box-shadow:0 0 18px rgba(216,180,90,.45);transition:width .9s ease}
 .dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px}
 .dash div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 .dash b{display:block;font-size:1.25rem;color:var(--gold)}
@@ -107,11 +107,43 @@ background:linear-gradient(115deg,transparent 30%,#ff9be8 40%,#9bf3ff 47%,#fff7a
 .gain,.paid{margin:8px 0 0;font-weight:650}
 .qbox .btn{margin-top:10px}
 footer code{color:var(--txt);font-size:.85em}
+.btn.ghost{background:transparent;color:var(--gold)!important;border:1px solid rgba(216,180,90,.65)}
+.qactions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#ritual,#proof{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.72);display:flex;align-items:flex-end;justify-content:center;padding:12px}
+#ritual[hidden],#proof[hidden],#badgePop[hidden]{display:none !important}
+.ritual-card,.proof-card{position:relative;width:min(480px,100%);max-height:min(92vh,760px);overflow:auto;background:#14151f;border:1px solid rgba(216,180,90,.55);border-radius:18px 18px 14px 14px;padding:22px 18px 16px;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.ritual-card h2,.proof-card h2{margin:0 0 8px;font-family:Georgia,serif}
+.ritual-card label{display:block;margin:12px 0;color:var(--mut);font-size:.85rem}
+.ritual-card input,.ritual-card select{display:block;width:100%;margin-top:6px;background:#101219;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:12px;font:16px inherit}
+.ritual-card code{color:var(--txt)}
+.ritual-card .hashline code{word-break:break-all}
+.ritual-err{margin:8px 0;background:#2a1518;border:1px solid #7a3038;color:#f3c9cc;border-radius:10px;padding:8px 10px}
+.ritual-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ritual-x{position:absolute;top:6px;right:10px;background:none;border:0;color:var(--txt);font-size:28px;cursor:pointer}
+.capture{display:inline-flex;flex-direction:column;gap:8px;margin:8px 0;padding:12px;border-radius:12px;border:1px dashed rgba(216,180,90,.75);color:var(--gold);cursor:pointer}
+.proof-preview,.proof-card img{display:block;width:100%;max-height:320px;object-fit:contain;border-radius:12px;background:#0e0f16;margin-top:8px}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:40}
+.bit{position:fixed;width:8px;height:12px;margin:-6px 0 0 -4px;border-radius:2px;animation:bit 1.25s ease-out forwards}
+@keyframes bit{to{transform:translate(var(--dx),var(--dy)) rotate(220deg);opacity:0}}
+#badgePop{position:fixed;inset:0;z-index:45;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);pointer-events:none}
+.badge-pop{background:linear-gradient(180deg,#2a2416,#171925);border:1px solid var(--gold);border-radius:18px;padding:22px 28px;text-align:center;box-shadow:0 16px 50px rgba(0,0,0,.5);animation:pop .45s ease}
+.badge-pop h3{margin:4px 0;font-family:Georgia,serif;font-size:1.8rem;color:var(--gold)}
+@keyframes pop{from{transform:scale(.86);opacity:0}to{transform:none;opacity:1}}
+.just-unlocked{z-index:2}
+.just-unlocked .qfigure{animation:flipin 1s ease}
+@keyframes flipin{0%{transform:rotateY(78deg) translateY(0)}100%{transform:rotateY(0deg) translateY(0)}}
+.just-unlocked .boxart{animation:reveal 1s ease}
+@keyframes reveal{0%{filter:grayscale(1) brightness(.55)}100%{filter:none}}
+.lock.breaking{animation:lockbreak .85s ease forwards}
+@keyframes lockbreak{35%{transform:rotate(-12deg) scale(1.08)}100%{transform:translateY(18px) rotate(22deg) scale(.45);opacity:0}}
+@media (min-width:700px){#ritual,#proof{align-items:center}}
 @media (prefers-reduced-motion:reduce){
 .qfigure,.sheen,.foil{animation:none}
 .qfigure{transition:none}
 .sheen{opacity:0}
 .foil{opacity:.22}
+.bit,.just-unlocked .boxart,.just-unlocked .qfigure,.lock.breaking,.badge-pop{animation:none}
+.bar>span{transition:none}
 }
 @media(max-width:640px){
 .qhero h2{font-size:1.65rem}

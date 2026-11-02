@@ -1,6 +1,6 @@
 {
   "updated": "2026-11-02",
-  "note": "Mark a box owned by setting \"owned\" to true on that object. Optional \"paid\" is what Luke paid, in USD. Leave \"msrp\" null when it is unknown — never invent one; the page shows n/a. imageUrl is the TCGplayer product photo (https://tcgplayer-cdn.tcgplayer.com/product/<id>_in_1000x1000.jpg). python3 update_cards.py --refresh-boxes rewrites lowestListed and market from tcgcsv.com, fills a missing imageUrl, and does not change owned, paid, or msrp. --refresh updates cards and these box prices.",
+  "note": "Mark a box owned by setting \"owned\" to true on that object. Optional \"paid\" is what Luke paid, in USD. Leave \"msrp\" null when it is unknown — never invent one; the page shows n/a. imageUrl is the TCGplayer product photo (https://tcgplayer-cdn.tcgplayer.com/product/<id>_in_1000x1000.jpg). python3 update_cards.py --refresh-boxes rewrites lowestListed and market from tcgcsv.com, fills a missing imageUrl, and does not change owned, paid, or msrp. --refresh updates cards and these box prices. The unlock ritual sets owned, paid, unlockedAt, and verificationPhoto, and can store unlock.salt/hash. It never stores a passphrase or a GitHub token.",
   "boxes": [
     {
       "id": "eld",
@@ -1157,5 +1157,11 @@
       "icon": "https://svgs.scryfall.io/sets/mdd.svg",
       "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/723266_in_1000x1000.jpg"
     }
-  ]
+  ],
+  "unlock": {
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 100000,
+    "salt": null,
+    "hash": null
+  }
 }

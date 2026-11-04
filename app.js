@@ -29,7 +29,7 @@ function salesHtml(c){if(!c.recentSales)return"<p class=mut>No sales data availa
 document.addEventListener("keydown",e=>{
  if(e.key!=="/"||e.ctrlKey||e.metaKey||e.altKey)return;
  const t=e.target;if(t&&(t.tagName==="INPUT"||t.tagName==="TEXTAREA"||t.isContentEditable))return;
- const onQuest=document.getElementById("quest")&&!document.getElementById("quest").hidden;
- const field=onQuest?document.getElementById("questQ"):$("#q");
+ const shelf=[...document.querySelectorAll("#quest,#precon")].find(el=>!el.hidden);
+ const field=shelf?shelf.querySelector(".qsearch"):$("#q");
  if(!field)return;e.preventDefault();field.focus();
 });

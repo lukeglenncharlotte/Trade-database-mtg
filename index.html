@@ -14,6 +14,7 @@
 <nav class="tabs" aria-label="Site sections">
 <button type="button" class="tab on" id="tabTrade" aria-controls="trade" aria-selected="true">Trade Database</button>
 <button type="button" class="tab" id="tabQuest" aria-controls="quest" aria-selected="false">Collector Box Quest</button>
+<button type="button" class="tab" id="tabPrecon" aria-controls="precon" aria-selected="false">Collector Commander Quest</button>
 </nav>
 <section id="trade">
 <section class="controls">
@@ -34,36 +35,74 @@
 <h2>Collector Box Quest</h2>
 <p class="lede">One sealed Collector Booster display from every Magic set that ever had one. Unlocked boxes stay on the shelf, foil-side out. Everything else is still locked. The list also keeps three extra sealed products: Double Masters VIP (that set never had a Collector Booster), the Lord of the Rings special edition, and the Japanese Final Fantasy printing.</p>
 </div>
-<div id="questDash"></div>
-<div id="questMedals" class="medals"></div>
-<div id="questNext"></div>
+<div class="qdash"></div>
+<div class="medals qmedals"></div>
+<div class="qnext"></div>
 <div class="controls qcontrols">
 <div class="seg" role="group" aria-label="Show">
 <button type="button" data-filter="all" class="on">All</button>
 <button type="button" data-filter="owned">Unlocked</button>
 <button type="button" data-filter="missing">Missing</button>
 </div>
-<input id="questQ" type="search" placeholder="Search sets…  (press / )" autocomplete="off">
-<select id="questSort" aria-label="Sort boxes">
+<input class="qsearch" type="search" placeholder="Search sets…  (press / )" autocomplete="off">
+<select class="qsort" aria-label="Sort boxes">
 <option value="release">Release · oldest</option>
 <option value="low-asc">Lowest price ↑</option>
 <option value="low-desc">Lowest price ↓</option>
 <option value="mkt-asc">Market price ↑</option>
 <option value="mkt-desc">Market price ↓</option>
 </select>
-<button type="button" class="btn" id="unlockAny">Unlock a box</button>
+<button type="button" class="btn qunlock">Unlock a box</button>
 </div>
-<h2 class="shelf" id="ownedHead">On the shelf</h2>
-<div id="questOwned" class="qgrid"></div>
-<h2 class="shelf" id="missHead">Still locked</h2>
-<div id="questList" class="qgrid"></div>
-<p id="questEmpty" hidden>No boxes match.</p>
+<h2 class="shelf qowned-head">On the shelf</h2>
+<div class="qgrid qowned"></div>
+<h2 class="shelf qmiss-head">Still locked</h2>
+<div class="qgrid qmiss"></div>
+<p class="qempty" hidden>No boxes match.</p>
 </div>
-<div id="ritual" hidden></div>
-<div id="proof" hidden></div>
-<div id="confetti" aria-hidden="true"></div>
-<div id="badgePop" hidden></div>
-<footer>Prices are a TCGplayer snapshot from November 2026 (lowest listing and market). <code>python3 update_cards.py --refresh-boxes</code> pulls fresh numbers from tcgcsv.com and leaves <code>owned</code> alone. MSRP is Wizards' Collector Booster price times the packs in the display when a real MSRP exists; otherwise it shows n/a. Mark a box owned in <code>collector_boxes.json</code> — see the README. Set symbols © Scryfall / Wizards of the Coast.</footer>
+<div class="ritual" hidden></div>
+<div class="proof" hidden></div>
+<div class="confetti" aria-hidden="true"></div>
+<div class="badge-host" hidden></div>
+<footer>Prices are a TCGplayer snapshot from November 2026 (lowest listing and market). <code>python3 update_cards.py --refresh-boxes</code> pulls fresh numbers for these boxes and the collector commander decks from tcgcsv.com and leaves <code>owned</code> alone. MSRP is Wizards' Collector Booster price times the packs in the display when a real MSRP exists; otherwise it shows n/a. Mark a box owned in <code>collector_boxes.json</code> — see the README. Set symbols © Scryfall / Wizards of the Coast.</footer>
+</section>
+<section id="precon" hidden>
+<div class="qwrap">
+<div class="qhero">
+<p class="kicker">Achievement shelf</p>
+<h2>Collector Commander Quest</h2>
+<p class="lede">One sealed Collector's Edition Commander deck from every release that sold them separately. Unlocked decks stay on the shelf, foil-side out. Everything else is still locked, in release order. This is the all-foil Collector's Edition line: Warhammer 40,000, Modern Horizons 3, Final Fantasy, Marvel Super Heroes, Star Trek, and Marvel: Darkhold Destiny.</p>
+</div>
+<div class="qdash"></div>
+<div class="medals qmedals"></div>
+<div class="qnext"></div>
+<div class="controls qcontrols">
+<div class="seg" role="group" aria-label="Show">
+<button type="button" data-filter="all" class="on">All</button>
+<button type="button" data-filter="owned">Unlocked</button>
+<button type="button" data-filter="missing">Missing</button>
+</div>
+<input class="qsearch" type="search" placeholder="Search decks…  (press / )" autocomplete="off">
+<select class="qsort" aria-label="Sort decks">
+<option value="release">Release · oldest</option>
+<option value="low-asc">Lowest price ↑</option>
+<option value="low-desc">Lowest price ↓</option>
+<option value="mkt-asc">Market price ↑</option>
+<option value="mkt-desc">Market price ↓</option>
+</select>
+<button type="button" class="btn qunlock">Unlock a deck</button>
+</div>
+<h2 class="shelf qowned-head">On the shelf</h2>
+<div class="qgrid qowned"></div>
+<h2 class="shelf qmiss-head">Still locked</h2>
+<div class="qgrid qmiss"></div>
+<p class="qempty" hidden>No decks match.</p>
+</div>
+<div class="ritual" hidden></div>
+<div class="proof" hidden></div>
+<div class="confetti" aria-hidden="true"></div>
+<div class="badge-host" hidden></div>
+<footer>Prices are a TCGplayer snapshot from November 2026 (lowest listing and market). <code>python3 update_cards.py --refresh-boxes</code> pulls fresh numbers for these decks and the collector boxes from tcgcsv.com and leaves <code>owned</code> alone. MSRP is a Wizards price or a retailer sheet when one exists; otherwise it shows n/a. Mark a deck owned in <code>collector_precons.json</code> — see the README. Set symbols © Scryfall / Wizards of the Coast.</footer>
 </section>
 <div id="modal" hidden><div class="mbox"><button id="close" aria-label="Close">×</button><div class="mimg"></div><div class="minfo"></div></div></div>
 <script src="app.js"></script>

@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Add/refresh cards in cards.json, and collector box prices in collector_boxes.json. See README.md."""
+"""Add/refresh cards in cards.json, and sealed prices in collector_boxes.json and collector_precons.json. See README.md."""
 import argparse, csv, json, os, re, sys, time, urllib.request, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DB = os.path.join(HERE, "cards.json")
 BOXES = os.path.join(HERE, "collector_boxes.json")
+PRECONS = os.path.join(HERE, "collector_precons.json")
 UA = {"User-Agent": "LukeCardShowcase/1.0", "Accept": "application/json"}
 FOIL_NAMES = {
  "surgefoil":"Surge foil","galaxyfoil":"Galaxy foil","textured":"Textured foil",
@@ -128,21 +129,21 @@ def sealed_image_url(pid, csv_url=None):
         return csv_url.replace("_200w.", "_in_1000x1000.")
     return csv_url or None
 
-def refresh_boxes():
+def refresh_sealed(path, key, label, noun):
     """Rewrite lowestListed and market from tcgcsv.com, and fill a missing imageUrl.
 
     Leaves owned, paid, purchasedAt, submittedAt, vendor, location, notes, verificationPhoto, msrp, and an imageUrl that is already set.
     """
-    if not os.path.exists(BOXES):
-        print("no collector_boxes.json", file=sys.stderr); return
-    with open(BOXES) as f:
+    if not os.path.exists(path):
+        print(f"no {label}", file=sys.stderr); return
+    with open(path) as f:
         doc = json.load(f)
     groups, products = {}, {}
     changed = images = 0
-    for b in doc.get("boxes") or []:
+    for b in doc.get(key) or []:
         gid, pid = b.get("tcgplayerGroupId"), b.get("tcgplayerProductId")
         if not gid or not pid:
-            print("! box missing tcgplayer ids", b.get("id"), file=sys.stderr); continue
+            print(f"! {noun} missing tcgplayer ids", b.get("id"), file=sys.stderr); continue
         if gid not in groups:
             data = get(f"https://tcgcsv.com/tcgplayer/1/{gid}/prices")
             groups[gid] = data.get("results") if isinstance(data, dict) else []
@@ -168,10 +169,14 @@ def refresh_boxes():
                 b["imageUrl"] = url
                 images += 1
     doc["updated"] = datetime.date.today().isoformat()
-    with open(BOXES, "w") as f:
+    with open(path, "w") as f:
         json.dump(doc, f, indent=2, ensure_ascii=False)
         f.write("\n")
-    print(f"collector_boxes.json: refreshed {changed} box prices from tcgcsv.com, filled {images} product image(s)")
+    print(f"{label}: refreshed {changed} {noun} prices from tcgcsv.com, filled {images} product image(s)")
+
+def refresh_boxes():
+    refresh_sealed(BOXES, "boxes", "collector_boxes.json", "box")
+    refresh_sealed(PRECONS, "decks", "collector_precons.json", "deck")
 
 def load():
     if os.path.exists(DB):
@@ -208,8 +213,8 @@ def main():
     ap.add_argument("--condition", default="NM/LP")
     ap.add_argument("--hp", action="append", default=[], help="card name to mark HP")
     ap.add_argument("--top", type=int, help="keep only the N most valuable cards overall")
-    ap.add_argument("--refresh", action="store_true", help="re-price all existing cards and collector boxes")
-    ap.add_argument("--refresh-boxes", action="store_true", help="re-price collector boxes from tcgcsv.com (does not change owned/paid/msrp)")
+    ap.add_argument("--refresh", action="store_true", help="re-price all existing cards, collector boxes, and collector commander decks")
+    ap.add_argument("--refresh-boxes", action="store_true", help="re-price collector boxes and collector commander decks from tcgcsv.com (does not change owned/paid/msrp)")
     a = ap.parse_args()
     if a.refresh_boxes and not (a.refresh or a.archidekt or a.list or a.card or a.top):
         refresh_boxes(); return

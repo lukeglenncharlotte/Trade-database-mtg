@@ -24,7 +24,7 @@ python3 update_cards.py --refresh
 ```
 `--top N` keeps only the N most valuable cards overall (omit to keep all). HP cards are priced at 65% of NM and flagged as estimated; cards lacking a price for their finish fall back to the other finish and are flagged "est.".
 
-`--refresh` also updates Collector Box Quest prices (see below). Boxes alone:
+`--refresh` also updates Collector Box Quest and Collector Commander Quest prices (see below). Sealed products alone:
 
 ```
 python3 update_cards.py --refresh-boxes
@@ -72,7 +72,23 @@ To make an unlock permanent, put those fields on the box in `collector_boxes.jso
 
 Days owned are counted from `purchasedAt`. Click a tile for its purchase profile, or a teaser with MSRP and the current price if it is still locked. The profile shows the price as MSRP, 0% over MSRP, and the gain against that amount when it was an MSRP purchase. Tiles and profiles use the TCGplayer product photo in `imageUrl`. `python3 update_cards.py --refresh-boxes` updates prices and fills a missing product photo. It does not change ownership or purchase details.
 
-`python3 update_cards.py --refresh-boxes` rewrites `lowestListed` and `market` from [tcgcsv.com](https://tcgcsv.com/) (TCGplayer low price and market price for the stored product id). If `imageUrl` is missing, it fills the TCGplayer product photo (`https://tcgplayer-cdn.tcgplayer.com/product/<id>_in_1000x1000.jpg`, or the tcgcsv `imageUrl` when there is no product id). It does not change `owned`, `paid`, `msrp`, names, links, or an image URL that is already set. `--refresh` does the card reprice and this box reprice together. Wizards was not publishing MSRP from February 2019 until Foundations (October 2024), so displays before Foundations — and the Japanese Final Fantasy printing, which has no USD MSRP on file — stay `null`. Where a box MSRP is filled in, it is Wizards' Collector Booster pack MSRP times the 12 packs in the display, or a retailer sheet that printed the display MSRP itself.
+`python3 update_cards.py --refresh-boxes` rewrites `lowestListed` and `market` from [tcgcsv.com](https://tcgcsv.com/) (TCGplayer low price and market price for the stored product id) for collector boxes and Collector's Edition commander decks. If `imageUrl` is missing, it fills the TCGplayer product photo (`https://tcgplayer-cdn.tcgplayer.com/product/<id>_in_1000x1000.jpg`, or the tcgcsv `imageUrl` when there is no product id). It does not change `owned`, `paid`, `msrp`, names, links, or an image URL that is already set. `--refresh` does the card reprice and this sealed reprice together. Wizards was not publishing MSRP from February 2019 until Foundations (October 2024), so displays before Foundations — and the Japanese Final Fantasy printing, which has no USD MSRP on file — stay `null`. Where a box MSRP is filled in, it is Wizards' Collector Booster pack MSRP times the 12 packs in the display, or a retailer sheet that printed the display MSRP itself.
+
+## Collector Commander Quest
+
+The third tab is the sealed Collector's Edition Commander decks, the all-foil versions sold as their own product. Data is `collector_precons.json`. The page uses the same shelf, progress bar, prices, photos, and unlock ritual as Collector Box Quest. Each deck is its own entry. Four-deck cases are not listed.
+
+Mark a deck owned the same way as a box. Doom Prevails is already owned, with paid, vendor, and the purchase date left empty. Leave `"msrp"` null when there is no real Wizards or retailer price.
+
+The unlock ritual is the same: proof photo, amount paid, **I purchased this for MSRP**, vendor, location, and an editable purchase date and time. It saves on this browser only (`ccq-local-unlocks`) and merges over the JSON. A deck already owned in the file, such as Doom Prevails, is left as it is. The photo goes to the same ntfy topic as a collector box. The JSON in `X-Message` adds `"kind":"precon"` as the first key so a precon can be told apart from a box:
+
+```json
+{"kind":"precon","id":"msh-doom","paid":159.99,"msrpPurchase":true,"vendor":"Micro Center","location":"Charlotte, NC","purchasedAt":"2026-06-26T18:00:00.000Z","submittedAt":"2026-11-04T16:30:00.000Z","notes":""}
+```
+
+The other keys stay in the box order. `Title` is `Collector precon <deck id>`. `Filename` is `<deck id>.jpg`.
+
+`python3 update_cards.py --refresh-boxes` updates these deck prices along with the boxes.
 
 ## TCGplayer data
 For each card the script uses Scryfall's `tcgplayer_id` (or `tcgplayer_etched_id`) to call

@@ -928,8 +928,8 @@
     },
     {
       "id": "eoe",
-      "owned": false,
-      "paid": null,
+      "owned": true,
+      "paid": 765,
       "name": "Edge of Eternities",
       "setCode": "EOE",
       "releaseDate": "2025-08-01",
@@ -945,7 +945,15 @@
       "tcgplayerProductId": 619672,
       "tcgplayerGroupId": 24233,
       "icon": "https://svgs.scryfall.io/sets/eoe.svg",
-      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/619672_in_1000x1000.jpg"
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/619672_in_1000x1000.jpg",
+      "unlockedAt": "2026-11-05",
+      "verificationPhoto": "images/verified/eoe.jpg",
+      "vendor": "Heist brewery steph",
+      "location": "Charlotte",
+      "notes": "",
+      "submittedAt": "2026-11-05T23:13:18.019Z",
+      "purchasedAt": "2026-11-05T23:12:00.000Z",
+      "msrpPurchase": false
     },
     {
       "id": "spm",

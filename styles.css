@@ -178,3 +178,89 @@ body.ritual-open .foil .art::after{animation:none !important}
 .sales{margin-top:12px;background:#11131c;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
 .sales summary{cursor:pointer;font-weight:650;color:var(--gold)}.sales table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.88rem}
 .sales th,.sales td{text-align:left;padding:5px 4px;border-bottom:1px solid var(--line)}.sales th{color:var(--mut);font-weight:500}
+
+/* Collector Box Quest liquidation sheet. Every rule is under #quest or the scroll lock. */
+body.cbq-liq-lock{overflow:hidden}
+#quest .cbq-liq-actions{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto;align-items:center}
+#quest .cbq-liq-actions .btn{margin:0}
+#quest .cbq-liq-open{appearance:none;margin:0;padding:9px 14px;border-radius:10px;cursor:pointer;font:inherit;font-weight:700;letter-spacing:.01em;color:#f8e7c4;background:linear-gradient(180deg,rgba(243,220,149,.18),transparent 46%),linear-gradient(180deg,#7c2c38,#45141d);border:1px solid rgba(216,180,90,.82);box-shadow:inset 0 0 0 1px rgba(70,12,20,.55)}
+#quest .cbq-liq-open:hover{color:#fff;border-color:#f3dc95}
+#quest .cbq-liq-open:focus-visible,#quest .cbq-liq button:focus-visible,#quest .cbq-liq-card button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#quest .cbq-liq[hidden]{display:none !important}
+#quest .cbq-liq{position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.74);display:flex;align-items:flex-end;justify-content:center;padding:10px 10px calc(10px + env(safe-area-inset-bottom))}
+#quest .cbq-liq-sheet{position:relative;width:min(1040px,100%);max-height:min(92vh,920px);overflow:auto;overscroll-behavior:contain;background:#14151f;color:var(--txt);border:1px solid rgba(216,180,90,.55);border-radius:18px 18px 14px 14px;padding:18px 16px 20px;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+#quest .cbq-liq-grab{width:42px;height:4px;border-radius:99px;background:rgba(216,180,90,.55);margin:0 auto 10px}
+#quest .cbq-liq-x{position:absolute;top:8px;right:10px;background:none;border:0;color:var(--txt);font-size:28px;line-height:1;cursor:pointer;padding:4px 8px}
+#quest .cbq-liq-kicker{margin:0 0 4px;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;color:#e07a86;font-weight:700}
+#quest .cbq-liq-sheet h2{margin:0 36px 8px 0;font-family:Georgia,serif;font-size:1.7rem;background:linear-gradient(90deg,#f3dc95,#d8b45a);-webkit-background-clip:text;background-clip:text;color:transparent}
+#quest .cbq-liq-lede,#quest .cbq-liq-muted,#quest .cbq-liq-note{color:var(--mut);margin:0}
+#quest .cbq-liq-lede{max-width:78ch}
+#quest .cbq-liq-context{margin:12px 0 0;color:var(--txt)}
+#quest .cbq-liq-context strong{color:var(--gold)}
+#quest .cbq-liq-toggle{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:14px 0}
+#quest .cbq-liq-toggle button{flex:1;background:transparent;color:var(--mut);border:0;padding:8px 10px;font:inherit;cursor:pointer}
+#quest .cbq-liq-toggle button.cbq-liq-on{background:var(--gold);color:#111;font-weight:700}
+#quest .cbq-liq-scenarios{display:grid;gap:12px}
+#quest .cbq-liq-card{background:#101219;border:1px solid var(--line);border-radius:16px;padding:12px}
+#quest .cbq-liq-card.cbq-liq-on{border-color:rgba(216,180,90,.85);box-shadow:0 0 0 1px rgba(216,180,90,.28)}
+#quest .cbq-liq-casehead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+#quest .cbq-liq-case{margin:0;font-family:Georgia,serif;font-size:1.15rem}
+#quest .cbq-liq-note{margin-top:4px;font-size:.84rem}
+#quest .cbq-liq-card button{flex:0 0 auto;background:transparent;color:var(--gold);border:1px solid rgba(216,180,90,.65);border-radius:999px;padding:7px 10px;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer}
+#quest .cbq-liq-card button[aria-pressed="true"]{background:var(--gold);color:#111}
+#quest .cbq-liq-banner{margin:10px 0 0;color:#f3dc95;font-weight:700}
+#quest .cbq-liq-cols{display:grid;gap:10px;margin-top:10px}
+#quest .cbq-liq-col{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#171925}
+#quest .cbq-liq-col.cbq-liq-wincol{border-color:rgba(216,180,90,.75);background:linear-gradient(180deg,rgba(216,180,90,.14),transparent 72%),#171925}
+#quest .cbq-liq-plat{display:flex;justify-content:space-between;gap:8px;align-items:center;margin:0;font-weight:700}
+#quest .cbq-liq-badge{display:inline-block;margin-left:8px;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:#111;background:var(--gold);border-radius:99px;padding:2px 7px;font-weight:800}
+#quest .cbq-liq-dl{margin:8px 0 0}
+#quest .cbq-liq-dl div{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:2px 10px;padding:7px 0;border-top:1px solid rgba(42,45,62,.95)}
+#quest .cbq-liq-dl dt{color:var(--mut);font-size:.78rem}
+#quest .cbq-liq-dl dd{margin:0;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+#quest .cbq-liq-dl small{display:block;margin-top:2px;color:var(--mut);font-size:.72rem;font-weight:500}
+#quest .cbq-liq-netrow dd{color:var(--gold);font-family:Georgia,serif;font-size:1.2rem}
+#quest .cbq-liq-up{color:#8ee0b0}
+#quest .cbq-liq-down{color:#f0a0a8}
+#quest .cbq-liq-break{margin-top:18px}
+#quest .cbq-liq-break h3{margin:0 0 6px;font-family:Georgia,serif;font-size:1.25rem}
+#quest .cbq-liq-boxes{display:grid;gap:10px;margin-top:10px}
+#quest .cbq-liq-box{background:#101219;border:1px solid var(--line);border-radius:14px;padding:12px}
+#quest .cbq-liq-box > header{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px;align-items:center}
+#quest .cbq-liq-box h4{margin:0;font-family:Georgia,serif;font-size:1.05rem}
+#quest .cbq-liq-sale{grid-column:2;grid-row:1 / span 3;margin:0;text-align:right}
+#quest .cbq-liq-sale strong{color:var(--gold);font-family:Georgia,serif;font-size:1.2rem}
+#quest .cbq-liq-box table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.86rem}
+#quest .cbq-liq-box th,#quest .cbq-liq-box td{text-align:right;padding:7px 6px;border-top:1px solid var(--line);vertical-align:top;font-variant-numeric:tabular-nums}
+#quest .cbq-liq-box th:first-child{text-align:left}
+#quest .cbq-liq-box thead th{color:var(--mut);font-weight:600;font-size:.75rem}
+#quest .cbq-liq-box tbody th{font-weight:700}
+#quest .cbq-liq-box small{display:block;color:var(--mut);font-weight:500;font-size:.72rem}
+#quest .cbq-liq-winrow th{color:var(--gold)}
+#quest .cbq-liq-empty{margin:8px 0;padding:16px;border:1px dashed rgba(216,180,90,.45);border-radius:14px;background:#101219}
+#quest .cbq-liq-empty p{margin:0 0 6px}
+#quest .cbq-liq-empty p:last-child{margin:0;color:var(--mut)}
+#quest .cbq-liq-how{margin-top:16px;background:#101219;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+#quest .cbq-liq-how summary{cursor:pointer;font-weight:700;color:var(--gold)}
+#quest .cbq-liq-how p{margin:8px 0 0;color:var(--mut);font-size:.84rem}
+#quest .cbq-liq-how code{color:var(--txt)}
+@media (min-width:720px){
+#quest .cbq-liq{align-items:center}
+#quest .cbq-liq-grab{display:none}
+#quest .cbq-liq-scenarios[data-platforms="1"]{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}
+#quest .cbq-liq-cols[data-n="2"]{grid-template-columns:1fr 1fr}
+}
+@media (max-width:719px){
+#quest .cbq-liq-actions{margin-left:0;width:100%}
+#quest .cbq-liq-box > header{grid-template-columns:1fr}
+#quest .cbq-liq-sale{grid-column:1;grid-row:auto;text-align:left;margin-top:6px}
+#quest .cbq-liq-open{flex:1}
+#quest .cbq-liq-casehead{flex-direction:column}
+#quest .cbq-liq-dl div{grid-template-columns:1fr}
+#quest .cbq-liq-dl dd{text-align:left}
+#quest .cbq-liq-box thead{display:none}
+#quest .cbq-liq-box tr{display:block;padding:8px 0;border-top:1px solid var(--line)}
+#quest .cbq-liq-box tbody th,#quest .cbq-liq-box td{display:block;text-align:left;border:0;padding:3px 0}
+#quest .cbq-liq-box tbody th{padding-top:0}
+#quest .cbq-liq-box td[data-label]::before{content:attr(data-label);display:block;color:var(--mut);font-size:.72rem;font-weight:600}
+}

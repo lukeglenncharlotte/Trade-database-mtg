@@ -55,6 +55,9 @@
     let filter = "all";
     let sort = "release";
     let q = "";
+    let liqOn = false;
+    let liqPlatform = "both";
+    let liqScenario = "median";
 
     function cmpNum(av, bv, dir) {
       const an = av == null, bn = bv == null;
@@ -289,6 +292,7 @@
           verificationPhoto: extra.photo || null,
         });
       });
+      if (cfg.liquidate && liqOn) paintLiq();
     }
     function submissionObject(p) {
       const body = {
@@ -787,12 +791,352 @@
     });
     document.addEventListener("keydown", (e) => {
       if (e.key !== "Escape" || root.hidden) return;
+      if (cfg.liquidate && liqOn) { closeLiq(); return; }
       if (ritual && ritual.step === "saving") return;
       if (ritual && ritual.step === "sent") { finishSent(); return; }
       if (ritual) { closeRitual(); return; }
       const proof = $(".proof");
       if (proof && !proof.hidden) proof.hidden = true;
     });
+
+    const LIQ_NAME = { tcg: "TCGplayer", ebay: "eBay" };
+    const LIQ_CASE = {
+      worst: ["Worst case", "7-day fire sale. 80% of the lower of market and the lowest listing."],
+      median: ["Median case", "Realistic week. 91% of that floor, an undercut built to clear."],
+      best: ["Best case", "Clean sale. 98% of the higher comp, never above 105% of market."],
+    };
+    function liqCents(n) {
+      return Math.round(n * 100) / 100;
+    }
+    function liqAdd(list) {
+      return list.reduce((sum, n) => sum + Math.round(Number(n) * 100), 0) / 100;
+    }
+    function liqNum(v) {
+      const n = Number(v);
+      return Number.isFinite(n) ? n : null;
+    }
+    function liqPct(n) {
+      if (n == null || !Number.isFinite(n)) return "n/a";
+      const v = Math.round(n * 10) / 10;
+      if (v === 0) return "0%";
+      return (v > 0 ? "+" : "−") + Math.abs(v).toFixed(1) + "%";
+    }
+    function liqHair(net, market) {
+      if (market == null || market <= 0) return "n/a";
+      const pct = (market - net) / market * 100;
+      const v = Math.round(pct * 10) / 10;
+      if (v === 0) return "0% off market";
+      if (v > 0) return v.toFixed(1) + "% off market";
+      return Math.abs(v).toFixed(1) + "% over market";
+    }
+    function liqSale(box, scenario) {
+      const market = liqNum(box.market);
+      const low = liqNum(box.lowestListed);
+      if (market == null && low == null) return null;
+      const m = market == null ? low : market;
+      const floor = low == null ? m : Math.min(m, low);
+      if (scenario === "best") {
+        const high = low == null ? m : Math.max(m, low);
+        return liqCents(Math.min(high, m * 1.05) * 0.98);
+      }
+      if (scenario === "median") return liqCents(floor * 0.91);
+      return liqCents(floor * 0.8);
+    }
+    function liqShip(sale, scenario) {
+      const base = scenario === "best" ? 10.5 : scenario === "median" ? 13.5 : 19;
+      const per = scenario === "best" ? 0.8 : scenario === "median" ? 1 : 1.5;
+      const insurance = liqCents(sale / 100 * per);
+      const signature = sale >= 750 ? 3.7 : 0;
+      return { base, insurance, signature, total: liqAdd([base, insurance, signature]) };
+    }
+    function liqTcg(sale) {
+      const raw = sale * 0.1075;
+      const commission = liqCents(Math.min(raw, 75));
+      const transaction = liqCents(sale * 1.07 * 0.025 + 0.3);
+      return {
+        commission,
+        transaction,
+        uncapped: liqCents(raw),
+        capped: raw > 75,
+        total: liqAdd([commission, transaction]),
+      };
+    }
+    function liqEbay(sale, scenario) {
+      const taxed = sale * 1.07;
+      const fvf = liqCents(Math.min(taxed, 7500) * 0.1325 + Math.max(0, taxed - 7500) * 0.0235);
+      const promoted = scenario === "worst" ? liqCents(taxed * 0.02) : 0;
+      const perOrder = 0.4;
+      return { fvf, perOrder, promoted, total: liqAdd([fvf, perOrder, promoted]) };
+    }
+    function liqQuote(box, scenario, platform) {
+      const sale = liqSale(box, scenario);
+      if (sale == null) return null;
+      const fees = platform === "tcg" ? liqTcg(sale) : liqEbay(sale, scenario);
+      const ship = liqShip(sale, scenario);
+      const net = liqAdd([sale, -fees.total, -ship.total]);
+      const paid = liqNum(box.paid);
+      const pnl = paid == null ? null : liqAdd([net, -paid]);
+      const pnlPct = paid ? (net - paid) / paid * 100 : null;
+      return { sale, fees, ship, net, paid, pnl, pnlPct, market: liqNum(box.market), low: liqNum(box.lowestListed) };
+    }
+    function liqPack(owned, scenario, platform) {
+      const rows = [];
+      const skipped = [];
+      owned.forEach((box) => {
+        const quote = liqQuote(box, scenario, platform);
+        if (!quote) skipped.push(box);
+        else rows.push(Object.assign({ box }, quote));
+      });
+      const sum = (fn) => liqAdd(rows.map(fn));
+      const paidRows = rows.filter((row) => row.paid != null);
+      const marketRows = rows.filter((row) => row.market != null);
+      const paid = liqAdd(paidRows.map((row) => row.paid));
+      const netForPnl = liqAdd(paidRows.map((row) => row.net));
+      const market = liqAdd(marketRows.map((row) => row.market));
+      const net = sum((row) => row.net);
+      return {
+        rows,
+        skipped,
+        paid,
+        paidCount: paidRows.length,
+        market,
+        marketCount: marketRows.length,
+        gross: sum((row) => row.sale),
+        fees: sum((row) => row.fees.total),
+        commission: sum((row) => row.fees.commission || 0),
+        transaction: sum((row) => row.fees.transaction || 0),
+        fvf: sum((row) => row.fees.fvf || 0),
+        perOrder: sum((row) => row.fees.perOrder || 0),
+        promoted: sum((row) => row.fees.promoted || 0),
+        ship: sum((row) => row.ship.total),
+        shipBase: sum((row) => row.ship.base),
+        insurance: sum((row) => row.ship.insurance),
+        signature: sum((row) => row.ship.signature),
+        net,
+        pnl: paidRows.length ? liqAdd([netForPnl, -paid]) : null,
+        pnlPct: paidRows.length && paid ? (netForPnl - paid) / paid * 100 : null,
+        capped: rows.filter((row) => row.fees.capped).map((row) => row.box.name),
+      };
+    }
+    function liqWinner(tcgNet, ebayNet) {
+      const delta = liqAdd([tcgNet, -ebayNet]);
+      if (delta === 0) return { id: "tie", delta: 0 };
+      if (delta > 0) return { id: "tcg", delta };
+      return { id: "ebay", delta: liqAdd([ebayNet, -tcgNet]) };
+    }
+    function liqFeeText(platform, fees) {
+      if (platform === "tcg") {
+        const cap = fees.capped ? " (capped, 10.75% is " + usd(fees.uncapped) + ")" : "";
+        return "Commission " + usd(fees.commission) + cap + " · Transaction " + usd(fees.transaction);
+      }
+      const promo = fees.promoted ? " · Promoted " + usd(fees.promoted) : "";
+      return "Final value " + usd(fees.fvf) + " · Order " + usd(fees.perOrder) + promo;
+    }
+    function liqShipText(ship) {
+      const sig = ship.signature ? " · Signature " + usd(ship.signature) : "";
+      return "Base " + usd(ship.base) + " · Insurance " + usd(ship.insurance) + sig;
+    }
+    function liqPackFeeText(platform, pack) {
+      if (platform === "tcg") {
+        const cap = pack.capped.length ? " · $75 cap on " + pack.capped.map(esc).join(", ") : "";
+        return "Commission " + usd(pack.commission) + " · Transaction " + usd(pack.transaction) + cap;
+      }
+      const promo = pack.promoted ? " · Promoted " + usd(pack.promoted) : "";
+      return "Final value " + usd(pack.fvf) + " · Order fees " + usd(pack.perOrder) + promo;
+    }
+    function liqPackShipText(pack) {
+      const sig = pack.signature ? " · Signature " + usd(pack.signature) : "";
+      return "Base " + usd(pack.shipBase) + " · Insurance " + usd(pack.insurance) + sig;
+    }
+    function liqColumn(scenario, platform, pack, win) {
+      const winner = win.id === platform;
+      const pnlClass = pack.pnl == null ? "" : pack.pnl >= 0 ? "cbq-liq-up" : "cbq-liq-down";
+      const pnl = pack.pnl == null ? "n/a" : money(pack.pnl) + " (" + liqPct(pack.pnlPct) + ")";
+      const pnlSub = pack.pnl == null ? "No paid amount on the priced boxes" : "against " + usd(pack.paid) + " paid";
+      const hairSub = pack.marketCount < pack.rows.length ? "Boxes without a market price are left out." : "Market on these boxes " + usd(pack.market);
+      return `<div class="cbq-liq-col${winner ? " cbq-liq-wincol" : ""}" data-liq-scenario="${scenario}" data-liq-platform="${platform}" data-gross="${pack.gross}" data-fees="${pack.fees}" data-ship="${pack.ship}" data-net="${pack.net}" data-pnl="${pack.pnl == null ? "" : pack.pnl}">
+        <p class="cbq-liq-plat">${LIQ_NAME[platform]}${winner ? '<span class="cbq-liq-badge">Keeps more</span>' : ""}</p>
+        <dl class="cbq-liq-dl">
+          <div><dt>Gross sale price</dt><dd>${usd(pack.gross)}<small>Before sales tax</small></dd></div>
+          <div><dt>Platform &amp; payment fees</dt><dd>${usd(pack.fees)}<small>${liqPackFeeText(platform, pack)}</small></dd></div>
+          <div><dt>Shipping, packing &amp; insurance</dt><dd>${usd(pack.ship)}<small>${liqPackShipText(pack)}</small></dd></div>
+          <div class="cbq-liq-netrow"><dt>Net cash in pocket</dt><dd>${usd(pack.net)}</dd></div>
+          <div><dt>Net profit / loss vs paid</dt><dd class="${pnlClass}">${pnl}<small>${pnlSub}</small></dd></div>
+          <div><dt>Haircut vs market</dt><dd>${liqHair(pack.net, pack.market)}<small>${hairSub}</small></dd></div>
+        </dl>
+      </div>`;
+    }
+    function liqBoxRow(row, platform, win) {
+      const pnlClass = row.pnl == null ? "" : row.pnl >= 0 ? "cbq-liq-up" : "cbq-liq-down";
+      const pnl = row.pnl == null ? "n/a" : money(row.pnl) + " (" + liqPct(row.pnlPct) + ")";
+      const keep = win.id === platform ? '<span class="cbq-liq-badge">Keeps more</span>' : "";
+      return `<tr data-liq-box="${esc(row.box.id)}" data-liq-platform="${platform}" data-sale="${row.sale}" data-net="${row.net}" data-pnl="${row.pnl == null ? "" : row.pnl}"${win.id === platform ? ' class="cbq-liq-winrow"' : ""}>
+        <th scope="row">${LIQ_NAME[platform]}${keep}</th>
+        <td data-label="Fees">${usd(row.fees.total)}<small>${liqFeeText(platform, row.fees)}</small></td>
+        <td data-label="Shipping">${usd(row.ship.total)}<small>${liqShipText(row.ship)}</small></td>
+        <td data-label="Net cash">${usd(row.net)}</td>
+        <td data-label="vs paid" class="${pnlClass}">${pnl}</td>
+      </tr>`;
+    }
+    function liqBoxCard(box, platforms, packs) {
+      const quote = packs[platforms[0]].rows.find((row) => row.box.id === box.id);
+      if (!quote) {
+        return `<article class="cbq-liq-box"><h4>${esc(box.name)}</h4><p class="cbq-liq-muted">No market or lowest listing, so this display is left out of the totals.</p></article>`;
+      }
+      const tcgRow = packs.tcg.rows.find((row) => row.box.id === box.id);
+      const ebayRow = packs.ebay.rows.find((row) => row.box.id === box.id);
+      const win = tcgRow && ebayRow ? liqWinner(tcgRow.net, ebayRow.net) : { id: "", delta: 0 };
+      const bits = [box.setCode, box.variant, box.localOnly ? "Saved on this device" : ""].filter(Boolean).map(esc).join(" · ");
+      const rows = platforms.map((platform) => liqBoxRow(packs[platform].rows.find((row) => row.box.id === box.id), platform, win)).join("");
+      return `<article class="cbq-liq-box">
+        <header>
+          <h4>${esc(box.name)}</h4>
+          <p class="cbq-liq-muted">${bits}</p>
+          <p class="cbq-liq-muted">Market ${usd(quote.market)} · Lowest listing ${usd(quote.low)} · Paid ${quote.paid == null ? "n/a" : usd(quote.paid)}</p>
+          <p class="cbq-liq-sale">Sells at <strong>${usd(quote.sale)}</strong></p>
+        </header>
+        <table>
+          <thead><tr><th>Platform</th><th>Fees</th><th>Shipping</th><th>Net cash</th><th>vs paid</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </article>`;
+    }
+    function liqHtml() {
+      const owned = boxes.filter((b) => b.owned);
+      const paidRows = owned.filter((b) => liqNum(b.paid) != null);
+      const marketRows = owned.filter((b) => liqNum(b.market) != null);
+      const paid = liqAdd(paidRows.map((b) => b.paid));
+      const market = liqAdd(marketRows.map((b) => b.market));
+      const platforms = liqPlatform === "both" ? ["tcg", "ebay"] : [liqPlatform];
+      const order = ["worst", "median", "best"];
+      let body = "";
+      if (!owned.length) {
+        body = `<div class="cbq-liq-empty"><p>No owned displays yet.</p><p>Unlock a Collector Booster box, including one saved only on this device, and the 7-day TCGplayer and eBay exit prices show up here.</p></div>`;
+      } else {
+        const probe = liqPack(owned, "median", "tcg");
+        if (!probe.rows.length) {
+          body = `<div class="cbq-liq-empty"><p>These owned displays have no market or lowest listing yet, so there is nothing to price.</p></div>`;
+        } else {
+          const cards = order.map((scenario) => {
+            const packs = { tcg: liqPack(owned, scenario, "tcg"), ebay: liqPack(owned, scenario, "ebay") };
+            const win = liqWinner(packs.tcg.net, packs.ebay.net);
+            const banner = win.id === "tie"
+              ? "Both platforms net the same cash."
+              : LIQ_NAME[win.id] + " nets " + usd(win.delta) + " more in pocket.";
+            const cols = platforms.map((platform) => liqColumn(scenario, platform, packs[platform], win)).join("");
+            const extra = scenario === "worst" ? " eBay also pays a 2% promoted-listing fee on the price plus tax." : "";
+            const on = scenario === liqScenario;
+            return `<article class="cbq-liq-card${on ? " cbq-liq-on" : ""}">
+              <div class="cbq-liq-casehead">
+                <div>
+                  <p class="cbq-liq-case">${LIQ_CASE[scenario][0]}</p>
+                  <p class="cbq-liq-note">${esc(LIQ_CASE[scenario][1] + extra)}</p>
+                </div>
+                <button type="button" data-liq-scenario="${scenario}" aria-pressed="${on ? "true" : "false"}">${on ? "Showing boxes" : "Show boxes"}</button>
+              </div>
+              <p class="cbq-liq-banner">${banner}</p>
+              <div class="cbq-liq-cols" data-n="${platforms.length}">${cols}</div>
+            </article>`;
+          }).join("");
+          const selected = order.map((scenario) => ({
+            scenario,
+            packs: { tcg: liqPack(owned, scenario, "tcg"), ebay: liqPack(owned, scenario, "ebay") },
+          })).find((item) => item.scenario === liqScenario);
+          const shown = selected.packs[platforms[0]];
+          const sorted = shown.rows.slice().sort((a, b) => b.sale - a.sale || a.box.name.localeCompare(b.box.name)).map((row) => row.box).concat(shown.skipped);
+          const boxesHtml = sorted.map((box) => liqBoxCard(box, platforms, selected.packs)).join("");
+          const skip = shown.skipped.length ? `<p class="cbq-liq-muted">${shown.skipped.length} owned ${shown.skipped.length === 1 ? "display has" : "displays have"} no price and ${shown.skipped.length === 1 ? "is" : "are"} left out of the totals.</p>` : "";
+          body = `<div class="cbq-liq-scenarios" data-platforms="${platforms.length}">${cards}</div>
+            <section class="cbq-liq-break">
+              <h3>Per box · ${esc(LIQ_CASE[liqScenario][0])}</h3>
+              <p class="cbq-liq-muted">Click a case above to retarget this list. The sale price is the same on both platforms. Fees are not.</p>
+              ${skip}
+              <div class="cbq-liq-boxes">${boxesHtml}</div>
+            </section>`;
+        }
+      }
+      const local = owned.some((b) => b.localOnly) ? " Includes a display saved on this device." : "";
+      return `<div class="cbq-liq-sheet" role="dialog" aria-modal="true" aria-labelledby="cbq-liq-title" tabindex="-1">
+        <div class="cbq-liq-grab" aria-hidden="true"></div>
+        <button type="button" class="cbq-liq-x" aria-label="Close">×</button>
+        <p class="cbq-liq-kicker">Next 7 days</p>
+        <h2 id="cbq-liq-title">Emergency Liquidate</h2>
+        <p class="cbq-liq-lede">Sell every owned Collector Booster display within a week. You pay shipping. Buyers pay about 7% sales tax, and you do not keep that tax, but both platforms charge their percentage fee on the price plus tax.</p>
+        <p class="cbq-liq-context"><strong>${owned.length}</strong> owned · paid <strong>${paidRows.length ? usd(paid) : "n/a"}</strong> · market <strong>${marketRows.length ? usd(market) : "n/a"}</strong>.${esc(local)}</p>
+        <div class="cbq-liq-toggle" role="group" aria-label="Platform">
+          <button type="button" data-liq-platform="tcg" class="${liqPlatform === "tcg" ? "cbq-liq-on" : ""}" aria-pressed="${liqPlatform === "tcg" ? "true" : "false"}">TCGplayer</button>
+          <button type="button" data-liq-platform="both" class="${liqPlatform === "both" ? "cbq-liq-on" : ""}" aria-pressed="${liqPlatform === "both" ? "true" : "false"}">Side by side</button>
+          <button type="button" data-liq-platform="ebay" class="${liqPlatform === "ebay" ? "cbq-liq-on" : ""}" aria-pressed="${liqPlatform === "ebay" ? "true" : "false"}">eBay</button>
+        </div>
+        ${body}
+        <details class="cbq-liq-how">
+          <summary>How this is calculated</summary>
+          <div>
+            <p>Best sale = 98% × the higher of market and the lowest listing, but never above 105% of market, so a stray high listing cannot inflate it. Median = 91% of the lower of those two. Worst = 80% of that same lower price. If one price is missing, the other stands in for both.</p>
+            <p>Gross is the item price buyers pay before tax. The 7.0% figure is only the fee base. Fee base = sale × 1.07.</p>
+            <p>TCGplayer Level 1–4: marketplace commission is min(sale × 10.75%, $75) per display. Transaction fee is 2.5% of the fee base + $0.30 per order.</p>
+            <p>eBay Collectible Card Games, sealed boxes: final value fee is 13.25% of the fee base up to $7,500 of that taxed amount, then 2.35% above, + $0.40 per order. Worst case also adds a 2% promoted-listing fee on the fee base. Median and best assume no ads.</p>
+            <p>Shipping is seller-paid for a roughly 2 lb double-boxed display. Best is $10.50 + $0.80 per $100 of the sale. Median is $13.50 + $1.00 per $100. Worst is $19.00 + $1.50 per $100. Insurance is proportional, not rounded up to the next $100. Signature confirmation is $3.70 when the sale price is $750 or more, on either platform, because that parcel needs it for eBay seller protection.</p>
+            <p>Each display is its own order. The $75 cap, the per-order fees, and the $7,500 tier apply per box, and the totals add those cents. Net cash = gross − fees − shipping. Profit compares net cash with <code>paid</code>. Haircut is how far that net sits under today's TCGplayer market. A box already owned in the file wins over a stale unlock saved in this browser.</p>
+          </div>
+        </details>
+      </div>`;
+    }
+    function paintLiq() {
+      const host = $(".cbq-liq");
+      if (!host) return;
+      const sheet = host.querySelector(".cbq-liq-sheet");
+      const top = sheet ? sheet.scrollTop : 0;
+      host.innerHTML = liqHtml();
+      const next = host.querySelector(".cbq-liq-sheet");
+      if (next) next.scrollTop = top;
+    }
+    function openLiq() {
+      liqOn = true;
+      document.body.classList.add("cbq-liq-lock");
+      $(".cbq-liq").hidden = false;
+      paintLiq();
+      const close = $(".cbq-liq-x");
+      if (close) close.focus();
+    }
+    function closeLiq() {
+      const host = $(".cbq-liq");
+      const inside = host && document.activeElement && host.contains(document.activeElement);
+      liqOn = false;
+      document.body.classList.remove("cbq-liq-lock");
+      if (host) host.hidden = true;
+      const opener = $(".cbq-liq-open");
+      if (inside && opener) opener.focus();
+    }
+    function onLiqClick(e) {
+      if (e.target === e.currentTarget || e.target.closest(".cbq-liq-x")) { closeLiq(); return; }
+      const plat = e.target.closest(".cbq-liq-toggle button[data-liq-platform]");
+      if (plat && plat.dataset.liqPlatform) {
+        liqPlatform = plat.dataset.liqPlatform;
+        paintLiq();
+        const again = $(".cbq-liq-toggle").querySelector(`[data-liq-platform="${liqPlatform}"]`);
+        if (again) again.focus();
+        return;
+      }
+      const pick = e.target.closest("button[data-liq-scenario]");
+      if (pick && pick.dataset.liqScenario) {
+        liqScenario = pick.dataset.liqScenario;
+        paintLiq();
+        const again = $(".cbq-liq").querySelector(`button[data-liq-scenario="${liqScenario}"]`);
+        if (again) again.focus();
+      }
+    }
+    function onLiqKey(e) {
+      if (e.key === "Escape") { e.stopPropagation(); closeLiq(); }
+    }
+    if (cfg.liquidate && $(".cbq-liq") && $(".cbq-liq-open")) {
+      $(".cbq-liq-open").addEventListener("click", openLiq);
+      $(".cbq-liq").addEventListener("click", onLiqClick);
+      $(".cbq-liq").addEventListener("keydown", onLiqKey);
+      document.getElementById("tabTrade").addEventListener("click", () => { if (liqOn) closeLiq(); });
+      document.getElementById("tabPrecon").addEventListener("click", () => { if (liqOn) closeLiq(); });
+      window.addEventListener("hashchange", () => { if (location.hash !== "#quest" && liqOn) closeLiq(); });
+    }
 
     root.addEventListener("error", (e) => {
       const img = e.target;
@@ -841,6 +1185,7 @@
     photoError: "Add a photo of the sealed box.",
     unlockLabel: "Unlock this box",
     goals: boxGoals,
+    liquidate: true,
   });
   mountShelf({
     root: "#precon",

@@ -52,7 +52,10 @@
 <option value="mkt-asc">Market price ↑</option>
 <option value="mkt-desc">Market price ↓</option>
 </select>
+<div class="cbq-liq-actions">
 <button type="button" class="btn qunlock">Unlock a box</button>
+<button type="button" class="cbq-liq-open" aria-haspopup="dialog" aria-controls="cbq-liq-modal">Emergency Liquidate</button>
+</div>
 </div>
 <h2 class="shelf qowned-head">On the shelf</h2>
 <div class="qgrid qowned"></div>
@@ -64,6 +67,7 @@
 <div class="proof" hidden></div>
 <div class="confetti" aria-hidden="true"></div>
 <div class="badge-host" hidden></div>
+<div class="cbq-liq" id="cbq-liq-modal" hidden></div>
 <footer>Prices are a TCGplayer snapshot from November 2026 (lowest listing and market). <code>python3 update_cards.py --refresh-boxes</code> pulls fresh numbers for these boxes and the collector commander decks from tcgcsv.com and leaves <code>owned</code> alone. MSRP is Wizards' Collector Booster price times the packs in the display when a real MSRP exists; otherwise it shows n/a. Mark a box owned in <code>collector_boxes.json</code> — see the README. Set symbols © Scryfall / Wizards of the Coast.</footer>
 </section>
 <section id="precon" hidden>

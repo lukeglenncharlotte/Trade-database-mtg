@@ -36,7 +36,7 @@
 
   const NTFY_URL = "https://ntfy.sh/r1q-ff7fbe21564bbd7038b8995a";
   const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const usd = (n) => n == null || n === "" ? "n/a" : "$" + Number(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const usd = (n) => n == null || n === "" || !Number.isFinite(Number(n)) ? "n/a" : "$" + Number(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const pretty = (iso) => {
     const [y, m, d] = String(iso || "").split("-").map(Number);
@@ -382,8 +382,8 @@
     }
     function shelfOrder() {
       return boxes.filter((b) => b.owned).slice().sort((a, b) => {
-        const ka = a.submittedAt || a.unlockedAt || "9999";
-        const kb = b.submittedAt || b.unlockedAt || "9999";
+        const ka = a.purchasedAt || a.submittedAt || a.unlockedAt || "9999";
+        const kb = b.purchasedAt || b.submittedAt || b.unlockedAt || "9999";
         if (ka !== kb) return ka.localeCompare(kb);
         return (a.releaseDate || "").localeCompare(b.releaseDate || "") || a.name.localeCompare(b.name);
       });
@@ -742,7 +742,8 @@
       const order = shelfOrder();
       const num = order.findIndex((b) => b.id === box.id) + 1;
       const mile = goals(boxes.length).find((g) => g.n === num);
-      const paidVs = box.msrpPurchase ? 0 : (box.paid != null && box.msrp ? ((box.paid - box.msrp) / box.msrp) * 100 : null);
+      const msrpNum = box.msrp == null || !Number.isFinite(Number(box.msrp)) ? null : Number(box.msrp);
+      const paidVs = msrpNum == null || msrpNum === 0 ? null : (box.msrpPurchase ? 0 : (box.paid != null && Number.isFinite(Number(box.paid)) ? ((Number(box.paid) - msrpNum) / msrpNum) * 100 : null));
       const gain = box.paid != null && box.market != null ? box.market - box.paid : null;
       const gainPct = gain != null && box.paid ? (gain / box.paid) * 100 : null;
       const days = daysOwned(box);
@@ -752,8 +753,8 @@
         ["Logged", stampText(box.submittedAt)],
         ["Vendor", box.vendor || "n/a"],
         ["Location", box.location || "n/a"],
-        ["Paid", box.msrpPurchase ? usd(box.paid) + " · MSRP" : usd(box.paid)],
-        ["MSRP", usd(box.msrp)],
+        ["Paid", box.msrpPurchase && msrpNum != null ? usd(box.paid) + " · MSRP" : usd(box.paid)],
+        ["MSRP", usd(msrpNum)],
         ["Vs MSRP", paidVs == null ? "n/a" : (Math.abs(paidVs) < 0.05 ? "0% over MSRP" : signedPct(paidVs) + " vs MSRP")],
         ["Lowest listing", usd(box.lowestListed)],
         ["Market", usd(box.market)],
@@ -812,6 +813,7 @@
       return list.reduce((sum, n) => sum + Math.round(Number(n) * 100), 0) / 100;
     }
     function liqNum(v) {
+      if (v == null || v === "") return null;
       const n = Number(v);
       return Number.isFinite(n) ? n : null;
     }

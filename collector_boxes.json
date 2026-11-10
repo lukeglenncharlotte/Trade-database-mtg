@@ -487,8 +487,8 @@
     },
     {
       "id": "mat",
-      "owned": false,
-      "paid": null,
+      "owned": true,
+      "paid": 279.99,
       "name": "March of the Machine: The Aftermath",
       "setCode": "MAT",
       "releaseDate": "2023-05-12",
@@ -504,7 +504,15 @@
       "tcgplayerProductId": 489207,
       "tcgplayerGroupId": 22876,
       "icon": "https://svgs.scryfall.io/sets/mat.svg",
-      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/489207_in_1000x1000.jpg"
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/489207_in_1000x1000.jpg",
+      "unlockedAt": "2026-11-10",
+      "verificationPhoto": "images/verified/mat.jpg",
+      "vendor": "Buzz City Games",
+      "location": "Concord NC",
+      "notes": "Bought just below market from the owner he’s cool",
+      "submittedAt": "2026-11-10T17:33:24.058Z",
+      "purchasedAt": "2026-11-10T17:32:00.000Z",
+      "msrpPurchase": false
     },
     {
       "id": "ltr",
@@ -1140,8 +1148,8 @@
     },
     {
       "id": "trk",
-      "owned": false,
-      "paid": null,
+      "owned": true,
+      "paid": 455.88,
       "name": "Star Trek",
       "setCode": "TRK",
       "releaseDate": "2026-11-13",
@@ -1157,7 +1165,15 @@
       "tcgplayerProductId": 706142,
       "tcgplayerGroupId": 24766,
       "icon": "https://svgs.scryfall.io/sets/trk.svg",
-      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/706142_in_1000x1000.jpg"
+      "imageUrl": "https://tcgplayer-cdn.tcgplayer.com/product/706142_in_1000x1000.jpg",
+      "unlockedAt": "2026-11-06",
+      "verificationPhoto": "images/verified/trk.jpg",
+      "vendor": "Mighty Meeple",
+      "location": "Charlotte NC",
+      "notes": "Camped out with Hunter since 8am. UPS truck arrived around 11:30 while we were hanging out and waiting.",
+      "submittedAt": "2026-11-06T16:57:00.000Z",
+      "purchasedAt": "2026-11-06T16:56:00.000Z",
+      "msrpPurchase": true
     },
     {
       "id": "mdd",
